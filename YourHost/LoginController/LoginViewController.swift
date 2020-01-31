@@ -10,8 +10,23 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    // email
+    @IBOutlet weak var emailTextField: UITextField!
+    // pasword
+    @IBOutlet weak var passWordTextField: UITextField!
+    
+    
+    @IBOutlet weak var loginButton: UIButton!
+    
+    @IBOutlet weak var googleLoginButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // ボタンを丸く
+        loginButton.layer.cornerRadius = 15
+        googleLoginButton.layer.cornerRadius = 15
+        
         
       
     }
@@ -23,4 +38,18 @@ class LoginViewController: UIViewController {
     }
     
 
+    // emailログイン
+    @IBAction func login(_ sender: Any) {
+        
+    }
+    
+    // googleログイン
+    @IBAction func googleLogin(_ sender: Any) {
+         
+    }
+    
+    // メンバー登録
+    @IBAction func signUp(_ sender: Any) {
+    }
+    
 }
