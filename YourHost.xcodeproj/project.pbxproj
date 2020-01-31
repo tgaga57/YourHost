@@ -14,10 +14,13 @@
 		B162933023E29DC900C8463A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B162932E23E29DC900C8463A /* LaunchScreen.storyboard */; };
 		B162933B23E2A9D800C8463A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162933A23E2A9D800C8463A /* ViewController.swift */; };
 		B162933D23E2ABDD00C8463A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162933C23E2ABDD00C8463A /* LoginViewController.swift */; };
-		B185023423E3E52B00E764B5 /* textFieldAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B185023323E3E52B00E764B5 /* textFieldAction.swift */; };
+		B185023423E3E52B00E764B5 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B185023323E3E52B00E764B5 /* Alert.swift */; };
+		B185023823E3ED6B00E764B5 /* NewSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B185023723E3ED6B00E764B5 /* NewSignUpViewController.swift */; };
 		B1BECA6123E2DA3D000CE5AD /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = B1BECA6023E2DA3D000CE5AD /* 1.json */; };
 		B1FE7C2723E2DB2F00B1AF3C /* 3.json in Resources */ = {isa = PBXBuildFile; fileRef = B1FE7C2623E2DB2F00B1AF3C /* 3.json */; };
 		B1FE7C2923E2DCF800B1AF3C /* 2.json in Resources */ = {isa = PBXBuildFile; fileRef = B1FE7C2823E2DCF800B1AF3C /* 2.json */; };
+		B1FECC5723E3F19200DA1383 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1FECC5623E3F19200DA1383 /* GoogleService-Info.plist */; };
+		B1FECC5D23E42DBA00DA1383 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FECC5C23E42DBA00DA1383 /* TimeLineViewController.swift */; };
 		DEAC5F1B8D4C21AB2DA64865 /* Pods_YourHost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C3209BC9CEA4171F9C8327 /* Pods_YourHost.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,10 +36,13 @@
 		B162933123E29DC900C8463A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B162933A23E2A9D800C8463A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B162933C23E2ABDD00C8463A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		B185023323E3E52B00E764B5 /* textFieldAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldAction.swift; sourceTree = "<group>"; };
+		B185023323E3E52B00E764B5 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		B185023723E3ED6B00E764B5 /* NewSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSignUpViewController.swift; sourceTree = "<group>"; };
 		B1BECA6023E2DA3D000CE5AD /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 1.json; sourceTree = "<group>"; };
 		B1FE7C2623E2DB2F00B1AF3C /* 3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 3.json; path = ../Pods/3.json; sourceTree = "<group>"; };
 		B1FE7C2823E2DCF800B1AF3C /* 2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 2.json; path = ../../../2.json; sourceTree = "<group>"; };
+		B1FECC5623E3F19200DA1383 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		B1FECC5C23E42DBA00DA1383 /* TimeLineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		B2C3209BC9CEA4171F9C8327 /* Pods_YourHost.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourHost.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -90,13 +96,17 @@
 		B162932223E29DC800C8463A /* YourHost */ = {
 			isa = PBXGroup;
 			children = (
+				B162932323E29DC800C8463A /* AppDelegate.swift */,
+				B162932523E29DC800C8463A /* SceneDelegate.swift */,
 				B162933723E2A8E700C8463A /* Model */,
 				B162933923E2A8FB00C8463A /* View */,
 				B162933823E2A8F000C8463A /* LoginController */,
 				B162933123E29DC900C8463A /* Info.plist */,
+				B1FECC5623E3F19200DA1383 /* GoogleService-Info.plist */,
 				B1BECA6023E2DA3D000CE5AD /* 1.json */,
 				B1FE7C2823E2DCF800B1AF3C /* 2.json */,
 				B1FE7C2623E2DB2F00B1AF3C /* 3.json */,
+				B162932C23E29DC900C8463A /* Assets.xcassets */,
 			);
 			path = YourHost;
 			sourceTree = "<group>";
@@ -104,7 +114,7 @@
 		B162933723E2A8E700C8463A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B185023323E3E52B00E764B5 /* textFieldAction.swift */,
+				B185023323E3E52B00E764B5 /* Alert.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -112,10 +122,10 @@
 		B162933823E2A8F000C8463A /* LoginController */ = {
 			isa = PBXGroup;
 			children = (
-				B162932323E29DC800C8463A /* AppDelegate.swift */,
-				B162932523E29DC800C8463A /* SceneDelegate.swift */,
 				B162933A23E2A9D800C8463A /* ViewController.swift */,
 				B162933C23E2ABDD00C8463A /* LoginViewController.swift */,
+				B185023723E3ED6B00E764B5 /* NewSignUpViewController.swift */,
+				B1FECC5C23E42DBA00DA1383 /* TimeLineViewController.swift */,
 			);
 			path = LoginController;
 			sourceTree = "<group>";
@@ -124,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				B162932923E29DC800C8463A /* Main.storyboard */,
-				B162932C23E29DC900C8463A /* Assets.xcassets */,
 				B162932E23E29DC900C8463A /* LaunchScreen.storyboard */,
 			);
 			path = View;
@@ -197,6 +206,7 @@
 				B1FE7C2723E2DB2F00B1AF3C /* 3.json in Resources */,
 				B162932B23E29DC800C8463A /* Main.storyboard in Resources */,
 				B1BECA6123E2DA3D000CE5AD /* 1.json in Resources */,
+				B1FECC5723E3F19200DA1383 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,8 +279,10 @@
 				B162933D23E2ABDD00C8463A /* LoginViewController.swift in Sources */,
 				B162933B23E2A9D800C8463A /* ViewController.swift in Sources */,
 				B162932423E29DC800C8463A /* AppDelegate.swift in Sources */,
-				B185023423E3E52B00E764B5 /* textFieldAction.swift in Sources */,
+				B185023423E3E52B00E764B5 /* Alert.swift in Sources */,
+				B1FECC5D23E42DBA00DA1383 /* TimeLineViewController.swift in Sources */,
 				B162932623E29DC800C8463A /* SceneDelegate.swift in Sources */,
+				B185023823E3ED6B00E764B5 /* NewSignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

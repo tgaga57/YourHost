@@ -12,8 +12,9 @@ target 'YourHost' do
   pod 'Firebase/Firestore'
   pod 'FirebaseUI/Phone'
   pod 'FirebaseUI/Google'
-  pod 'GoogleSignIn'
   pod 'FirebaseStorage'
-
-
+  pod 'FacebookLogin'
+  pod 'FacebookSDK'
+  pod 'FacebookCore'
+  pod 'FacebookShare'
 end

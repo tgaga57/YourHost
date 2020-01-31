@@ -9,7 +9,7 @@
 import UIKit
 import Lottie
 
-class ViewController: UIViewController,UIScrollViewDelegate {
+class ViewController: UIViewController,UIScrollViewDelegate{
     
     var startPoint:CGFloat!
     
