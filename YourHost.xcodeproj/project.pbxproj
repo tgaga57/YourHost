@@ -98,7 +98,7 @@
 			children = (
 				B162932323E29DC800C8463A /* AppDelegate.swift */,
 				B162932523E29DC800C8463A /* SceneDelegate.swift */,
-				B162933723E2A8E700C8463A /* Model */,
+				B1B7318523E5B01D0081D0A7 /* Method */,
 				B162933923E2A8FB00C8463A /* View */,
 				B162933823E2A8F000C8463A /* LoginController */,
 				B162933123E29DC900C8463A /* Info.plist */,
@@ -109,13 +109,6 @@
 				B162932C23E29DC900C8463A /* Assets.xcassets */,
 			);
 			path = YourHost;
-			sourceTree = "<group>";
-		};
-		B162933723E2A8E700C8463A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		B162933823E2A8F000C8463A /* LoginController */ = {
@@ -137,6 +130,13 @@
 				B162932E23E29DC900C8463A /* LaunchScreen.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B1B7318523E5B01D0081D0A7 /* Method */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Method;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -12,6 +12,7 @@ import FacebookCore
 import FacebookLogin
 import FBSDKCoreKit
 import FBSDKLoginKit
+import NVActivityIndicatorView
 
 
 class LoginViewController: UIViewController,UITextFieldDelegate{
@@ -25,21 +26,28 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     @IBOutlet weak var loginButton: UIButton!
     // googleLoginButton
     @IBOutlet weak var googleLoginButton: UIButton!
+    // activeIndicator
+    @IBOutlet weak var activeIndicatorView: NVActivityIndicatorView!
+    
+    @IBOutlet weak var signUpButton: UIButton!
     
     // アラート用
     var alertController:UIAlertController!
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         // ボタンを丸く
         loginButton.layer.cornerRadius = 15
         googleLoginButton.layer.cornerRadius = 15
         
+        signUpButton.layer.cornerRadius = 15
         // デリゲートの設定
         emailTextField.delegate = self
         passWordTextField.delegate = self
         
+        emailTextField.addBorderBottom(height: 1.0, color: UIColor.black)
+        passWordTextField.addBorderBottom(height: 1.0, color: UIColor.black)
         
     }
     
@@ -52,12 +60,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        let loginManager: LoginManager = LoginManager()
-        loginManager.logOut()
+        //　アニメーションストップ
+        activeIndicatorView.stopAnimating()
         
     }
-    
     
     // emailログイン
     @IBAction func login(_ sender: Any) {
@@ -65,48 +71,55 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
             print("なにも入っていません")
             return
         }
+        // スタートアニメーション
+        activeIndicatorView.startAnimating()
+        
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passWordTextField.text!) { (usr, error) in
             if error != nil {
                 print("ログイン失敗")
                 print(error)
                 self.createAlert(title: "正しく入力が行われていないかアカウントが存在しません", message: "もう一度おねがいします")
+                self.emailTextField.text = ""
+                self.passWordTextField.text = ""
+                self.activeIndicatorView.stopAnimating()
             }else {
                 print("ログイン成功")
                 self.toTimeLine()
             }
         }
-        
-        }
+    }
     
     // facebookログイン
     @IBAction func facebookLogin(_ sender: Any) {
+        // スタートアニメーション
+        activeIndicatorView.startAnimating()
         
-        if AccessToken.current == nil {
-            let TimeLineVC = self.storyboard?.instantiateViewController(identifier: "TimeLine") as! TimeLineViewController
-            TimeLineVC.modalPresentationStyle = .fullScreen
-            self.present(TimeLineVC, animated: true, completion: nil)
-            print("ログイン")
-        }else {
-            let manager = LoginManager()
-            manager.logIn(permissions: [Permission.publicProfile], viewController: self) { (result) in
-                
-                switch result {
-                // もしエラーなら
-                case .failed(let error):
-                    print(error)
-                // キャンセルしたら
-                case .cancelled:
-                    print("ログインをキャンセルしました")
-                    return
-                    // 成功したら
-                case .success(let garantedPermision, let declinedPermision , let accesToken):
-                 print("facebookでログイン")
-                 self.toTimeLine()
-                }
+        //        if AccessToken.current == nil {
+        //            let TimeLineVC = self.storyboard?.instantiateViewController(identifier: "TimeLine") as! TimeLineViewController
+        //            TimeLineVC.modalPresentationStyle = .fullScreen
+        //            self.present(TimeLineVC, animated: true, completion: nil)
+        //            print("ログイン")
+        //        }else {
+        
+        let manager = LoginManager()
+        manager.logIn(permissions: [Permission.publicProfile], viewController: self) { (result) in
+            
+            switch result {
+            // もしエラーなら
+            case .failed(let error):
+                print(error)
+            // キャンセルしたら
+            case .cancelled:
+                print("ログインをキャンセルしました")
+                self.activeIndicatorView.stopAnimating()
+            // 成功したら
+            case .success(let garantedPermision, let declinedPermision , let accesToken):
+                print("facebookでログイン")
+                self.toTimeLine()
             }
         }
-        
     }
+    
     
     // あたらしいメンバー登録
     @IBAction func signUp(_ sender: Any) {
@@ -137,12 +150,22 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         
     }
     
+    // 遷移メソッド
     func toTimeLine(){
+        print("遷移処理")
         let toTimeLineVC = storyboard?.instantiateViewController(withIdentifier: "TimeLine") as! TimeLineViewController
         toTimeLineVC.modalPresentationStyle = .fullScreen
         present(toTimeLineVC, animated: true, completion: nil)
-        
     }
     
-    
+}
+
+// textfieldをカスタム
+extension UITextField {
+    func addBorderBottom(height: CGFloat, color: UIColor) {
+        let border = CALayer()
+        border.frame = CGRect(x: 0, y: self.frame.height - height, width: self.frame.width, height: height)
+        border.backgroundColor = color.cgColor
+        self.layer.addSublayer(border)
+    }
 }

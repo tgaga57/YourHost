@@ -17,4 +17,6 @@ target 'YourHost' do
   pod 'FacebookSDK'
   pod 'FacebookCore'
   pod 'FacebookShare'
+  pod 'NVActivityIndicatorView'
+
 end
