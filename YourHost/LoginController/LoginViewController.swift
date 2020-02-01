@@ -61,21 +61,27 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     // emailログイン
     @IBAction func login(_ sender: Any) {
-        // ログイン画面の処理
-        Auth.auth().signIn(withEmail: emailTextField.text!, password: passWordTextField.text!) { (user, error) in
-            // もしnilなら
-            if error != nil {
-                print(error)
-                self.createAlert(title: "正しく入力が行われていません", message: "もう一度お願いします")
+        // email,passwordがnilならreturn
+        guard let email = emailTextField.text, let passWord = passWordTextField.text else {
+            return
+        }
+          // nilでないなら下の処理に移動
+        Auth.auth().signIn(withEmail: email, password: passWord) { (user, error) in
+            if let error = error {
+                self.createAlert(title: "入力が正しく行われていないかアカウントが存在しません", message: "もう一度お願いします")
                 self.emailTextField.text = ""
                 self.passWordTextField.text = ""
-                
+                print("ログイン失敗")
             }else {
                 print("ログイン成功")
-                self.performSegue(withIdentifier: "timeLine", sender: nil)
+                UserDefaults.standard.set("Check", forKey: "set")
+                
+                //タイムラインへ遷移
+                self.toTimeLine()
             }
         }
-    }
+            
+        }
     
     // facebookログイン
     @IBAction func facebookLogin(_ sender: Any) {
@@ -101,17 +107,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
                     
                 case .success(let garantedPermision, let declinedPermision , let accesToken):
                     print("facebookでログイン")
-                    // 遷移処理
-                    let TimeLineVC = self.storyboard?.instantiateViewController(identifier: "TimeLine") as! TimeLineViewController
-                    // 遷移後はフルスクリーンに
-                    TimeLineVC.modalPresentationStyle = .fullScreen
-                    self.present(TimeLineVC, animated: true, completion: nil)
+                    self.toTimeLine()
                 }
             }
         }
         
     }
-    
     
     // あたらしいメンバー登録に
     @IBAction func signUp(_ sender: Any) {
@@ -142,15 +143,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         
     }
     
-    
-    func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
-        return true
-        
-    }
-    
-    // ログアウトボタンが押されたとき
-    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-        print("ログアウトしました")
+    func toTimeLine() {
+        // 遷移処理
+        let TimeLineVC = self.storyboard?.instantiateViewController(identifier: "TimeLine") as! TimeLineViewController
+        // 遷移後はフルスクリーンに
+        TimeLineVC.modalPresentationStyle = .fullScreen
+        self.present(TimeLineVC, animated: true, completion: nil)
     }
     
     

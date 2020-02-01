@@ -16,8 +16,6 @@ class NewSignUpViewController: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var passwordTextField: UITextField!
     
-    // アラート用
-    var alertController:UIAlertController!
     
     
     override func viewDidLoad() {
@@ -46,7 +44,7 @@ class NewSignUpViewController: UIViewController,UITextFieldDelegate {
                 print("新規登録成功")
                 UserDefaults.standard.set("check", forKey: "set")
                 // 遷移処理
-                self.performSegue(withIdentifier: "Setting", sender: nil)
+           
             }
             
         }
@@ -80,4 +78,6 @@ class NewSignUpViewController: UIViewController,UITextFieldDelegate {
         
         self.view.endEditing(true)
     }
+    
+    
 }

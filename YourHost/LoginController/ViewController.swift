@@ -79,7 +79,6 @@ class ViewController: UIViewController,UIScrollViewDelegate{
             onboardLabel.text = introStringArray[i]
             // scrollViewにaddsubview
             scrollView.addSubview(onboardLabel)
-            
         }
     }
    
