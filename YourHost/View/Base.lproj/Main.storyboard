@@ -87,7 +87,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="zL6-Pa-Sel">
                                 <rect key="frame" x="30" y="179" width="315" height="172"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="tgaga57@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zu5-qQ-rpJ">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="tgaga57ss@gmail.com" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zu5-qQ-rpJ">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="34"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -186,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wOc-kC-ODK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1877.5999999999999" y="117.39130434782609"/>
+            <point key="canvasLocation" x="2194" y="118"/>
         </scene>
         <!--Time Line View Controller-->
         <scene sceneID="153-Jh-Thv">
@@ -198,10 +198,11 @@
                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="TEV-lE-pYv"/>
                     </view>
+                    <navigationItem key="navigationItem" id="1mV-8E-FPe"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pEE-BQ-qdY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3569" y="117"/>
+            <point key="canvasLocation" x="3817" y="-229"/>
         </scene>
         <!--New Sign Up View Controller-->
         <scene sceneID="yd2-82-sq6">
@@ -308,7 +309,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrh-Lk-8Xj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3865" y="1018"/>
+            <point key="canvasLocation" x="4660" y="627"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iLM-uu-orQ">

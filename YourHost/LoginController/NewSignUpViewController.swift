@@ -15,9 +15,7 @@ class NewSignUpViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,7 +42,7 @@ class NewSignUpViewController: UIViewController,UITextFieldDelegate {
                 print("新規登録成功")
                 UserDefaults.standard.set("check", forKey: "set")
                 // 遷移処理
-           
+                self.toTimeLine()
             }
             
         }
@@ -59,7 +57,7 @@ class NewSignUpViewController: UIViewController,UITextFieldDelegate {
     
     // エラーが返ってきた場合のアラート
        func showErrorAlert(error: Error?)  {
-           let alert = UIAlertController(title: "正しく入力がおこなわれていません", message: "もう一度お願いします", preferredStyle: .alert)
+           let alert = UIAlertController(title: "正しく入力がおこなわていないかアカウントがすでに存在します", message: "もう一度お願いします", preferredStyle: .alert)
            let okAction = UIAlertAction(title: "OK", style: .cancel)
            alert.addAction(okAction)
            // 表示
@@ -79,5 +77,9 @@ class NewSignUpViewController: UIViewController,UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    
+    func toTimeLine() {
+        let toTimeLineVC = storyboard?.instantiateViewController(withIdentifier: "TimeLine") as! TimeLineViewController
+        toTimeLineVC.modalPresentationStyle = .fullScreen
+        present(toTimeLineVC, animated: true, completion: nil)
+    }
 }
