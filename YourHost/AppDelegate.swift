@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     }
     
     func application(_ application: UIApplication,open url: URL,sourceApplication: String?,annotation: Any) -> Bool {
-           
            return ApplicationDelegate.shared.application(application, open: url,sourceApplication: sourceApplication, annotation: annotation)
        }
        
@@ -45,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 

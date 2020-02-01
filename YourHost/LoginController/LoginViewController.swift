@@ -15,7 +15,7 @@ import FBSDKLoginKit
 
 
 class LoginViewController: UIViewController,UITextFieldDelegate{
-
+    
     
     // email
     @IBOutlet weak var emailTextField: UITextField!
@@ -50,10 +50,17 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     }
     
     
-    // emailログイン
-    // animationでトランジションボタン
-    @IBAction func login(_ sender: Any) {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
+        let loginManager: LoginManager = LoginManager()
+        loginManager.logOut()
+        
+    }
+    
+    
+    // emailログイン
+    @IBAction func login(_ sender: Any) {
         // ログイン画面の処理
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passWordTextField.text!) { (user, error) in
             // もしnilなら
@@ -70,40 +77,37 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         }
     }
     
-    
     // facebookログイン
     @IBAction func facebookLogin(_ sender: Any) {
         
-        if AccessToken.current != nil {
+        if AccessToken.current == nil {
             let TimeLineVC = self.storyboard?.instantiateViewController(identifier: "TimeLine") as! TimeLineViewController
+            TimeLineVC.modalPresentationStyle = .fullScreen
             self.present(TimeLineVC, animated: true, completion: nil)
+            print("ログイン")
         }else {
             let manager = LoginManager()
             manager.logIn(permissions: [Permission.publicProfile], viewController: self) { (result) in
                 
                 switch result {
-                    // もしエラーなら
+                // もしエラーなら
                 case .failed(let error):
                     print(error)
-                    // アラートを出します
-                    self.createAlert(title: "エラーです", message: "もう一度試してみてください")
-                    // キャンセルしたら
+                // キャンセルしたら
                 case .cancelled:
                     print("ログインをキャンセルしました")
                     return
-                   // 成功したら
+                    // 成功したら
+                    
                 case .success(let garantedPermision, let declinedPermision , let accesToken):
-                    print("login in !!")
+                    print("facebookでログイン")
                     // 遷移処理
-                   let TimeLineVC = self.storyboard?.instantiateViewController(identifier: "TimeLine") as! TimeLineViewController
+                    let TimeLineVC = self.storyboard?.instantiateViewController(identifier: "TimeLine") as! TimeLineViewController
                     // 遷移後はフルスクリーンに
                     TimeLineVC.modalPresentationStyle = .fullScreen
-                   self.present(TimeLineVC, animated: true, completion: nil)
-                
+                    self.present(TimeLineVC, animated: true, completion: nil)
                 }
-                
             }
-            
         }
         
     }
@@ -111,9 +115,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     // あたらしいメンバー登録に
     @IBAction func signUp(_ sender: Any) {
-        
+        print("signupページに移動")
     }
-    
     
     // テキストフィールドを閉じる処理
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -121,11 +124,11 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         passWordTextField.resignFirstResponder()
         return true
     }
+    
     // テキストフィールド以外を触った時の処理
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
     
     //  アラートの生成
     // 引数に自分でアラートの文字を入れることができる
@@ -138,5 +141,17 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         present(alertController,animated: true)
         
     }
+    
+    
+    func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
+        return true
+        
+    }
+    
+    // ログアウトボタンが押されたとき
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        print("ログアウトしました")
+    }
+    
     
 }
