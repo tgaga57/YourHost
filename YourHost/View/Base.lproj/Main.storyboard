@@ -270,7 +270,6 @@
                                 </state>
                                 <connections>
                                     <action selector="createButton:" destination="XO9-BD-HJ8" eventType="touchUpInside" id="i9a-ur-p4S"/>
-                                    <segue destination="NgE-6s-V8Z" kind="show" id="X5H-5U-siq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -289,11 +288,12 @@
                     <connections>
                         <outlet property="emailTextField" destination="7M4-kX-JCJ" id="ghm-SF-xy3"/>
                         <outlet property="passwordTextField" destination="L2P-52-7hV" id="wMz-GX-tSF"/>
+                        <segue destination="NgE-6s-V8Z" kind="show" id="ply-7j-Sx5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="emc-c8-AEx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2695" y="874"/>
+            <point key="canvasLocation" x="2775" y="1018"/>
         </scene>
         <!--New Setting View Controller-->
         <scene sceneID="Wvs-ri-ioP">
@@ -309,7 +309,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrh-Lk-8Xj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3630" y="874"/>
+            <point key="canvasLocation" x="3991" y="1018"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iLM-uu-orQ">

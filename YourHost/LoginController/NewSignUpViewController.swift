@@ -34,34 +34,39 @@ class NewSignUpViewController: UIViewController,UITextFieldDelegate {
     
     // 登録
     @IBAction func createButton(_ sender: Any) {
-               
-        Auth.auth().signIn(withEmail: emailTextField.text!, link: passwordTextField.text!) { (user, error) in
-            if error != nil {
-                print(error)
-                self.createAlert(title: "入力が正しく行われていません", message: "もう一度お願いします")
-                self.emailTextField.text = ""
-                self.passwordTextField.text = ""
+        // emailとpasswordがnilならreturn
+        guard let email = emailTextField.text,let passWord = passwordTextField.text else {
+           return
+        } // nil でないならこの処理をする
+        Auth.auth().createUser(withEmail: email, password: passWord) { (user, error) in
             
+            if let error = error {
+                self.showErrorAlert(error: error)
             } else {
-                print("新しくアカウントが登録されました")
+                print("新規登録成功")
+                UserDefaults.standard.set("check", forKey: "set")
+                // 遷移処理
+                self.performSegue(withIdentifier: "Setting", sender: nil)
             }
+            
         }
-    }
+        
+        }
     
     // backbutton
     @IBAction func back(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+    self.navigationController?.popViewController(animated: true)
         print("最初の画面にもどります")
     }
     
-    
-    //  アラートの生成
-    // 引数に自分でアラートの文字を入れることができる
-    func createAlert(title:String,message:String) {
-        alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController,animated: true)
-    }
+    // エラーが返ってきた場合のアラート
+       func showErrorAlert(error: Error?)  {
+           let alert = UIAlertController(title: "正しく入力がおこなわれていません", message: "もう一度お願いします", preferredStyle: .alert)
+           let okAction = UIAlertAction(title: "OK", style: .cancel)
+           alert.addAction(okAction)
+           // 表示
+           self.present(alert, animated: true)
+       }
     
     // リターンを押したときをキーボードを消す
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
