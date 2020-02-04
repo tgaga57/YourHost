@@ -117,8 +117,8 @@
 				B162933A23E2A9D800C8463A /* ViewController.swift */,
 				B162933C23E2ABDD00C8463A /* LoginViewController.swift */,
 				B1FECC5E23E524CC00DA1383 /* NewSignUpViewController.swift */,
-				B1FECC5C23E42DBA00DA1383 /* TimeLineViewController.swift */,
 				B1B7318823E67F950081D0A7 /* NewMemberSettingViewController.swift */,
+				B1FECC5C23E42DBA00DA1383 /* TimeLineViewController.swift */,
 			);
 			path = LoginController;
 			sourceTree = "<group>";

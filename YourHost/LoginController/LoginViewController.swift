@@ -31,7 +31,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     @IBOutlet weak var signUpButton: UIButton!
     // facebook
     @IBOutlet weak var fbButton: UIButton!
-    
+    //　アラート用
     var alertController:UIAlertController!
     
     override func viewDidLoad() {
@@ -95,7 +95,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     // facebookログイン
     @IBAction func facebookLogin(_ sender: Any) {
-        
         // スタートアニメーション
         activeIndicatorView.startAnimating()
         
