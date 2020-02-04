@@ -345,6 +345,9 @@ PODS:
     - NVActivityIndicatorView/Presenter (= 4.8.0)
   - NVActivityIndicatorView/Presenter (4.8.0)
   - PromisesObjC (1.2.8)
+  - SDWebImage (5.5.2):
+    - SDWebImage/Core (= 5.5.2)
+  - SDWebImage/Core (5.5.2)
 
 DEPENDENCIES:
   - FacebookCore
@@ -359,6 +362,7 @@ DEPENDENCIES:
   - FirebaseUI/Phone
   - lottie-ios
   - NVActivityIndicatorView
+  - SDWebImage
 
 SPEC REPOS:
   trunk:
@@ -399,6 +403,7 @@ SPEC REPOS:
     - nanopb
     - NVActivityIndicatorView
     - PromisesObjC
+    - SDWebImage
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
@@ -438,7 +443,8 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   NVActivityIndicatorView: d24b7ebcf80af5dcd994adb650e2b6c93379270f
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
 
-PODFILE CHECKSUM: 63db73e7c0e6bcf956115993145010cd6056dda3
+PODFILE CHECKSUM: 4d32b0c87d34217d82fa6eec659a5629c21c80e2
 
 COCOAPODS: 1.8.4

@@ -26,8 +26,8 @@ class NewSignUpViewController: UIViewController,UITextFieldDelegate {
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         createButoon.layer.cornerRadius = 15
-        
         backButton.layer.cornerRadius = 15
+        
         emailTextField.addBorderBottom(height: 1.0, color: UIColor.black)
         passwordTextField.addBorderBottom(height: 1.0, color: UIColor.black)
         
@@ -52,7 +52,8 @@ class NewSignUpViewController: UIViewController,UITextFieldDelegate {
                 self.passwordTextField.text = ""
             } else {
                 print("新規登録成功")
-                UserDefaults.standard.set("check", forKey: "set")
+                UserDefaults.standard.set(self.emailTextField.text, forKey: "userEmail")
+                UserDefaults.standard.set(self.passwordTextField.text, forKey: "userPassWord")
                 // 遷移処理
                 self.performSegue(withIdentifier: "Setting", sender: nil)
             }

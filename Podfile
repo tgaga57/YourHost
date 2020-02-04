@@ -18,5 +18,6 @@ target 'YourHost' do
   pod 'FacebookCore'
   pod 'FacebookShare'
   pod 'NVActivityIndicatorView'
+  pod 'SDWebImage'
 
 end

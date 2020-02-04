@@ -24,37 +24,41 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     @IBOutlet weak var passWordTextField: UITextField!
     // loginButton
     @IBOutlet weak var loginButton: UIButton!
-    // googleLoginButton
-    @IBOutlet weak var googleLoginButton: UIButton!
+    
     // activeIndicator
     @IBOutlet weak var activeIndicatorView: NVActivityIndicatorView!
     
     @IBOutlet weak var signUpButton: UIButton!
+    // facebook
+    @IBOutlet weak var fbButton: UIButton!
     
-    // アラート用
     var alertController:UIAlertController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         // ボタンを丸く
         loginButton.layer.cornerRadius = 15
-        googleLoginButton.layer.cornerRadius = 15
-        
+        fbButton.layer.cornerRadius = 15
         signUpButton.layer.cornerRadius = 15
         // デリゲートの設定
         emailTextField.delegate = self
         passWordTextField.delegate = self
         
-        emailTextField.addBorderBottom(height: 1.0, color: UIColor.black)
-        passWordTextField.addBorderBottom(height: 1.0, color: UIColor.black)
+        // テキストフィールドをボーダーだけに
+        emailTextField.addBorderBottom(height: 1.0, color: UIColor.white)
+        passWordTextField.addBorderBottom(height: 1.0, color: UIColor.white)
         
+        // テキストフィールドの角を丸く
+        emailTextField.layer.cornerRadius = 10
+        passWordTextField.layer.cornerRadius = 10
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // navigationbarを消す
         self.navigationController?.isNavigationBarHidden = true
+        
     }
     
     
@@ -91,6 +95,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     // facebookログイン
     @IBAction func facebookLogin(_ sender: Any) {
+        
         // スタートアニメーション
         activeIndicatorView.startAnimating()
         
@@ -150,22 +155,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         
     }
     
-    // 遷移メソッド
+    // タイムラインへのメソッド
     func toTimeLine(){
-        print("遷移処理")
+        print("タイムラインへ")
         let toTimeLineVC = storyboard?.instantiateViewController(withIdentifier: "TimeLine") as! TimeLineViewController
         toTimeLineVC.modalPresentationStyle = .fullScreen
         present(toTimeLineVC, animated: true, completion: nil)
     }
     
-}
-
-// textfieldをカスタム
-extension UITextField {
-    func addBorderBottom(height: CGFloat, color: UIColor) {
-        let border = CALayer()
-        border.frame = CGRect(x: 0, y: self.frame.height - height, width: self.frame.width, height: height)
-        border.backgroundColor = color.cgColor
-        self.layer.addSublayer(border)
-    }
+    
 }
