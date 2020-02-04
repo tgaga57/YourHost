@@ -46,8 +46,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         passWordTextField.delegate = self
         
         // テキストフィールドをボーダーだけに
-        emailTextField.addBorderBottom(height: 1.0, color: UIColor.white)
-        passWordTextField.addBorderBottom(height: 1.0, color: UIColor.white)
+        emailTextField.addBorderBottom(height: 1.0, color: UIColor.purple)
+        passWordTextField.addBorderBottom(height: 1.0, color: UIColor.purple)
         
         // テキストフィールドの角を丸く
         emailTextField.layer.cornerRadius = 10

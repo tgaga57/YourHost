@@ -37,10 +37,10 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         userProfImage.layer.cornerRadius = 30
         
         // ボーダーだけに
-        emailTextField.addBorderBottom(height: 1, color: .gray)
-        nameTextField.addBorderBottom(height: 1, color: .gray)
-        passWordTextField.addBorderBottom(height: 1, color: .gray)
-        ageTextField.addBorderBottom(height: 1, color: .gray)
+        emailTextField.addBorderBottom(height: 1, color: .purple)
+        nameTextField.addBorderBottom(height: 1, color: .purple)
+        passWordTextField.addBorderBottom(height: 1, color: .purple)
+        ageTextField.addBorderBottom(height: 1, color: .purple)
         
         // textfiledデリゲートの設定
         emailTextField.delegate = self
@@ -179,23 +179,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         
     }
     
-    // 年齢がありえないものにならないようにする
-    @IBAction func yourAgeTextField(_ sender: Any) {
-        
-        let yourAge:Int? = Int(ageTextField.text!)
-        
-        if yourAge! <= 10 {
-            createAlert(title: "年齢が低すぎます", message: "もう一度お願いします")
-            ageTextField.text = ""
-        } else if  yourAge! > 100{
-            createAlert(title: "年齢が高すぎます", message: "もう一度お願いします")
-            ageTextField.text = ""
-        } else {
-            return
-        }
-          
-        
-    }
+    
     
     func toTimeLine (){
         print("タイムラインへ")
@@ -224,5 +208,29 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         self.present(alertController, animated: true, completion: nil)
     }
     
-}
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // 年齢のところのkeybordは数字しか打てないようにする
+        if textField.tag == 1 {
+            
+            // 0から9までの数字しか許さない
+                   let allowedCharacters = "0123456789"
+                   // この中にallowedChraracrtesを入れる
+                   let charactersSet = CharacterSet(charactersIn: allowedCharacters)
+                   // String型
+                   let typedCharacterSet = CharacterSet(charactersIn: string)
+                   
+                   // 入力を反映させたテキストを取得する
+                   // 文字数の制限
+                   // 文字数は2まで
+                   let resultText: String = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+                   if resultText.count <= 2 {
+                       return charactersSet.isSuperset(of: typedCharacterSet)
+                   } else {
+                       return false
+                   }
+        }
+        return true
+    }
+   }
 
