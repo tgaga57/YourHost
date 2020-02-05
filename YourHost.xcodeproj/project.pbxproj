@@ -23,7 +23,6 @@
 		B1FE7C2723E2DB2F00B1AF3C /* 3.json in Resources */ = {isa = PBXBuildFile; fileRef = B1FE7C2623E2DB2F00B1AF3C /* 3.json */; };
 		B1FE7C2923E2DCF800B1AF3C /* 2.json in Resources */ = {isa = PBXBuildFile; fileRef = B1FE7C2823E2DCF800B1AF3C /* 2.json */; };
 		B1FECC5723E3F19200DA1383 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1FECC5623E3F19200DA1383 /* GoogleService-Info.plist */; };
-		B1FECC5F23E524CC00DA1383 /* NewSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FECC5E23E524CC00DA1383 /* NewSignUpViewController.swift */; };
 		DEAC5F1B8D4C21AB2DA64865 /* Pods_YourHost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C3209BC9CEA4171F9C8327 /* Pods_YourHost.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +47,6 @@
 		B1FE7C2623E2DB2F00B1AF3C /* 3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 3.json; path = ../Pods/3.json; sourceTree = "<group>"; };
 		B1FE7C2823E2DCF800B1AF3C /* 2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 2.json; path = ../../../2.json; sourceTree = "<group>"; };
 		B1FECC5623E3F19200DA1383 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		B1FECC5E23E524CC00DA1383 /* NewSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSignUpViewController.swift; sourceTree = "<group>"; };
 		B2C3209BC9CEA4171F9C8327 /* Pods_YourHost.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourHost.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -105,7 +103,7 @@
 				B162932323E29DC800C8463A /* AppDelegate.swift */,
 				B162932523E29DC800C8463A /* SceneDelegate.swift */,
 				B1B7318523E5B01D0081D0A7 /* Method */,
-				B1A2129123EA98420090E467 /* ManuView */,
+				B1A2129123EA98420090E467 /* HomeView */,
 				B162933923E2A8FB00C8463A /* LoginView */,
 				B162933823E2A8F000C8463A /* LoginController */,
 				B1A2128923EA85150090E467 /* TimeLine */,
@@ -124,7 +122,6 @@
 			children = (
 				B162933A23E2A9D800C8463A /* ViewController.swift */,
 				B162933C23E2ABDD00C8463A /* LoginViewController.swift */,
-				B1FECC5E23E524CC00DA1383 /* NewSignUpViewController.swift */,
 				B1B7318823E67F950081D0A7 /* NewMemberSettingViewController.swift */,
 			);
 			path = LoginController;
@@ -149,12 +146,12 @@
 			path = TimeLine;
 			sourceTree = "<group>";
 		};
-		B1A2129123EA98420090E467 /* ManuView */ = {
+		B1A2129123EA98420090E467 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
 				B1A2129223EA98860090E467 /* Menu.storyboard */,
 			);
-			path = ManuView;
+			path = HomeView;
 			sourceTree = "<group>";
 		};
 		B1B7318523E5B01D0081D0A7 /* Method */ = {
@@ -309,7 +306,6 @@
 				B162932623E29DC800C8463A /* SceneDelegate.swift in Sources */,
 				B1B7318923E67F950081D0A7 /* NewMemberSettingViewController.swift in Sources */,
 				B1A2128B23EA86800090E467 /* HomeViewController.swift in Sources */,
-				B1FECC5F23E524CC00DA1383 /* NewSignUpViewController.swift in Sources */,
 				B1A2129023EA8B360090E467 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import Firebase
 
-enum MenuType: Int {
-    case home
-    case message
-    case profile
-    case likes
-}
+//enum MenuType: Int {
+//    case home
+//    case message
+//    case profile
+//    case likes
+//    case logout
+//
+//}
 
 class MenuViewController: UITableViewController {
     
@@ -26,9 +29,38 @@ class MenuViewController: UITableViewController {
         super.viewWillAppear(animated)
     }
     
+    // セルがタップされると呼び出される
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let menuType = MenuType(rawValue: indexPath.row) else {return}
-        print("dissmissing: \(menuType)")
+        
+        print(indexPath.row)
+        
+        switch indexPath.row  {
+        case 0:
+            dismiss(animated: true)
+            print("homeに戻ります")
+        case 1:
+            performSegue(withIdentifier: "next", sender: nil)
+        case 2:
+            performSegue(withIdentifier: "next", sender: nil)
+        case 3:
+            performSegue(withIdentifier: "next", sender: nil)
+            
+        case 4:
+                // ログアウト
+                try! Auth.auth().signOut()
+                // story
+                let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                let VC = storyboard.instantiateViewController(identifier: "Login")
+                //  フルスクリーンに
+                VC.modalPresentationStyle = .fullScreen
+                // 遷移処理
+                self.present(VC, animated: true, completion: nil)
+                print("ログアウト")
+
+        default:
+            break
+            
+        }
     }
-    
 }
