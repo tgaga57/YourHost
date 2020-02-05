@@ -62,7 +62,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     
     // カメラ立ち上げ
     func openCamera() {
-        
         let sourceType:UIImagePickerController.SourceType = .camera
         // カメラが利用可能かチェックする
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -79,7 +78,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     
     // アルバム立ち上げ
     func openAlbum() {
-        
         let sourceType:UIImagePickerController.SourceType = .photoLibrary
         // カメラが利用可能かチェックする
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
@@ -100,7 +98,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         
         if info[.originalImage] as? UIImage != nil {
             let selctedImage = info[.originalImage] as! UIImage
-            
+            // userImageを保存
             UserDefaults.standard.set(selctedImage.jpegData(compressionQuality: 0.1), forKey: "userImage")
             
             userProfImage.image = selctedImage
@@ -125,8 +123,9 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     @IBAction func createAccount(_ sender: Any) {
         // もしnilの場合はここでreturnを返す
         guard let email = emailTextField.text, let passWord = passWordTextField.text, let age = ageTextField.text, let name = nameTextField.text, let profImage = userProfImage.image else {
+            createAlert(title: "入力が正しくないです", message: "もう一度お願いします")
             return
-            print("nil")
+                print("nil")
             createAlert(title: "正しく入力されていません", message: "もう一度お願いします")
         }
         //　nilがなければこの続きの処理に行く
@@ -137,11 +136,19 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                 self.showErrorAlert(error: error)
             } else {
                 print("新規登録成功")
+                // userNameを保存
+                UserDefaults.standard.set(self.nameTextField.text, forKey: "userName")
+                // userAgeを保存
+                UserDefaults.standard.set(self.ageTextField.text, forKey: "userAge")
+                // userSexを保存
+                UserDefaults.standard.set(self.ChoseSex.selectedSegmentIndex, forKey: "userSex")
+                
+                print(self.ChoseSex.selectedSegmentIndex)
+                // タイムラインへ遷移
                 self.toTimeLine()
+                
             }
         }
-        
-      
     }
     
     // テキストフィールドを閉じる処理
@@ -154,7 +161,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         return true
     }
     
-    // キーボード以外を触ったときの処理
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -178,12 +184,10 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         present(alertController,animated: true)
         
     }
-    
-    
-    
+    // タイムラインへ
     func toTimeLine (){
         print("タイムラインへ")
-        let nextVC = storyboard?.instantiateViewController(identifier: "TimeLine") as! TimeLineViewController
+        let nextVC = storyboard?.instantiateViewController(identifier: "TimeLine") as! HomeViewController
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true, completion: nil)
     }
@@ -214,23 +218,47 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         if textField.tag == 1 {
             
             // 0から9までの数字しか許さない
-                   let allowedCharacters = "0123456789"
-                   // この中にallowedChraracrtesを入れる
-                   let charactersSet = CharacterSet(charactersIn: allowedCharacters)
-                   // String型
-                   let typedCharacterSet = CharacterSet(charactersIn: string)
-                   
-                   // 入力を反映させたテキストを取得する
-                   // 文字数の制限
-                   // 文字数は2まで
-                   let resultText: String = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-                   if resultText.count <= 2 {
-                       return charactersSet.isSuperset(of: typedCharacterSet)
-                   } else {
-                       return false
-                   }
+            let allowedCharacters = "0123456789"
+            // この中にallowedChraracrtesを入れる
+            let charactersSet = CharacterSet(charactersIn: allowedCharacters)
+            // String型
+            let typedCharacterSet = CharacterSet(charactersIn: string)
+            
+            // 入力を反映させたテキストを取得する
+            // 文字数の制限
+            // 文字数は2まで
+            let resultText: String = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            if resultText.count <= 2 {
+                return charactersSet.isSuperset(of: typedCharacterSet)
+            } else {
+                return false
+            }
         }
         return true
     }
-   }
+    
+    // 性別
+    @IBAction func yourGender(_ sender: Any) {
+        if ChoseSex.selectedSegmentIndex == 0 {
+            print("女性")
+        } else if ChoseSex.selectedSegmentIndex == 1{
+            print("男性")
+        } else {
+            print("その他")
+        }
+    }
+    
+    // ログイン画面に戻る
+    @IBAction func back(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+}
 
+// scrollView内でtouchesBeganが使えるように
+extension UIScrollView {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.next?.touchesBegan(touches, with: event)
+    }
+}

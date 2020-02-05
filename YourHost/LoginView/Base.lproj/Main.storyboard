@@ -54,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="117.39130434782609"/>
+            <point key="canvasLocation" x="1039" y="117"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="ec1-si-5F3">
@@ -87,7 +87,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="zL6-Pa-Sel">
                                 <rect key="frame" x="30" y="179" width="315" height="174"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zu5-qQ-rpJ">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test@gmail.com" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zu5-qQ-rpJ">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="ZMd-Xh-9UA"/>
@@ -137,7 +137,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R81-mv-ikM">
                                 <rect key="frame" x="173" y="368" width="29.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hlv-NI-1xG">
@@ -188,6 +188,8 @@
                             <constraint firstItem="520-7C-oxH" firstAttribute="centerX" secondItem="At9-xR-UXY" secondAttribute="centerX" id="NzK-zv-UbI"/>
                             <constraint firstItem="xIz-NU-sUG" firstAttribute="bottom" secondItem="RXj-KZ-gfk" secondAttribute="bottom" constant="20" id="O74-ai-264"/>
                             <constraint firstItem="zL6-Pa-Sel" firstAttribute="leading" secondItem="xIz-NU-sUG" secondAttribute="leading" constant="30" id="W4M-2I-ipY"/>
+                            <constraint firstItem="hlv-NI-1xG" firstAttribute="width" secondItem="2lw-K6-QLD" secondAttribute="width" id="Yt3-tC-YWQ"/>
+                            <constraint firstItem="hlv-NI-1xG" firstAttribute="height" secondItem="2lw-K6-QLD" secondAttribute="height" multiplier="0.923077" id="abM-H3-hDW"/>
                             <constraint firstItem="RXj-KZ-gfk" firstAttribute="leading" secondItem="xIz-NU-sUG" secondAttribute="leading" constant="90" id="bOt-JK-Mqn"/>
                             <constraint firstItem="hlv-NI-1xG" firstAttribute="leading" secondItem="xIz-NU-sUG" secondAttribute="leading" constant="30" id="gIZ-6F-2gC"/>
                             <constraint firstItem="xIz-NU-sUG" firstAttribute="trailing" secondItem="RXj-KZ-gfk" secondAttribute="trailing" constant="90" id="gjA-ih-Csp"/>
@@ -215,22 +217,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wOc-kC-ODK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2192.8000000000002" y="117.39130434782609"/>
-        </scene>
-        <!--Time Line View Controller-->
-        <scene sceneID="153-Jh-Thv">
-            <objects>
-                <viewController storyboardIdentifier="TimeLine" id="sSC-fO-KAa" customClass="TimeLineViewController" customModule="YourHost" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="02w-5R-iuA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="TEV-lE-pYv"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="1mV-8E-FPe"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pEE-BQ-qdY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4055" y="116"/>
         </scene>
         <!--New Sign Up View Controller-->
         <scene sceneID="yd2-82-sq6">
@@ -438,6 +424,9 @@
                                                             <segment title="その他"/>
                                                         </segments>
                                                         <color key="selectedSegmentTintColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <connections>
+                                                            <action selector="yourGender:" destination="CGn-gG-9X7" eventType="valueChanged" id="so7-rn-zMv"/>
+                                                        </connections>
                                                     </segmentedControl>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zi-2u-ygW">
                                                         <rect key="frame" x="0.0" y="222.5" width="315" height="20.5"/>
@@ -474,13 +463,8 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPq-3j-flT">
-                                                <rect key="frame" x="149" y="962" width="77" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="こちらから"/>
-                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="アカウントはお持ちですか？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idR-Pg-qKJ">
-                                                <rect key="frame" x="69" y="933" width="226" height="21"/>
+                                                <rect key="frame" x="74" y="874" width="226" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -499,6 +483,14 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="createAccount:" destination="CGn-gG-9X7" eventType="touchUpInside" id="RbB-v7-E2j"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uPq-3j-flT">
+                                                <rect key="frame" x="149" y="903" width="77" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="こちらから"/>
+                                                <connections>
+                                                    <action selector="back:" destination="CGn-gG-9X7" eventType="touchUpInside" id="BP3-kI-5YF"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -552,7 +544,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FAA-vo-aR0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3180" y="913"/>
+            <point key="canvasLocation" x="3478" y="963"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iLM-uu-orQ">

@@ -98,13 +98,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         // スタートアニメーション
         activeIndicatorView.startAnimating()
         
-        //        if AccessToken.current == nil {
-        //            let TimeLineVC = self.storyboard?.instantiateViewController(identifier: "TimeLine") as! TimeLineViewController
-        //            TimeLineVC.modalPresentationStyle = .fullScreen
-        //            self.present(TimeLineVC, animated: true, completion: nil)
-        //            print("ログイン")
-        //        }else {
-        
         let manager = LoginManager()
         manager.logIn(permissions: [Permission.publicProfile], viewController: self) { (result) in
             
@@ -157,7 +150,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     // タイムラインへのメソッド
     func toTimeLine(){
         print("タイムラインへ")
-        let toTimeLineVC = storyboard?.instantiateViewController(withIdentifier: "TimeLine") as! TimeLineViewController
+        let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
+        let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine")
         toTimeLineVC.modalPresentationStyle = .fullScreen
         present(toTimeLineVC, animated: true, completion: nil)
     }
