@@ -9,6 +9,15 @@
 import UIKit
 import Firebase
 
+
+// scrollView内でtouchesBeganが使えるように
+extension UIScrollView {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.next?.touchesBegan(touches, with: event)
+    }
+}
+
+
 class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     // 名前
@@ -256,9 +265,3 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     
 }
 
-// scrollView内でtouchesBeganが使えるように
-extension UIScrollView {
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.next?.touchesBegan(touches, with: event)
-    }
-}

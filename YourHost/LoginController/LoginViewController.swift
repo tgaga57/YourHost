@@ -14,6 +14,16 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import NVActivityIndicatorView
 
+// textfieldをカスタム
+extension UITextField {
+    func addBorderBottom(height: CGFloat, color: UIColor) {
+        let border = CALayer()
+        border.frame = CGRect(x: 0, y: self.frame.height - height, width: self.frame.width, height: height)
+        border.backgroundColor = color.cgColor
+        self.layer.addSublayer(border)
+    }
+}
+
 
 class LoginViewController: UIViewController,UITextFieldDelegate{
     
@@ -52,6 +62,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         // テキストフィールドの角を丸く
         emailTextField.layer.cornerRadius = 10
         passWordTextField.layer.cornerRadius = 10
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +87,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
             return
         }
         // スタートアニメーション
+        activeIndicatorView.color = .green
         activeIndicatorView.startAnimating()
         
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passWordTextField.text!) { (usr, error) in
@@ -96,6 +108,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     // facebookログイン
     @IBAction func facebookLogin(_ sender: Any) {
         // スタートアニメーション
+        activeIndicatorView.color = .green
         activeIndicatorView.startAnimating()
         
         let manager = LoginManager()
@@ -118,7 +131,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     }
     
     
-    // あたらしいメンバー登録
+    // 新規メンバー登録
     @IBAction func signUp(_ sender: Any) {
         print("signupページに移動")
     }

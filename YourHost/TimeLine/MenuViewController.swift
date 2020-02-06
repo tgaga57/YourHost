@@ -8,21 +8,16 @@
 
 import UIKit
 import Firebase
+import FacebookCore
+import FacebookLogin
 
-//enum MenuType: Int {
-//    case home
-//    case message
-//    case profile
-//    case likes
-//    case logout
-//
-//}
 
 class MenuViewController: UITableViewController {
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,14 +36,19 @@ class MenuViewController: UITableViewController {
         case 1:
             performSegue(withIdentifier: "next", sender: nil)
         case 2:
-            performSegue(withIdentifier: "next", sender: nil)
+            performSegue(withIdentifier: "Profile", sender: nil)
+            
         case 3:
             performSegue(withIdentifier: "next", sender: nil)
             
         case 4:
+            
+            // facebookログアウト
+            let logoutManeger = LoginManager()
+            logoutManeger.logOut()
                 // ログアウト
-                try! Auth.auth().signOut()
-                // story
+            try! Auth.auth().signOut()
+                // storyboardの指定
                 let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 
                 let VC = storyboard.instantiateViewController(identifier: "Login")
@@ -58,6 +58,7 @@ class MenuViewController: UITableViewController {
                 self.present(VC, animated: true, completion: nil)
                 print("ログアウト")
 
+            
         default:
             break
             
