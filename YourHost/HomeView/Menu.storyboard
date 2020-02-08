@@ -280,6 +280,8 @@
                                         <rect key="frame" x="117.5" y="-41" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.97270912195923587" green="0.97270912195923587" blue="0.97270912195923587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="EhN-Xg-LCS"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="duz-JG-c83"/>
                                             <constraint firstAttribute="width" constant="100" id="kmI-Ys-Cmf"/>
                                         </constraints>
                                     </imageView>
@@ -408,14 +410,14 @@
                         <outlet property="backView" destination="sa3-Uj-veC" id="5Gx-8D-Jjv"/>
                         <outlet property="introduceYourSelfTextView" destination="Nlz-Qm-cVU" id="hFA-7W-WdD"/>
                         <outlet property="nameTextFiled" destination="s7E-WI-0N9" id="A6h-Rq-cTM"/>
-                        <outlet property="pfoImageView" destination="pLw-Vb-KDQ" id="ppT-d0-DpO"/>
                         <outlet property="prfofileUpdate" destination="n0X-2l-gjY" id="VQt-hX-CGX"/>
+                        <outlet property="profImageView" destination="pLw-Vb-KDQ" id="ppT-d0-DpO"/>
                         <outlet property="sexSegment" destination="zUG-jz-QUV" id="IMK-oY-Wgb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hv8-nw-NLq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7029.6000000000004" y="815.44227886056979"/>
+            <point key="canvasLocation" x="6903" y="816"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hfs-GZ-JgB">

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 
 // scrollView内でtouchesBeganが使えるように
@@ -16,7 +17,6 @@ extension UIScrollView {
         self.next?.touchesBegan(touches, with: event)
     }
 }
-
 
 class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
@@ -60,7 +60,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         // ボタンを丸く
         createAccountButton.layer.cornerRadius = 15
         profButton.layer.cornerRadius = 15
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +83,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
             print("カメラが開かれました")
         }
     }
+    
     
     // アルバム立ち上げ
     func openAlbum() {
@@ -110,10 +110,13 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
             // userImageを保存
             UserDefaults.standard.set(selctedImage.jpegData(compressionQuality: 0.1), forKey: "userImage")
             
+            userProfImage.contentMode = .scaleToFill
+            
             userProfImage.image = selctedImage
             picker.dismiss(animated: true, completion: nil)
             
         }
+        
     }
     
     //キャンセルが押されたとき
@@ -130,34 +133,73 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     
     // 新規登録ボタン
     @IBAction func createAccount(_ sender: Any) {
-        // もしnilの場合はここでreturnを返す
-        guard let email = emailTextField.text, let passWord = passWordTextField.text, let age = ageTextField.text, let name = nameTextField.text, let profImage = userProfImage.image else {
-            createAlert(title: "入力が正しくないです", message: "もう一度お願いします")
-            return
-                print("nil")
+        //         // もしnilの場合はここでreturnを返す
+        //        guard let email = emailTextField.text, let passWord = passWordTextField.text, let age = ageTextField.text, let name = nameTextField.text, let profImage = userProfImage.image else {
+        //            print("nil")
+        //            createAlert(title: "正しく入力されていません", message: "もう一度お願いします")
+        //            return
+        //        }
+        //        //　nilがなければこの続きの処理に行く
+        //        Auth.auth().createUser(withEmail: email, password: passWord) { (user, error) in
+        //            if let errro = error {
+        //                print("新規登録失敗")
+        //                print(error)
+        //                self.showErrorAlert(error: error)
+        //            } else {
+        //                print("新規登録成功")
+        //                // userNameを保存
+        //                UserDefaults.standard.set(self.nameTextField.text, forKey: "userName")
+        //                // userAgeを保存
+        //                UserDefaults.standard.set(self.ageTextField.text, forKey: "userAge")
+        //                // userSexを保存
+        //                UserDefaults.standard.set(self.ChoseSex.selectedSegmentIndex, forKey: "userSex")
+        //
+        //                print(self.ChoseSex.selectedSegmentIndex)
+        //                // タイムラインへ遷移
+        //                self.toTimeLine()
+        //
+        //            }
+        //        }
+        
+        // 全てに記入がされているかの確認
+        guard let email = emailTextField.text, let passWord = passWordTextField.text, let userAge = ageTextField.text, let userName = nameTextField.text, let userImage = userProfImage.image else{
+            print("nil")
             createAlert(title: "正しく入力されていません", message: "もう一度お願いします")
+            return
         }
-        //　nilがなければこの続きの処理に行く
-        Auth.auth().createUser(withEmail: email, password: passWord) { (user, error) in
-            if let errro = error {
-                print("新規登録失敗")
-                print(error)
+         
+        let userSex = String(ChoseSex.selectedSegmentIndex)
+        
+        
+        
+        Auth.auth().createUser(withEmail: email, password: passWord) { (result, error) in
+            // エラーがないかチェック
+            if let error = error {
                 self.showErrorAlert(error: error)
             } else {
-                print("新規登録成功")
-                // userNameを保存
-                UserDefaults.standard.set(self.nameTextField.text, forKey: "userName")
-                // userAgeを保存
-                UserDefaults.standard.set(self.ageTextField.text, forKey: "userAge")
-                // userSexを保存
-                UserDefaults.standard.set(self.ChoseSex.selectedSegmentIndex, forKey: "userSex")
                 
-                print(self.ChoseSex.selectedSegmentIndex)
-                // タイムラインへ遷移
-                self.toTimeLine()
+                let db = Firestore.firestore()
                 
+                var profImageData: NSData = NSData()
+                
+                if let profileImage = self.userProfImage.image{
+                    profImageData = profileImage.jpegData(compressionQuality: 0.1)! as NSData
+                }
+                let base64UserImage = profImageData.base64EncodedString(options: .lineLength64Characters) as String
+                
+                db.collection("users").addDocument(data: ["userName":userName,"userAge":userAge,"userGender":userSex,"uid": result!.user.uid,"userImage":base64UserImage]) { (error) in
+                    if error != nil {
+                        self.showErrorAlert(error: error)
+                        print("新規登録失敗")
+                    } else {
+                        print("新規登録成功")
+                        self.toTimeLine()
+                    }
+                }
             }
         }
+        
+        
     }
     
     // テキストフィールドを閉じる処理
@@ -196,9 +238,11 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     // タイムラインへ
     func toTimeLine (){
         print("タイムラインへ")
-        let nextVC = storyboard?.instantiateViewController(identifier: "TimeLine") as! HomeViewController
-        nextVC.modalPresentationStyle = .fullScreen
-        present(nextVC, animated: true, completion: nil)
+        let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
+        let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine")
+        toTimeLineVC.modalPresentationStyle = .fullScreen
+        present(toTimeLineVC, animated: true, completion: nil)
+        
     }
     
     

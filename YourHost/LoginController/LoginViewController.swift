@@ -107,6 +107,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     // facebookログイン
     @IBAction func facebookLogin(_ sender: Any) {
+        
+        
         // スタートアニメーション
         activeIndicatorView.color = .green
         activeIndicatorView.startAnimating()

@@ -34,12 +34,12 @@ class MenuViewController: UITableViewController {
             dismiss(animated: true)
             print("homeに戻ります")
         case 1:
-            performSegue(withIdentifier: "next", sender: nil)
+            performSegue(withIdentifier: "message", sender: nil)
         case 2:
             performSegue(withIdentifier: "Profile", sender: nil)
             
         case 3:
-            performSegue(withIdentifier: "next", sender: nil)
+            performSegue(withIdentifier: "likes", sender: nil)
             
         case 4:
             
