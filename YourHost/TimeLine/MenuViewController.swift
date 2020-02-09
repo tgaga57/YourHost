@@ -7,17 +7,16 @@
 //
 
 import UIKit
-import Firebase
 import FacebookCore
+import Firebase
 import FacebookLogin
 
 
 class MenuViewController: UITableViewController {
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +56,6 @@ class MenuViewController: UITableViewController {
                 // 遷移処理
                 self.present(VC, animated: true, completion: nil)
                 print("ログアウト")
-
             
         default:
             break

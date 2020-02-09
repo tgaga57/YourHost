@@ -45,9 +45,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         
         prfofileUpdate.layer.cornerRadius = 15
         
-        // 情報を反映
-        getProfile()
-        
     }
     
     // カメラ立ち上げ
@@ -115,50 +112,12 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         self.present(alertController, animated: true, completion: nil)
     }
     
-    // user情報を反映
-    func getProfile() {
-        // 画像情報
-            if UserDefaults.standard.object(forKey: "userImage") != nil {
-                // userImageにuserDefaultsをdata型で入れる
-                userImageData = UserDefaults.standard.object(forKey: "userImage") as! Data
-                // UIImage型に変更
-                userImage = UIImage(data: userImageData)!
-                // 画像が
-                profImageView.contentMode = .scaleToFill
-                // 最後に入れる
-                profImageView.image = userImage
-            } else {
-                // 何もない場合は
-                profImageView.image = #imageLiteral(resourceName: "プロフィール")
-                
-        }
-        
-        // 名前情報
-        if let profName = UserDefaults.standard.object(forKey: "userName") as? String {
-            // profileNameLabelへ代入
-            nameTextFiled.text = profName
-        } else {
-            // なければ匿名としておく
-            nameTextFiled.text = "まだ名前がありません"
-        }
-        
-        // 年齢
-        if let profAge = UserDefaults.standard.object(forKey: "userAge") {
-            ageTextFiled.text = profAge as! String
-        } else {
-            ageTextFiled.text = "年齢が入力されていません"
-        }
-        
-        //　性別
-        if let profSex = UserDefaults.standard.object(forKey: "userSex") {
-            sexSegment.selectedSegmentIndex = profSex as! Int
-        } else {
-            sexSegment.selectedSegmentIndex = 0
-        }
-        // 自己紹介
-        introduceYourSelfTextView.text = "あなたのことについてご記入ください"
-    }
     
+    func getProfile() {
+        
+        
+        
+    }
     
     //キャンセルが押されたとき
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

@@ -13,6 +13,7 @@ import FacebookLogin
 import FBSDKCoreKit
 import FBSDKLoginKit
 import NVActivityIndicatorView
+import FirebaseFirestore
 
 // textfieldをカスタム
 extension UITextField {
@@ -26,7 +27,8 @@ extension UITextField {
 
 
 class LoginViewController: UIViewController,UITextFieldDelegate{
-    
+
+    let db = Firestore.firestore()
     
     // email
     @IBOutlet weak var emailTextField: UITextField!
@@ -44,9 +46,11 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     //　アラート用
     var alertController:UIAlertController!
     
+    
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // ボタンを丸く
         loginButton.layer.cornerRadius = 15
         fbButton.layer.cornerRadius = 15
@@ -164,12 +168,15 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     // タイムラインへのメソッド
     func toTimeLine(){
-        print("タイムラインへ")
+       
         let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
         let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine")
         toTimeLineVC.modalPresentationStyle = .fullScreen
         present(toTimeLineVC, animated: true, completion: nil)
+        
+        print("タイムラインへ")
     }
+    
     
     
 }

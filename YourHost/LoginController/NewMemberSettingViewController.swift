@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
-
+import FirebaseStorage
 
 // scrollView内でtouchesBeganが使えるように
 extension UIScrollView {
@@ -39,6 +39,8 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     // プロフ写真変更ボタン
     @IBOutlet weak var profButton: UIButton!
     
+    
+    var fileName = String()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -106,14 +108,16 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if info[.originalImage] as? UIImage != nil {
+            
             let selctedImage = info[.originalImage] as! UIImage
-            // userImageを保存
-            UserDefaults.standard.set(selctedImage.jpegData(compressionQuality: 0.1), forKey: "userImage")
             
+            // 画像を画面全体に反映
             userProfImage.contentMode = .scaleToFill
-            
+            // userProfileに反映
             userProfImage.image = selctedImage
+            
             picker.dismiss(animated: true, completion: nil)
+            
             
         }
         
@@ -133,52 +137,41 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     
     // 新規登録ボタン
     @IBAction func createAccount(_ sender: Any) {
-        //         // もしnilの場合はここでreturnを返す
-        //        guard let email = emailTextField.text, let passWord = passWordTextField.text, let age = ageTextField.text, let name = nameTextField.text, let profImage = userProfImage.image else {
-        //            print("nil")
-        //            createAlert(title: "正しく入力されていません", message: "もう一度お願いします")
-        //            return
-        //        }
-        //        //　nilがなければこの続きの処理に行く
-        //        Auth.auth().createUser(withEmail: email, password: passWord) { (user, error) in
-        //            if let errro = error {
-        //                print("新規登録失敗")
-        //                print(error)
-        //                self.showErrorAlert(error: error)
-        //            } else {
-        //                print("新規登録成功")
-        //                // userNameを保存
-        //                UserDefaults.standard.set(self.nameTextField.text, forKey: "userName")
-        //                // userAgeを保存
-        //                UserDefaults.standard.set(self.ageTextField.text, forKey: "userAge")
-        //                // userSexを保存
-        //                UserDefaults.standard.set(self.ChoseSex.selectedSegmentIndex, forKey: "userSex")
-        //
-        //                print(self.ChoseSex.selectedSegmentIndex)
-        //                // タイムラインへ遷移
-        //                self.toTimeLine()
-        //
-        //            }
-        //        }
         
-        // 全てに記入がされているかの確認
+        //  全てに記入がされているかの確認
         guard let email = emailTextField.text, let passWord = passWordTextField.text, let userAge = ageTextField.text, let userName = nameTextField.text, let userImage = userProfImage.image else{
             print("nil")
-            createAlert(title: "正しく入力されていません", message: "もう一度お願いします")
+            createAlert(title: "入力されていない項目があります", message: "もう一度お願いします")
             return
+            
         }
-         
-        let userSex = String(ChoseSex.selectedSegmentIndex)
         
-        
+        //        let userSex = String(ChoseSex.selectedSegmentIndex)
         
         Auth.auth().createUser(withEmail: email, password: passWord) { (result, error) in
             // エラーがないかチェック
-            if let error = error {
+            if error != nil{
                 self.showErrorAlert(error: error)
             } else {
+                let uploadRef = Storage.storage().reference(withPath: "user/\(String(describing: result?.user.uid)).jpg")
+                guard let imageData = self.userProfImage.image?.jpegData(compressionQuality: 0.1) else {return}
+                
+                let uploadMetaData = StorageMetadata.init()
+                uploadMetaData.contentType = "image/jpeg"
+                
+                uploadRef.putData(imageData, metadata: uploadMetaData) { (downloadMetaData, error) in
+                    if let error = error {
+                        print("画像をアップロードできませんでした")
+                        print("errroを見つけました! \(error.localizedDescription)")
+                        return
+                    }
+                    print("画像をアップロードしました\(String(describing: downloadMetaData))")
+                    
+                }
                 
                 let db = Firestore.firestore()
+                
+                let userSex = String(self.ChoseSex.selectedSegmentIndex)
                 
                 var profImageData: NSData = NSData()
                 
@@ -186,20 +179,19 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                     profImageData = profileImage.jpegData(compressionQuality: 0.1)! as NSData
                 }
                 let base64UserImage = profImageData.base64EncodedString(options: .lineLength64Characters) as String
-                
-                db.collection("users").addDocument(data: ["userName":userName,"userAge":userAge,"userGender":userSex,"uid": result!.user.uid,"userImage":base64UserImage]) { (error) in
+                db.collection("users").addDocument(data: ["email":email,"userName":userName,"userAge":userAge,"userGender":userSex,"uid": result!.user.uid,"userImage":base64UserImage]) { (error) in
                     if error != nil {
                         self.showErrorAlert(error: error)
                         print("新規登録失敗")
                     } else {
                         print("新規登録成功")
+                        // タイムラインへ遷移
                         self.toTimeLine()
+                        
                     }
                 }
             }
         }
-        
-        
     }
     
     // テキストフィールドを閉じる処理
@@ -218,7 +210,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     
     // エラーが返ってきた場合のアラート
     func showErrorAlert(error: Error?)  {
-        let alert = UIAlertController(title: "入力が正しくありません", message: "もう一度お願いします", preferredStyle: .alert)
+        let alert = UIAlertController(title: "入力されていない項目があります", message: "もう一度お願いします", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(okAction)
         // 表示
@@ -238,13 +230,13 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     // タイムラインへ
     func toTimeLine (){
         print("タイムラインへ")
+        
+        // 遷移する先
         let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
         let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine")
         toTimeLineVC.modalPresentationStyle = .fullScreen
         present(toTimeLineVC, animated: true, completion: nil)
-        
     }
-    
     
     // カメラ使用時のアラート
     func cameraAlert() {
@@ -308,4 +300,5 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     
     
 }
+
 

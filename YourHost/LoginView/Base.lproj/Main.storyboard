@@ -239,7 +239,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EzU-cq-iLu">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="プロフィール" translatesAutoresizingMaskIntoConstraints="NO" id="EzU-cq-iLu">
                                                 <rect key="frame" x="112.5" y="42.5" width="150" height="150"/>
                                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <gestureRecognizers/>
@@ -438,6 +438,21 @@
             </objects>
             <point key="canvasLocation" x="3326" y="116"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="2zO-Sv-Pcr">
+            <objects>
+                <viewController id="1tM-CS-Xp5" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EwF-pO-1Xo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="ULd-AW-Fzw"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DI6-Ab-ac9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3321" y="883"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="iLM-uu-orQ">
             <objects>
@@ -457,4 +472,7 @@
             <point key="canvasLocation" x="-34" y="117"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="プロフィール" width="64" height="64"/>
+    </resources>
 </document>
