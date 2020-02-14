@@ -8,8 +8,6 @@
 
 import UIKit
 import Firebase
-import FBSDKCoreKit
-import FacebookLogin
 
 @UIApplicationMain
 
@@ -22,21 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         // firebaseを使う前に宣言
         FirebaseApp.configure()
         
-        // Facebook Login
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-        
         return true
     }
     
-    func application(_ application: UIApplication,open url: URL,sourceApplication: String?,annotation: Any) -> Bool {
-           return ApplicationDelegate.shared.application(application, open: url,sourceApplication: sourceApplication, annotation: annotation)
-       }
-       
-       func applicationDidBecomeActive(_ application: UIApplication) {
-           
-           AppEvents.activateApp()
-           
-       }
     
     // MARK: UISceneSession Lifecycle
 

@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseStorage
 import FirebaseFirestore
+import Firebase
 
 class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
@@ -26,6 +27,10 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     @IBOutlet weak var introduceYourSelfTextView: UITextView!
     // プロフィール更新
     @IBOutlet weak var prfofileUpdate: UIButton!
+
+    var users = Auth.auth().currentUser?.photoURL
+    // インスタンス化
+    let db = Firestore.firestore()
     
     // userDefalutImageの変換に使用
     var userImage = UIImage ()
@@ -44,8 +49,16 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         ageTextFiled.addBorderBottom(height: 1, color: .systemPink)
         
         prfofileUpdate.layer.cornerRadius = 15
+    
         
     }
+    
+    //userの情報を反映させる
+    func getProfile(){
+        
+        
+            }
+    
     
     // カメラ立ち上げ
     func openCamera() {
@@ -110,13 +123,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         alertController.addAction(action3)
         
         self.present(alertController, animated: true, completion: nil)
-    }
-    
-    
-    func getProfile() {
-        
-        
-        
     }
     
     //キャンセルが押されたとき

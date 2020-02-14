@@ -39,8 +39,8 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     // プロフ写真変更ボタン
     @IBOutlet weak var profButton: UIButton!
     
-    
     var fileName = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -115,9 +115,8 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
             userProfImage.contentMode = .scaleToFill
             // userProfileに反映
             userProfImage.image = selctedImage
-            
+            // 戻る
             picker.dismiss(animated: true, completion: nil)
-            
             
         }
         
@@ -138,22 +137,26 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     // 新規登録ボタン
     @IBAction func createAccount(_ sender: Any) {
         
+        if emailTextField.text == Auth.auth().currentUser?.email  {
+            print("このメールアドレスは既に使われています")
+            return
+        }
+        
         //  全てに記入がされているかの確認
         guard let email = emailTextField.text, let passWord = passWordTextField.text, let userAge = ageTextField.text, let userName = nameTextField.text, let userImage = userProfImage.image else{
             print("nil")
             createAlert(title: "入力されていない項目があります", message: "もう一度お願いします")
             return
-            
         }
         
-        //        let userSex = String(ChoseSex.selectedSegmentIndex)
-        
         Auth.auth().createUser(withEmail: email, password: passWord) { (result, error) in
-            // エラーがないかチェック
+            // nilないかチェック
             if error != nil{
                 self.showErrorAlert(error: error)
-            } else {
-                let uploadRef = Storage.storage().reference(withPath: "user/\(String(describing: result?.user.uid)).jpg")
+            }else{
+                // プロフィールの顔写真をアップロードする
+                let uID = result?.user.uid
+                let uploadRef = Storage.storage().reference(withPath: "user/\(uID!)).jpg")
                 guard let imageData = self.userProfImage.image?.jpegData(compressionQuality: 0.1) else {return}
                 
                 let uploadMetaData = StorageMetadata.init()
@@ -166,8 +169,8 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                         return
                     }
                     print("画像をアップロードしました\(String(describing: downloadMetaData))")
-                    
                 }
+            
                 
                 let db = Firestore.firestore()
                 
@@ -179,6 +182,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                     profImageData = profileImage.jpegData(compressionQuality: 0.1)! as NSData
                 }
                 let base64UserImage = profImageData.base64EncodedString(options: .lineLength64Characters) as String
+                
                 db.collection("users").addDocument(data: ["email":email,"userName":userName,"userAge":userAge,"userGender":userSex,"uid": result!.user.uid,"userImage":base64UserImage]) { (error) in
                     if error != nil {
                         self.showErrorAlert(error: error)
@@ -186,9 +190,11 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                     } else {
                         print("新規登録成功")
                         // タイムラインへ遷移
+                        
                         self.toTimeLine()
                         
                     }
+                    
                 }
             }
         }
@@ -196,11 +202,12 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     
     // テキストフィールドを閉じる処理
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    
+            emailTextField.resignFirstResponder()
+            passWordTextField.resignFirstResponder()
+            nameTextField.resignFirstResponder()
+            ageTextField.resignFirstResponder()
         
-        emailTextField.resignFirstResponder()
-        passWordTextField.resignFirstResponder()
-        nameTextField.resignFirstResponder()
-        ageTextField.resignFirstResponder()
         return true
     }
     
@@ -230,7 +237,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     // タイムラインへ
     func toTimeLine (){
         print("タイムラインへ")
-        
         // 遷移する先
         let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
         let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine")
