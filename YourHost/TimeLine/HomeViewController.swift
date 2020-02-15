@@ -8,19 +8,16 @@
 
 import UIKit
 
-//
+// スライド
 extension HomeViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.isPresenting = true
         return transition
-        
     }
-    
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.isPresenting = false
         return transition
     }
-    
 }
 
 // ここから
@@ -28,9 +25,13 @@ class HomeViewController: UIViewController{
     
     let transition = SlideTransition()
     
+    var userID:String = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("Timeline")
+        print(userID)
     }
     
     @IBAction func didTaped(_ sender: Any) {

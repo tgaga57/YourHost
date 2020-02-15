@@ -10,10 +10,34 @@
         <!--Home-->
         <scene sceneID="Tza-ZW-9D1">
             <objects>
-                <viewController id="01a-1C-Enw" customClass="HomeViewController" customModule="YourHost" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TimeLine" id="01a-1C-Enw" customClass="HomeViewController" customModule="YourHost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L5J-8Y-zac">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCq-97-9sc">
+                                <rect key="frame" x="0.0" y="10" width="375" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bs0-Qo-w8H">
+                                        <rect key="frame" x="24" y="13" width="33" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button" image="メニュー"/>
+                                        <connections>
+                                            <action selector="didTaped:" destination="01a-1C-Enw" eventType="touchUpInside" id="kbW-j2-sZ5"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1z-5w-4El">
+                                        <rect key="frame" x="152" y="19" width="87" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="EuphemiaUCAS-Bold" family="Euphemia UCAS" pointSize="28"/>
+                                        <color key="textColor" red="1" green="0.41455229000525151" blue="0.35979786362159916" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.91423547047970477" green="0.91423547047970477" blue="0.91423547047970477" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="gx0-DB-cBa"/>
                     </view>
@@ -21,16 +45,13 @@
                         <barButtonItem key="leftBarButtonItem" title="Item" image="メニュー" id="EzK-rH-F2T">
                             <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-3"/>
                             <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="didTaped:" destination="01a-1C-Enw" id="OvD-WD-sCH"/>
-                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="pjpjpjpj" id="G8n-yB-ZaA"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsp-gq-rsQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5420" y="-60"/>
+            <point key="canvasLocation" x="5420" y="-60.719640179910051"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="wBH-H7-lfd">
@@ -419,24 +440,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hv8-nw-NLq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6903" y="816"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="hfs-GZ-JgB">
-            <objects>
-                <navigationController storyboardIdentifier="TimeLine" automaticallyAdjustsScrollViewInsets="NO" id="aAe-e2-PDp" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SH6-kW-nSy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="01a-1C-Enw" kind="relationship" relationship="rootViewController" id="Xqv-bG-F2T"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yW3-0E-QBm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4373.6000000000004" y="-59.820089955022496"/>
         </scene>
     </scenes>
     <resources>

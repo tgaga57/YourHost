@@ -143,7 +143,6 @@
 			children = (
 				B1A2128A23EA86800090E467 /* HomeViewController.swift */,
 				B1A2128F23EA8B360090E467 /* MenuViewController.swift */,
-				B11530B523EAB91600540788 /* SlideTransition.swift */,
 				B102059D23EBD27D003F01AC /* ProfViewController.swift */,
 			);
 			path = TimeLine;
@@ -160,6 +159,7 @@
 		B1B7318523E5B01D0081D0A7 /* Method */ = {
 			isa = PBXGroup;
 			children = (
+				B11530B523EAB91600540788 /* SlideTransition.swift */,
 			);
 			path = Method;
 			sourceTree = "<group>";

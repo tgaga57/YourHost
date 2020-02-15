@@ -28,7 +28,8 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     // プロフィール更新
     @IBOutlet weak var prfofileUpdate: UIButton!
 
-    var users = Auth.auth().currentUser?.photoURL
+    var ref: DocumentReference!
+    
     // インスタンス化
     let db = Firestore.firestore()
     
@@ -57,7 +58,9 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     func getProfile(){
         
         
-            }
+       
+        
+     }
     
     
     // カメラ立ち上げ

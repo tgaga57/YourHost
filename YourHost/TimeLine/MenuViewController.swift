@@ -14,9 +14,14 @@ import FacebookLogin
 
 class MenuViewController: UITableViewController {
     
+    var ref: DocumentReference!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // インスタンス
+        let db = Firestore.firestore()
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {

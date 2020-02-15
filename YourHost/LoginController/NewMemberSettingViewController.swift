@@ -39,7 +39,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     // プロフ写真変更ボタン
     @IBOutlet weak var profButton: UIButton!
     
-    var fileName = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +84,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
             print("カメラが開かれました")
         }
     }
-    
     
     // アルバム立ち上げ
     func openAlbum() {
@@ -136,9 +134,10 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     
     // 新規登録ボタン
     @IBAction func createAccount(_ sender: Any) {
-        
+        // emailが既に使用されていないかの確認
         if emailTextField.text == Auth.auth().currentUser?.email  {
             print("このメールアドレスは既に使われています")
+            createAlert(title: "Emailが既に使用されています", message: "違うEmailを使用してください")
             return
         }
         
@@ -155,8 +154,12 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                 self.showErrorAlert(error: error)
             }else{
                 // プロフィールの顔写真をアップロードする
-                let uID = result?.user.uid
-                let uploadRef = Storage.storage().reference(withPath: "user/\(uID!)).jpg")
+                // uIDをオプショナルバインディング
+                guard let uID = result?.user.uid else {
+                    return
+                }
+                
+                let uploadRef = Storage.storage().reference(withPath: "user/\(uID)).jpg")
                 guard let imageData = self.userProfImage.image?.jpegData(compressionQuality: 0.1) else {return}
                 
                 let uploadMetaData = StorageMetadata.init()
@@ -170,7 +173,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                     }
                     print("画像をアップロードしました\(String(describing: downloadMetaData))")
                 }
-            
                 
                 let db = Firestore.firestore()
                 
@@ -183,15 +185,32 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                 }
                 let base64UserImage = profImageData.base64EncodedString(options: .lineLength64Characters) as String
                 
-                db.collection("users").addDocument(data: ["email":email,"userName":userName,"userAge":userAge,"userGender":userSex,"uid": result!.user.uid,"userImage":base64UserImage]) { (error) in
+                // userdatabase
+                
+                let userData = Firestore.firestore().document("users/\(String(describing: uID))")
+                
+                let dataToSave = ["email":email,"userName":userName,"userAge":userAge,"userGender":userSex,"userImage":base64UserImage]
+                
+                userData.setData(dataToSave) { (error) in
                     if error != nil {
                         self.showErrorAlert(error: error)
                         print("新規登録失敗")
+                        
                     } else {
+                        
                         print("新規登録成功")
                         // タイムラインへ遷移
                         
-                        self.toTimeLine()
+                        print("タイムラインへ")
+                        // 遷移する先
+                        let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
+                        let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine") as! HomeViewController
+                        // 次の画面にuserの情報を受け渡す
+                        toTimeLineVC.userID = uID
+                        // フルスクリーンで遷移
+                        toTimeLineVC.modalPresentationStyle = .fullScreen
+                        print(uID as Any)
+                        self.present(toTimeLineVC, animated: true, completion: nil)
                         
                     }
                     
@@ -202,11 +221,11 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     
     // テキストフィールドを閉じる処理
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    
-            emailTextField.resignFirstResponder()
-            passWordTextField.resignFirstResponder()
-            nameTextField.resignFirstResponder()
-            ageTextField.resignFirstResponder()
+        
+        emailTextField.resignFirstResponder()
+        passWordTextField.resignFirstResponder()
+        nameTextField.resignFirstResponder()
+        ageTextField.resignFirstResponder()
         
         return true
     }
@@ -233,15 +252,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         
         present(alertController,animated: true)
         
-    }
-    // タイムラインへ
-    func toTimeLine (){
-        print("タイムラインへ")
-        // 遷移する先
-        let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
-        let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine")
-        toTimeLineVC.modalPresentationStyle = .fullScreen
-        present(toTimeLineVC, animated: true, completion: nil)
     }
     
     // カメラ使用時のアラート

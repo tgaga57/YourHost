@@ -26,6 +26,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     let db = Firestore.firestore()
     
+    
     // email
     @IBOutlet weak var emailTextField: UITextField!
     // pasword
@@ -37,6 +38,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     @IBOutlet weak var activeIndicatorView: NVActivityIndicatorView!
     // 新規登録
     @IBOutlet weak var signUpButton: UIButton!
+    
+    var ref:DocumentReference!
+    
+    var userID = Auth.auth().currentUser?.uid
     
     // アラート用
     var alertController:UIAlertController!
@@ -84,6 +89,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         activeIndicatorView.color = .green
         activeIndicatorView.startAnimating()
         
+        
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passWordTextField.text!) { (usr, error) in
             if error != nil {
                 print("ログイン失敗")
@@ -94,13 +100,20 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
                 // アニメーションをとめる
                 self.activeIndicatorView.stopAnimating()
             }else {
-                
                 print("ログイン成功")
-                self.toTimeLine()
+                let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
+                let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine") as! HomeViewController
+                toTimeLineVC.modalPresentationStyle = .fullScreen
+                // 情報を受け渡す
+                toTimeLineVC.userID = self.userID!
+                self.present(toTimeLineVC, animated: true, completion: nil)
+                print("タイムラインへ")
+                print(self.userID)
+                
             }
         }
     }
-          
+    
     // 新規メンバー登録
     @IBAction func signUp(_ sender: Any) {
         print("signupページに移動")
@@ -134,10 +147,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     func toTimeLine(){
         
         let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
-        let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine")
+        let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine") as! HomeViewController
         toTimeLineVC.modalPresentationStyle = .fullScreen
         present(toTimeLineVC, animated: true, completion: nil)
-        
         print("タイムラインへ")
     }
     
