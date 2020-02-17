@@ -39,6 +39,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     // プロフ写真変更ボタン
     @IBOutlet weak var profButton: UIButton!
     
+    var ref:DocumentReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,8 +186,9 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                 }
                 let base64UserImage = profImageData.base64EncodedString(options: .lineLength64Characters) as String
                 
-                // userdatabase
+                let docRef:DocumentReference!
                 
+                // userdatabase ドキュメントとコレクション
                 let userData = Firestore.firestore().document("users/\(String(describing: uID))")
                 
                 let dataToSave = ["email":email,"userName":userName,"userAge":userAge,"userGender":userSex,"userImage":base64UserImage]
@@ -211,9 +213,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                         toTimeLineVC.modalPresentationStyle = .fullScreen
                         print(uID as Any)
                         self.present(toTimeLineVC, animated: true, completion: nil)
-                        
                     }
-                    
                 }
             }
         }

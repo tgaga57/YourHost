@@ -41,8 +41,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     var ref:DocumentReference!
     
-    var userID = Auth.auth().currentUser?.uid
-    
     // アラート用
     var alertController:UIAlertController!
     
@@ -100,16 +98,19 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
                 // アニメーションをとめる
                 self.activeIndicatorView.stopAnimating()
             }else {
+                // uIDをオプショナルバインディング
+                guard let userID = Auth.auth().currentUser?.uid else {
+                    return
+                }
                 print("ログイン成功")
                 let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
                 let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine") as! HomeViewController
                 toTimeLineVC.modalPresentationStyle = .fullScreen
                 // 情報を受け渡す
-                toTimeLineVC.userID = self.userID!
+                toTimeLineVC.userID = userID
                 self.present(toTimeLineVC, animated: true, completion: nil)
                 print("タイムラインへ")
-                print(self.userID)
-                
+                print(userID)
             }
         }
     }
@@ -140,7 +141,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
         present(alertController,animated: true)
-        
     }
     
     // タイムラインへのメソッド

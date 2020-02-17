@@ -28,14 +28,14 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     // プロフィール更新
     @IBOutlet weak var prfofileUpdate: UIButton!
 
+    // database用
     var ref: DocumentReference!
     
     // インスタンス化
     let db = Firestore.firestore()
     
-    // userDefalutImageの変換に使用
-    var userImage = UIImage ()
-    var userImageData = Data()
+    // ログイン情報
+    var uID = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,18 +50,51 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         ageTextFiled.addBorderBottom(height: 1, color: .systemPink)
         
         prfofileUpdate.layer.cornerRadius = 15
-    
+
+        // プロフィールの情報を反映
+        getProfile()
         
     }
     
     //userの情報を反映させる
     func getProfile(){
         
+        // usersの中のログインした本人のプロフィール情報を取ってくる
+        db.collection("users").document(uID).getDocument { (snap, error) in
+            if let error = error {
+                // エラーなら
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let data = snap?.data() else {return}
+            print(data)
+            // ドキュメントのデータを反映
+            self.nameTextFiled.text = data["userName"] as! String
+            self.ageTextFiled.text = data["userAge"] as! String
+            self.sexSegment.selectedSegmentIndex = Int(data["userGender"] as! String)!
+            // 画像情報を取得
+            let profileImage = data["userImage"] as! String
+            // NSData型に変換
+            let dataProfileimage = NSData(base64Encoded: profileImage, options: .ignoreUnknownCharacters)
+            // UIImage型に変換
+            let decodePostImage = UIImage(data: dataProfileimage! as Data)
+            // profileImageに反映
+            self.profImageView.image = decodePostImage
+            self.profImageView.contentMode = .scaleToFill
+            
+            // userのプロフィールイメージをダウンロード
+            let storage = Storage.storage()
+            let storateRef = storage.reference()
+            let userImage = storateRef.child("user\(self.uID)")
+            print("userImage\(userImage)")
+            
+            
+            
+        }
         
        
-        
-     }
-    
+    }
     
     // カメラ立ち上げ
     func openCamera() {

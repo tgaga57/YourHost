@@ -15,13 +15,14 @@ import FacebookLogin
 class MenuViewController: UITableViewController {
     
     var ref: DocumentReference!
-    
+    // インスタンス
+    let db = Firestore.firestore()
+    // DBのログインしたuserの情報が入ってくる from home
+    var userId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // インスタンス
-        let db = Firestore.firestore()
-      
+        print(userId)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,18 +39,14 @@ class MenuViewController: UITableViewController {
             dismiss(animated: true)
             print("homeに戻ります")
         case 1:
+            
             performSegue(withIdentifier: "message", sender: nil)
         case 2:
             performSegue(withIdentifier: "Profile", sender: nil)
             
         case 3:
             performSegue(withIdentifier: "likes", sender: nil)
-            
         case 4:
-            
-            // facebookログアウト
-            let logoutManeger = LoginManager()
-            logoutManeger.logOut()
                 // ログアウト
             try! Auth.auth().signOut()
                 // storyboardの指定
@@ -67,4 +64,14 @@ class MenuViewController: UITableViewController {
             
         }
     }
+    // 情報を受け渡す
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "Profile" {
+        let profVC = segue.destination as! ProfViewController
+            // ログインしている情報
+            profVC.uID = userId
+        }
+    }
+    
 }
