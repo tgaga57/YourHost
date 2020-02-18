@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseStorage
+import NVActivityIndicatorView
 
 // scrollView内でtouchesBeganが使えるように
 extension UIScrollView {
@@ -38,6 +39,11 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     @IBOutlet weak var ChoseSex: UISegmentedControl!
     // プロフ写真変更ボタン
     @IBOutlet weak var profButton: UIButton!
+    // インジゲーターの変数
+    var activityIndicatorView: NVActivityIndicatorView!
+    // ロード時画面のview
+    var indicatorBackgroundView: UIView!
+    
     
     var ref:DocumentReference!
     
@@ -62,6 +68,13 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         // ボタンを丸く
         createAccountButton.layer.cornerRadius = 15
         profButton.layer.cornerRadius = 15
+        
+        // インジゲーターのサイズ
+        activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0, y: 100, width: 60, height: 60))
+        // インジゲーターをセンターへ
+        activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 50)
+        
+        print(Auth.auth().currentUser?.email)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -149,6 +162,8 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
             return
         }
         
+        
+        
         Auth.auth().createUser(withEmail: email, password: passWord) { (result, error) in
             // nilないかチェック
             if error != nil{
@@ -159,21 +174,23 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                 guard let uID = result?.user.uid else {
                     return
                 }
+                // indicatorをスタート
+                self.showLodeIndicator()
                 
-                let uploadRef = Storage.storage().reference(withPath: "user/\(uID)).jpg")
-                guard let imageData = self.userProfImage.image?.jpegData(compressionQuality: 0.1) else {return}
-                
-                let uploadMetaData = StorageMetadata.init()
-                uploadMetaData.contentType = "image/jpeg"
-                
-                uploadRef.putData(imageData, metadata: uploadMetaData) { (downloadMetaData, error) in
-                    if let error = error {
-                        print("画像をアップロードできませんでした")
-                        print("errroを見つけました! \(error.localizedDescription)")
-                        return
-                    }
-                    print("画像をアップロードしました\(String(describing: downloadMetaData))")
-                }
+                //                let uploadRef = Storage.storage().reference(withPath: "user/\(uID)).jpg")
+                //                guard let imageData = self.userProfImage.image?.jpegData(compressionQuality: 0.1) else {return}
+                //
+                //                let uploadMetaData = StorageMetadata.init()
+                //                uploadMetaData.contentType = "image/jpeg"
+                //
+                //                uploadRef.putData(imageData, metadata: uploadMetaData) { (downloadMetaData, error) in
+                //                    if let error = error {
+                //                        print("画像をアップロードできませんでした")
+                //                        print("errroを見つけました! \(error.localizedDescription)")
+                //                        return
+                //                    }
+                //                    print("画像をアップロードしました\(String(describing: downloadMetaData))")
+                //                }
                 
                 let db = Firestore.firestore()
                 
@@ -185,8 +202,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                     profImageData = profileImage.jpegData(compressionQuality: 0.1)! as NSData
                 }
                 let base64UserImage = profImageData.base64EncodedString(options: .lineLength64Characters) as String
-                
-                let docRef:DocumentReference!
                 
                 // userdatabase ドキュメントとコレクション
                 let userData = Firestore.firestore().document("users/\(String(describing: uID))")
@@ -203,7 +218,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                         print("新規登録成功")
                         // タイムラインへ遷移
                         
-                        print("タイムラインへ")
                         // 遷移する先
                         let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
                         let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine") as! HomeViewController
@@ -212,7 +226,11 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                         // フルスクリーンで遷移
                         toTimeLineVC.modalPresentationStyle = .fullScreen
                         print(uID as Any)
+                        print("タイムラインへ")
+                        self.stopLoadIndicator()
+                        
                         self.present(toTimeLineVC, animated: true, completion: nil)
+                        
                     }
                 }
             }
@@ -315,6 +333,29 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     }
     
     
+    // 新規登録を押された時のインディケーター
+    func showLodeIndicator() {
+        indicatorBackgroundView = UIView(frame: self.view.bounds)
+        indicatorBackgroundView.backgroundColor = .systemPink
+        indicatorBackgroundView.alpha = 0.4
+        indicatorBackgroundView.tag = 1
+        // インジケータと背景を接続
+        self.view.addSubview(indicatorBackgroundView)
+        indicatorBackgroundView?.addSubview(activityIndicatorView)
+        //
+        //        //起動
+        activityIndicatorView.startAnimating()
+    }
+    
+    // インジケータを非表示にする
+    func stopLoadIndicator() {
+        // インジケータを消すか判断
+        if let viewWithTag = self.view.viewWithTag(1) {
+            viewWithTag.removeFromSuperview()
+        }
+        // 消えます
+        activityIndicatorView.stopAnimating()
+    }
 }
 
 

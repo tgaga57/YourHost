@@ -54,6 +54,7 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         // プロフィールの情報を反映
         getProfile()
         
+//        firebaseDBaddData()
     }
     
     //userの情報を反映させる
@@ -82,19 +83,13 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
             // profileImageに反映
             self.profImageView.image = decodePostImage
             self.profImageView.contentMode = .scaleToFill
-            
-            // userのプロフィールイメージをダウンロード
-            let storage = Storage.storage()
-            let storateRef = storage.reference()
-            let userImage = storateRef.child("user\(self.uID)")
-            print("userImage\(userImage)")
-            
-            
-            
         }
-        
-       
     }
+    
+//
+//    func firebaseDBaddData() {
+//        db.collection("users").document(uID).setData(["introYourSelf" : introduceYourSelfTextView.text!])
+//    }
     
     // カメラ立ち上げ
     func openCamera() {
@@ -168,6 +163,8 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     
     // プロフィール写真を変更
     @IBAction func changeImageButton(_ sender: Any) {
+        // カメラを起動
+        cameraAlert()
     }
     
     // プロフィールアップデート
@@ -180,7 +177,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         nameTextFiled.resignFirstResponder()
         ageTextFiled.resignFirstResponder()
         introduceYourSelfTextView.resignFirstResponder()
-        
         return true
     }
     // 他の部分を触ったらviewを消す

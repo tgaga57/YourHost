@@ -153,6 +153,31 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         print("タイムラインへ")
     }
     
-    
+    // 数字しか打ち込めなくする
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+           // 年齢のところのkeybordは数字しか打てないようにする
+           if textField.tag == 1 {
+               
+               // 0から9までの数字しか許さない
+               let allowedCharacters = "0123456789"
+               // この中にallowedChraracrtesを入れる
+               let charactersSet = CharacterSet(charactersIn: allowedCharacters)
+               // String型
+               let typedCharacterSet = CharacterSet(charactersIn: string)
+               
+               // 入力を反映させたテキストを取得する
+               // 文字数の制限
+               // 文字数は2まで
+               let resultText: String = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+               if resultText.count <= 2 {
+                   return charactersSet.isSuperset(of: typedCharacterSet)
+               } else {
+                   return false
+               }
+           }
+           return true
+       }
     
 }
+
+
