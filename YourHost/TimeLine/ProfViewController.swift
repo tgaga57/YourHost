@@ -10,6 +10,7 @@ import UIKit
 import FirebaseStorage
 import FirebaseFirestore
 import Firebase
+import NVActivityIndicatorView
 
 class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
@@ -27,13 +28,14 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     @IBOutlet weak var introduceYourSelfTextView: UITextView!
     // プロフィール更新
     @IBOutlet weak var prfofileUpdate: UIButton!
-
+    // インジゲーターの変数
+    var activityIndicatorView: NVActivityIndicatorView!
+    // ロード時画面のview
+    var indicatorBackgroundView: UIView!
     // database用
     var ref: DocumentReference!
-    
     // インスタンス化
     let db = Firestore.firestore()
-    
     // ログイン情報
     var uID = ""
     
@@ -54,7 +56,24 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         // プロフィールの情報を反映
         getProfile()
         
-//        firebaseDBaddData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //プロフィール情報をfirebaseから反映
+        getProfile()
+        // インジゲーターのサイズ
+        activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0, y: 100, width: 60, height: 60))
+        // インジゲーターをセンターへ
+        activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 50)
+        // インジケーターの種類
+        activityIndicatorView.type = .ballPulse
+        // 色
+        activityIndicatorView.color = .green
+        // viewにaddsubview
+        self.view.addSubview(activityIndicatorView)
+        
     }
     
     //userの情報を反映させる
@@ -70,6 +89,7 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
             
             guard let data = snap?.data() else {return}
             print(data)
+            
             // ドキュメントのデータを反映
             self.nameTextFiled.text = data["userName"] as! String
             self.ageTextFiled.text = data["userAge"] as! String
@@ -83,13 +103,11 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
             // profileImageに反映
             self.profImageView.image = decodePostImage
             self.profImageView.contentMode = .scaleToFill
+            self.introduceYourSelfTextView.text = (data["userInfo"] as! String)
         }
+        
     }
     
-//
-//    func firebaseDBaddData() {
-//        db.collection("users").document(uID).setData(["introYourSelf" : introduceYourSelfTextView.text!])
-//    }
     
     // カメラ立ち上げ
     func openCamera() {
@@ -126,14 +144,17 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     // カメラで取られた画像、アルバムで選ばれた画像が入る
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        
         if info[.originalImage] as? UIImage != nil {
-            let selctedImage = info[.originalImage] as! UIImage
-            // userImageを保存
-            UserDefaults.standard.set(selctedImage.jpegData(compressionQuality: 0.1), forKey: "userImage")
-            profImageView.image = selctedImage
-            // 画面に反映
-            picker.dismiss(animated: true, completion: nil)
             
+            let selctedImage = info[.originalImage] as! UIImage
+            
+            // 画像を画面全体に反映
+            profImageView.contentMode = .scaleToFill
+            // userProfileに反映
+            profImageView.image = selctedImage
+            // 戻る
+            picker.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -169,8 +190,40 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     
     // プロフィールアップデート
     @IBAction func profUpdateButton(_ sender: Any) {
+        // nilを排除
+        guard let name = nameTextFiled.text,let age = ageTextFiled.text,let userInfo = introduceYourSelfTextView.text else {
+            print("nil")
+            return
+        }
+        print("nilはなかったよ!")
+        
+        activityIndicatorView.startAnimating()
+        // data型
+        var profImageData: NSData = NSData()
+        
+        if let profileImage = profImageView.image{
+            profImageData = profileImage.jpegData(compressionQuality: 0.1) as! NSData
+        }
+        // base64にエンコード
+        let base64UserImage = profImageData.base64EncodedString(options: .lineLength64Characters) as String
+        
+        // usergender
+        var userGender = String(sexSegment.selectedSegmentIndex)
+        
+        let userRef = db.collection("users").document(uID)
+        userRef.updateData(["userName":name,"userGender":userGender,"userAge":age,"userImage":base64UserImage,"userInfo":userInfo]) { (error) in
+            
+            if error != nil {
+                print(error?.localizedDescription)
+                print("更新失敗")
+                return
+            } else {
+                print("更新成功")
+                self.activityIndicatorView.stopAnimating()
+                self.getProfile()
+            }
+        }
     }
-    
     
     // リターンを押した時の処理
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -179,9 +232,15 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         introduceYourSelfTextView.resignFirstResponder()
         return true
     }
+    
     // 他の部分を触ったらviewを消す
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
+    
+    
 }
+
+
+

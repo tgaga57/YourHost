@@ -37,10 +37,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.91423547047970477" green="0.91423547047970477" blue="0.91423547047970477" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTk-nQ-fPi">
-                                <rect key="frame" x="295" y="587" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTk-nQ-fPi">
+                                <rect key="frame" x="294" y="578" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" image="投稿"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -292,6 +292,21 @@
             </objects>
             <point key="canvasLocation" x="5420" y="815"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="yV2-3A-kVI">
+            <objects>
+                <viewController id="4dX-YM-KLb" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="12E-Dj-JU8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="LDG-ht-YIF"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C5N-wG-b6K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6961" y="-34"/>
+        </scene>
         <!--Prof View Controller-->
         <scene sceneID="ZDm-sk-8nW">
             <objects>
@@ -444,7 +459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hv8-nw-NLq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6962" y="815"/>
+            <point key="canvasLocation" x="6961" y="815"/>
         </scene>
     </scenes>
     <resources>
@@ -455,5 +470,6 @@
         <image name="メッセージ" width="64" height="64"/>
         <image name="メニュー" width="32" height="32"/>
         <image name="ログアウト" width="64" height="64"/>
+        <image name="投稿" width="48" height="48"/>
     </resources>
 </document>
