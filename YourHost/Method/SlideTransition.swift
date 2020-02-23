@@ -32,16 +32,18 @@ class SlideTransition: NSObject,UIViewControllerAnimatedTransitioning {
             containerView.addSubview(toViewController.view)
             // 画面の初期化
             toViewController.view.frame = CGRect(x: -finalWidth, y: 0, width: finalWidth, height: finalHeight)
-            
         }
+        
         // アニメーション 
         let transform = {
             toViewController.view.transform = CGAffineTransform(translationX: finalWidth, y:0)
         }
+        
         // アニメーションバック
         let identity = {
             fromViewController.view.transform = .identity
         }
+        
         
         let duration = transitionDuration(using: transitionContext)
         let isCancelled = transitionContext.transitionWasCancelled

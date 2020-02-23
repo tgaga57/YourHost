@@ -108,19 +108,16 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         
     }
     
-    
     // カメラ立ち上げ
     func openCamera() {
         let sourceType:UIImagePickerController.SourceType = .camera
         // カメラが利用可能かチェックする
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            
             let cameraPicker = UIImagePickerController()
             cameraPicker.allowsEditing = true
             cameraPicker.sourceType = sourceType
             cameraPicker.delegate = self
             self.present(cameraPicker, animated: true, completion: nil)
-            
             print("カメラが開かれました")
         }
     }
@@ -158,6 +155,7 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         }
     }
     
+    
     // カメラ使用時のアラート
     func cameraAlert() {
         let alertController = UIAlertController(title: "選択してください", message: "こちらから選べます", preferredStyle: .actionSheet)
@@ -190,6 +188,8 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     
     // プロフィールアップデート
     @IBAction func profUpdateButton(_ sender: Any) {
+        // 更新ボタンを押せなくする
+        self.prfofileUpdate.isEnabled = false
         // nilを排除
         guard let name = nameTextFiled.text,let age = ageTextFiled.text,let userInfo = introduceYourSelfTextView.text else {
             print("nil")
@@ -216,14 +216,25 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
             if error != nil {
                 print(error?.localizedDescription)
                 print("更新失敗")
+                // アニメーションをストップ
+                self.activityIndicatorView.stopAnimating()
+                // 更新ボタンを使用可能に
+                self.prfofileUpdate.isEnabled = true
                 return
             } else {
                 print("更新成功")
+                // アニメーションをストップ
                 self.activityIndicatorView.stopAnimating()
+                // 更新ボタンを使用可能に
+                self.prfofileUpdate.isEnabled = true
+                // プロフィールを更新
                 self.getProfile()
+                //　back
+                self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
             }
         }
     }
+    
     
     // リターンを押した時の処理
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -238,7 +249,35 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         self.view.endEditing(true)
     }
     
+    // back
+    @IBAction func backButton(_ sender: Any) {
+        presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
     
+    // Agetextのところは数字しか使えなくする
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+               // 年齢のところのkeybordは数字しか打てないようにする
+               if textField.tag == 1 {
+                   
+                   // 0から9までの数字しか許さない
+                   let allowedCharacters = "0123456789"
+                   // この中にallowedChraracrtesを入れる
+                   let charactersSet = CharacterSet(charactersIn: allowedCharacters)
+                   // String型
+                   let typedCharacterSet = CharacterSet(charactersIn: string)
+                   
+                   // 入力を反映させたテキストを取得する
+                   // 文字数の制限
+                   // 文字数は2まで
+                   let resultText: String = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+                   if resultText.count <= 2 {
+                       return charactersSet.isSuperset(of: typedCharacterSet)
+                   } else {
+                       return false
+                   }
+               }
+               return true
+           }
     
 }
 

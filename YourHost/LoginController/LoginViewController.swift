@@ -26,7 +26,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     let db = Firestore.firestore()
     
-    
     // email
     @IBOutlet weak var emailTextField: UITextField!
     // pasword
@@ -41,6 +40,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     var ref:DocumentReference!
     
+    var uid:String = ""
     // アラート用
     var alertController:UIAlertController!
     
@@ -109,9 +109,10 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
                 toTimeLineVC.modalPresentationStyle = .fullScreen
                 // 情報を受け渡す
                 toTimeLineVC.userID = userID
+                // 情報を受け渡す
                 self.present(toTimeLineVC, animated: true, completion: nil)
                 print("タイムラインへ")
-                print(userID)
+                
             }
         }
     }
@@ -178,6 +179,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
            }
            return true
        }
+    
+    
     
 }
 

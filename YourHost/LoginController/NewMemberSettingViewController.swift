@@ -302,7 +302,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                 let charactersSet = CharacterSet(charactersIn: allowedCharacters)
                 // String型
                 let typedCharacterSet = CharacterSet(charactersIn: string)
-                
                 // 入力を反映させたテキストを取得する
                 // 文字数の制限
                 // 文字数は2まで
@@ -356,6 +355,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
             // 消えます
             activityIndicatorView.stopAnimating()
         }
+    
 }
 
 

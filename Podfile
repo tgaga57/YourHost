@@ -20,4 +20,5 @@ target 'YourHost' do
   pod 'NVActivityIndicatorView'
   pod 'SDWebImage'
   pod 'FSCalendar'
-end
+
+ end
