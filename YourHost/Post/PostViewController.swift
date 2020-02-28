@@ -19,10 +19,14 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
     
     // user Id
     var userID:String = ""
-    
+    // setImage
     let image0:UIImage! = UIImage(named: "丸")
     let image1:UIImage! = UIImage(named: "チェック")
+    // Pickerで何が選ばれたか
     var selectedCount = 0
+    
+    //　情報を受け渡すためのSelected count
+    var selectedTag = 0
     // 家全体
     @IBOutlet weak var allHousingButton: UIButton!
     // 個室
@@ -34,7 +38,6 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
     @IBOutlet weak var categoryTextField: UITextField!
     // 建物のタイプ
     @IBOutlet weak var buildingTypeTextField: UITextField!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +60,7 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        // pickerのタグが1だったら
         if pickerView.tag == 1 {
             return priorityTypes.count
         }else{
@@ -65,6 +69,7 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        // Pickerのタグが1だったら
         if pickerView.tag == 1 {
             return priorityTypes[row]
         } else{
@@ -73,7 +78,7 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        // Pickerのtagが１だったら
         if pickerView.tag == 1 {
             selectedPriority = priorityTypes[row]
             categoryTextField.text = selectedPriority
@@ -160,6 +165,9 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
                 default:
                     break
                 }
+                // ボタンがどれが選ばれているか確認
+                print(button.tag)
+                selectedTag = button.tag
             }
         }
     }
@@ -189,4 +197,32 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
         
     }
     
+    
+    @IBAction func next(_ sender: Any) {
+        
+        if selectedTag == 0 {
+            print("ゼロです")
+            return
+        } else if categoryTextField.text == "" || buildingTypeTextField.text == "" {
+            print("カテゴリーが選ばれていません")
+            return
+        } else {
+        
+        guard let categoryText = categoryTextField.text,let buildingText = buildingTypeTextField.text else {
+            return
+        }
+            
+        // userDefalutsで保存
+            UserDefaults.standard.set(categoryText, forKey: "categoryText")
+            UserDefaults.standard.set(buildingText, forKey: "buildingText")
+            UserDefaults.standard.set(selectedTag, forKey: "selectedTag")
+        
+            
+        print(selectedTag)
+        
+        let nextVC = storyboard?.instantiateViewController(withIdentifier: "Post2") as! Post2ViewController
+        nextVC.modalPresentationStyle = .fullScreen
+        self.present(nextVC, animated: true, completion: nil)
+        }
+    }
 }

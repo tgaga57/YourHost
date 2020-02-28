@@ -39,6 +39,9 @@ class HomeViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // userdefaultsに保存
+        UserDefaults.standard.set(userID, forKey: "userID")
+        
         print(userID)
     }
     
@@ -55,5 +58,6 @@ class HomeViewController: UIViewController{
         
     }
     
+
 }
 

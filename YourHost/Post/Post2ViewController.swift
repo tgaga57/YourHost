@@ -30,16 +30,24 @@ class Post2ViewController: UIViewController{
     @IBOutlet weak var guestBedPulsButton: UIButton!
     
     // ゲストの数用
-    var numberOfGuestCount = 0
+    var numberOfGuestCount:Int = 0
     // ゲスト寝室用
-    var numberOfGuestBedroomCount = 0
+    var numberOfGuestBedroomCount:Int = 0
     // ゲストのベッドの数
-    var numberOfGuestBedCount = 0
-    
-    let button:UIButton = UIButton()
+    var numberOfGuestBedCount:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("post2")
+        
+        //　ボタンを使わせない設定
+        guestMinusButton.isEnabled = false
+        guestBedMinusButton.isEnabled = false
+        guestBedRoomMinusButton.isEnabled = false
+        
+        // 情報が来ているか確認
+        
     }
     
     enum buttanAction:Int {
@@ -55,51 +63,92 @@ class Post2ViewController: UIViewController{
     // ゲストに提供する寝室の数
     // ゲストに提供するベット数
     @IBAction func selectedGuestNumber(_ sender: Any) {
+        
         if let button = sender as? UIButton {
             if let tag = buttanAction(rawValue: button.tag) {
                 switch tag {
-                    // ゲストの数マイナス
+                // ゲストの数マイナス
                 case .action0:
-                    numberOfGuestCount >= 0
                     numberOfGuestCount -= 1
-                    numberOfGuestsLabel.text = String(numberOfGuestCount)
-                    if numberOfGuestBedroomCount == 0{
+                    numberOfGuestsLabel.text = "\(numberOfGuestCount)"
+                    // ゼロだった場合はマイナスボタンを押せなくしたい
+                    if numberOfGuestCount == 0 {
                         guestMinusButton.isEnabled = false
                     }
-                    // ゲストの数プラス
+                // ゲストの数プラス
                 case .action1:
                     numberOfGuestCount += 1
-                    numberOfGuestsLabel.text = String(numberOfGuestCount)
-                    // ゲストの寝室マイナス
+                    numberOfGuestsLabel.text = "\(numberOfGuestCount)"
+                    // 1以上になったらマイナスボタンを使用可能に
+                    if numberOfGuestCount <= 1{
+                        guestMinusButton.isEnabled = true
+                    }
+                // ゲストの寝室マイナス
                 case .action2:
                     numberOfGuestBedroomCount -= 1
-                    forGuestsBedroomLabel.text = String(numberOfGuestBedroomCount)
-                    // ゲストの寝室プラス
+                    forGuestsBedroomLabel.text = "\(numberOfGuestBedroomCount)"
+                    // ゼロだった場合はマイナスボタンを押せなくしたい
+                    if numberOfGuestBedroomCount == 0 {
+                        guestBedRoomMinusButton.isEnabled = false
+                    }
+                // ゲストの寝室プラス
                 case .action3:
                     numberOfGuestBedroomCount += 1
-                    forGuestsBedroomLabel.text = String(numberOfGuestBedroomCount)
-                    // ゲスト利用可能ベッドマイナス
+                    forGuestsBedroomLabel.text = "\(numberOfGuestBedroomCount)"
+                    // 1以上ならマイナスボタンを使用可能に
+                    if numberOfGuestBedroomCount >= 1{
+                        guestBedRoomMinusButton.isEnabled = true
+                    }
+                // ゲスト利用可能ベッドマイナス
                 case .action4:
                     numberOfGuestBedCount -= 1
-                    forGuestsBedLabel.text = String(numberOfGuestBedCount)
-                    // ゲスト利用可能ベッドプラス
+                    forGuestsBedLabel.text = "\(numberOfGuestBedCount)"
+                    // マイナスボタンを使用不可に
+                    if numberOfGuestBedCount == 0 {
+                        guestBedMinusButton.isEnabled = false
+                    }
+                // ゲスト利用可能ベッドプラス
                 case .action5:
                     numberOfGuestBedCount += 1
-                    forGuestsBedLabel.text = String(numberOfGuestBedCount)
+                    forGuestsBedLabel.text =  "\(numberOfGuestBedCount)"
+                    // マイナスボタンを使用可能に
+                    if numberOfGuestBedCount >= 1 {
+                        guestBedMinusButton.isEnabled = true
+                    }
                 default:
                     break
                 }
             }
         }
     }
-
     
+    // next
+    @IBAction func next(_ sender: Any) {
+        // もし一つでも情報が選ばれていなかったら
+        if numberOfGuestCount == 0 || numberOfGuestBedroomCount == 0 || numberOfGuestBedCount == 0 {
+            print("何も選択されていません")
+            // リターンを返す
+            return
+        } else {
+            
+            UserDefaults.standard.object(forKey: "selectedTag") as! Int
+            
+            print()
+            
+            UserDefaults.standard.set(numberOfGuestCount, forKey: "numberOfGuestCount")
+            UserDefaults.standard.set(numberOfGuestBedroomCount, forKey: "numberOfGuestBedroomCount")
+            UserDefaults.standard.set(numberOfGuestBedCount, forKey: "numberOfGuestBedCount")
+            let nextVC = storyboard?.instantiateViewController(withIdentifier: "Post3") as! Post3ViewController
+            nextVC.modalPresentationStyle = .fullScreen
+            
+            self.present(nextVC, animated: true, completion: nil)
+        }
+         
+    }
+     
     // 戻る
     @IBAction func back(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    
     
 }

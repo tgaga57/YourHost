@@ -78,7 +78,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     
     //userの情報を反映させる
     func getProfile(){
-        
         // usersの中のログインした本人のプロフィール情報を取ってくる
         db.collection("users").document(uID).getDocument { (snap, error) in
             if let error = error {
@@ -86,7 +85,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
                 print(error.localizedDescription)
                 return
             }
-            
             guard let data = snap?.data() else {return}
             print(data)
             
@@ -104,8 +102,8 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
             self.profImageView.image = decodePostImage
             self.profImageView.contentMode = .scaleToFill
             self.introduceYourSelfTextView.text = (data["userInfo"] as! String)
+            
         }
-        
     }
     
     // カメラ立ち上げ

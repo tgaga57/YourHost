@@ -18,7 +18,10 @@
 		B162933023E29DC900C8463A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B162932E23E29DC900C8463A /* LaunchScreen.storyboard */; };
 		B162933B23E2A9D800C8463A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162933A23E2A9D800C8463A /* ViewController.swift */; };
 		B162933D23E2ABDD00C8463A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162933C23E2ABDD00C8463A /* LoginViewController.swift */; };
+		B16CE0432407831400FB5BF3 /* Post5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CE0422407831400FB5BF3 /* Post5ViewController.swift */; };
 		B1748C3F240139DF00FB8F40 /* Post3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1748C3E240139DF00FB8F40 /* Post3ViewController.swift */; };
+		B1748C412402691A00FB8F40 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1748C402402691A00FB8F40 /* MapKit.framework */; };
+		B1748C432403A1FC00FB8F40 /* Post4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1748C422403A1FC00FB8F40 /* Post4ViewController.swift */; };
 		B1A2128B23EA86800090E467 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A2128A23EA86800090E467 /* HomeViewController.swift */; };
 		B1A2129023EA8B360090E467 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A2128F23EA8B360090E467 /* MenuViewController.swift */; };
 		B1A2129323EA98860090E467 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A2129223EA98860090E467 /* Menu.storyboard */; };
@@ -46,7 +49,10 @@
 		B162933123E29DC900C8463A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B162933A23E2A9D800C8463A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B162933C23E2ABDD00C8463A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B16CE0422407831400FB5BF3 /* Post5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post5ViewController.swift; sourceTree = "<group>"; };
 		B1748C3E240139DF00FB8F40 /* Post3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post3ViewController.swift; sourceTree = "<group>"; };
+		B1748C402402691A00FB8F40 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B1748C422403A1FC00FB8F40 /* Post4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post4ViewController.swift; sourceTree = "<group>"; };
 		B1A2128A23EA86800090E467 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B1A2128F23EA8B360090E467 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		B1A2129223EA98860090E467 /* Menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
@@ -63,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1748C412402691A00FB8F40 /* MapKit.framework in Frameworks */,
 				F6D64FD72FC0266D289FE69B /* Pods_YourHost.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,6 +80,7 @@
 		889F95F32A428AE2DE23B38A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B1748C402402691A00FB8F40 /* MapKit.framework */,
 				552B16203FD108315A7CF3BF /* Pods_YourHost.framework */,
 			);
 			name = Frameworks;
@@ -177,6 +185,8 @@
 				B1FCCD2623FFABE60065FA1F /* PostViewController.swift */,
 				B140D22C2400FC8400F8B0FF /* Post2ViewController.swift */,
 				B1748C3E240139DF00FB8F40 /* Post3ViewController.swift */,
+				B1748C422403A1FC00FB8F40 /* Post4ViewController.swift */,
+				B16CE0422407831400FB5BF3 /* Post5ViewController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -322,10 +332,12 @@
 				B1FCCD2723FFABE60065FA1F /* PostViewController.swift in Sources */,
 				B162933D23E2ABDD00C8463A /* LoginViewController.swift in Sources */,
 				B11530B623EAB91600540788 /* SlideTransition.swift in Sources */,
+				B1748C432403A1FC00FB8F40 /* Post4ViewController.swift in Sources */,
 				B162933B23E2A9D800C8463A /* ViewController.swift in Sources */,
 				B1748C3F240139DF00FB8F40 /* Post3ViewController.swift in Sources */,
 				B102059E23EBD27D003F01AC /* ProfViewController.swift in Sources */,
 				B140D22D2400FC8400F8B0FF /* Post2ViewController.swift in Sources */,
+				B16CE0432407831400FB5BF3 /* Post5ViewController.swift in Sources */,
 				B162932423E29DC800C8463A /* AppDelegate.swift in Sources */,
 				B162932623E29DC800C8463A /* SceneDelegate.swift in Sources */,
 				B1B7318923E67F950081D0A7 /* NewMemberSettingViewController.swift in Sources */,
