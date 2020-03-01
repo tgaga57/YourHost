@@ -19,6 +19,7 @@
 		B162933B23E2A9D800C8463A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162933A23E2A9D800C8463A /* ViewController.swift */; };
 		B162933D23E2ABDD00C8463A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162933C23E2ABDD00C8463A /* LoginViewController.swift */; };
 		B16CE0432407831400FB5BF3 /* Post5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CE0422407831400FB5BF3 /* Post5ViewController.swift */; };
+		B16CE0452408D96200FB5BF3 /* Post6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CE0442408D96200FB5BF3 /* Post6ViewController.swift */; };
 		B1748C3F240139DF00FB8F40 /* Post3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1748C3E240139DF00FB8F40 /* Post3ViewController.swift */; };
 		B1748C412402691A00FB8F40 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1748C402402691A00FB8F40 /* MapKit.framework */; };
 		B1748C432403A1FC00FB8F40 /* Post4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1748C422403A1FC00FB8F40 /* Post4ViewController.swift */; };
@@ -50,6 +51,7 @@
 		B162933A23E2A9D800C8463A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B162933C23E2ABDD00C8463A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B16CE0422407831400FB5BF3 /* Post5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post5ViewController.swift; sourceTree = "<group>"; };
+		B16CE0442408D96200FB5BF3 /* Post6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post6ViewController.swift; sourceTree = "<group>"; };
 		B1748C3E240139DF00FB8F40 /* Post3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post3ViewController.swift; sourceTree = "<group>"; };
 		B1748C402402691A00FB8F40 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B1748C422403A1FC00FB8F40 /* Post4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post4ViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				B1748C3E240139DF00FB8F40 /* Post3ViewController.swift */,
 				B1748C422403A1FC00FB8F40 /* Post4ViewController.swift */,
 				B16CE0422407831400FB5BF3 /* Post5ViewController.swift */,
+				B16CE0442408D96200FB5BF3 /* Post6ViewController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				B11530B623EAB91600540788 /* SlideTransition.swift in Sources */,
 				B1748C432403A1FC00FB8F40 /* Post4ViewController.swift in Sources */,
 				B162933B23E2A9D800C8463A /* ViewController.swift in Sources */,
+				B16CE0452408D96200FB5BF3 /* Post6ViewController.swift in Sources */,
 				B1748C3F240139DF00FB8F40 /* Post3ViewController.swift in Sources */,
 				B102059E23EBD27D003F01AC /* ProfViewController.swift in Sources */,
 				B140D22D2400FC8400F8B0FF /* Post2ViewController.swift in Sources */,

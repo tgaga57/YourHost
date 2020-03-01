@@ -223,6 +223,8 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
         let nextVC = storyboard?.instantiateViewController(withIdentifier: "Post2") as! Post2ViewController
         nextVC.modalPresentationStyle = .fullScreen
         self.present(nextVC, animated: true, completion: nil)
+            
+
         }
     }
 }

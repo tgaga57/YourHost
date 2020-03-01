@@ -140,7 +140,7 @@ class Post4ViewController: UIViewController {
     
     // Next
     @IBAction func next(_ sender: Any) {
-        
+        // count数を保存
         UserDefaults.standard.set(count1, forKey: "count1")
         UserDefaults.standard.set(count2, forKey: "count2")
         UserDefaults.standard.set(count3, forKey: "count3")
@@ -150,7 +150,10 @@ class Post4ViewController: UIViewController {
         UserDefaults.standard.set(count7, forKey: "count7")
         UserDefaults.standard.set(count8, forKey: "count8")
         
+        // 遷移
         let nextVC = storyboard?.instantiateViewController(withIdentifier: "Post5") as! Post5ViewController
+        // fullscreanに
+        nextVC.modalPresentationStyle = .fullScreen
         
         self.present(nextVC, animated: true, completion: nil)
     }

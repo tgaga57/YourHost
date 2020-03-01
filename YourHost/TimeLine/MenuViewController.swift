@@ -36,6 +36,7 @@ class MenuViewController: UITableViewController {
         
         print(indexPath.row)
         
+    // indexの番号で遷移する先を指定する
         switch indexPath.row  {
         case 0:
             dismiss(animated: true)
