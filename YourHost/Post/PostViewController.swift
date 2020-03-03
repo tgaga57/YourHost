@@ -124,6 +124,7 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
         view.endEditing(true)
     }
     
+    
     // 投稿していいかのアラートを出す
     func postconfirmationAlert() {
         let alert:UIAlertController = UIAlertController(title: "確認", message: "ホスティングを行うとタイムラインに掲載されますがよろしいですか？", preferredStyle: UIAlertController.Style.alert)
@@ -141,6 +142,7 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
         
         present(alert, animated: true, completion: nil)
     }
+    
     
     // buttonTag
     enum buttonTag:Int {
@@ -222,6 +224,7 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
         
         let nextVC = storyboard?.instantiateViewController(withIdentifier: "Post2") as! Post2ViewController
         nextVC.modalPresentationStyle = .fullScreen
+            nextVC.userID = userID
         self.present(nextVC, animated: true, completion: nil)
             
 

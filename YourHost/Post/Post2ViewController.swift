@@ -36,6 +36,7 @@ class Post2ViewController: UIViewController{
     // ゲストのベッドの数
     var numberOfGuestBedCount:Int = 0
     
+    var userID = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -130,17 +131,12 @@ class Post2ViewController: UIViewController{
             // リターンを返す
             return
         } else {
-            
-            UserDefaults.standard.object(forKey: "selectedTag") as! Int
-            
-            print()
-            
             UserDefaults.standard.set(numberOfGuestCount, forKey: "numberOfGuestCount")
             UserDefaults.standard.set(numberOfGuestBedroomCount, forKey: "numberOfGuestBedroomCount")
             UserDefaults.standard.set(numberOfGuestBedCount, forKey: "numberOfGuestBedCount")
             let nextVC = storyboard?.instantiateViewController(withIdentifier: "Post3") as! Post3ViewController
             nextVC.modalPresentationStyle = .fullScreen
-            
+            nextVC.userID = userID
             self.present(nextVC, animated: true, completion: nil)
         }
          

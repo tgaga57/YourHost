@@ -32,17 +32,18 @@ class HomeViewController: UIViewController{
     
     let db = Firestore.firestore()
     
-    var text = ""
-    
     var userID:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // userdefaultsに保存
+        var userId:String = ""
         UserDefaults.standard.set(userID, forKey: "userID")
         
         print(userID)
+        
+        
     }
     
     @IBAction func didTaped(_ sender: Any) {

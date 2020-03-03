@@ -10,6 +10,7 @@
 		B102059E23EBD27D003F01AC /* ProfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B102059D23EBD27D003F01AC /* ProfViewController.swift */; };
 		B10205A623ED6729003F01AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B10205A523ED6729003F01AC /* GoogleService-Info.plist */; };
 		B11530B623EAB91600540788 /* SlideTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11530B523EAB91600540788 /* SlideTransition.swift */; };
+		B12ECA24240E38D5005FAC65 /* animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12ECA23240E38D5005FAC65 /* animation.swift */; };
 		B140D22D2400FC8400F8B0FF /* Post2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140D22C2400FC8400F8B0FF /* Post2ViewController.swift */; };
 		B162932423E29DC800C8463A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162932323E29DC800C8463A /* AppDelegate.swift */; };
 		B162932623E29DC800C8463A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162932523E29DC800C8463A /* SceneDelegate.swift */; };
@@ -40,6 +41,7 @@
 		B102059D23EBD27D003F01AC /* ProfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfViewController.swift; sourceTree = "<group>"; };
 		B10205A523ED6729003F01AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B11530B523EAB91600540788 /* SlideTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTransition.swift; sourceTree = "<group>"; };
+		B12ECA23240E38D5005FAC65 /* animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = animation.swift; sourceTree = "<group>"; };
 		B140D22C2400FC8400F8B0FF /* Post2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post2ViewController.swift; sourceTree = "<group>"; };
 		B162932023E29DC800C8463A /* YourHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B162932323E29DC800C8463A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,10 +130,10 @@
 				B1FCCD2323FFAA030065FA1F /* Post */,
 				B162933123E29DC900C8463A /* Info.plist */,
 				B10205A523ED6729003F01AC /* GoogleService-Info.plist */,
+				B162932C23E29DC900C8463A /* Assets.xcassets */,
 				B1BECA6023E2DA3D000CE5AD /* 1.json */,
 				B1FE7C2823E2DCF800B1AF3C /* 2.json */,
 				B1A9BE1423FD402A00E398F2 /* 3.json */,
-				B162932C23E29DC900C8463A /* Assets.xcassets */,
 			);
 			path = YourHost;
 			sourceTree = "<group>";
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				B11530B523EAB91600540788 /* SlideTransition.swift */,
+				B12ECA23240E38D5005FAC65 /* animation.swift */,
 			);
 			path = Method;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				B102059E23EBD27D003F01AC /* ProfViewController.swift in Sources */,
 				B140D22D2400FC8400F8B0FF /* Post2ViewController.swift in Sources */,
 				B16CE0432407831400FB5BF3 /* Post5ViewController.swift in Sources */,
+				B12ECA24240E38D5005FAC65 /* animation.swift in Sources */,
 				B162932423E29DC800C8463A /* AppDelegate.swift in Sources */,
 				B162932623E29DC800C8463A /* SceneDelegate.swift in Sources */,
 				B1B7318923E67F950081D0A7 /* NewMemberSettingViewController.swift in Sources */,

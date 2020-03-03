@@ -84,6 +84,8 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         super.viewWillAppear(animated)
         // navigationController をけす
         navigationController?.isNavigationBarHidden = true
+        
+        configureNotification()
     }
     
     // カメラ立ち上げ
@@ -152,7 +154,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     // 新規登録ボタン
     @IBAction func createAccount(_ sender: Any) {
       
-            // ここは本当にできているのか確認する必要がある
+            // ここは本当にできているのか確認する必要がある///////////////////////////////////////
         
             // emailが既に使用されていないかの確認
             if emailTextField.text == Auth.auth().currentUser?.email  {
@@ -180,24 +182,9 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                     }
                     // indicatorをスタート
                     self.showLodeIndicator()
-                    
-                    //                let uploadRef = Storage.storage().reference(withPath: "user/\(uID)).jpg")
-                    //                guard let imageData = self.userProfImage.image?.jpegData(compressionQuality: 0.1) else {return}
-                    //
-                    //                let uploadMetaData = StorageMetadata.init()
-                    //                uploadMetaData.contentType = "image/jpeg"
-                    //
-                    //                uploadRef.putData(imageData, metadata: uploadMetaData) { (downloadMetaData, error) in
-                    //                    if let error = error {
-                    //                        print("画像をアップロードできませんでした")
-                    //                        print("errroを見つけました! \(error.localizedDescription)")
-                    //                        return
-                    //                    }
-                    //                    print("画像をアップロードしました\(String(describing: downloadMetaData))")
-                    //                }
-                    
+                    // 性別のindexをstring型に
                     let userSex = String(self.ChoseSex.selectedSegmentIndex)
-                    
+                    // nsData型に
                     var profImageData: NSData = NSData()
                     
                     if let profileImage = self.userProfImage.image{
@@ -206,7 +193,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                     let base64UserImage = profImageData.base64EncodedString(options: .lineLength64Characters) as String
                     
                     // userdatabase ドキュメントとコレクション
-                    let userData = Firestore.firestore().document("users/\(String(describing: uID))")
+                    let userData = self.db.document("users/\(String(describing: uID))")
                     
                     let dataToSave = ["email":email,"userName":userName,"userAge":userAge,"userGender":userSex,"userImage":base64UserImage,"userInfo":userInfo]
                     
@@ -214,10 +201,10 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                         // errroなら
                         if error != nil {
                             self.showErrorAlert(error: error)
-                            print("新規登録失敗")
+                            print("ユーザー登録失敗")
                             
                         } else {
-                            print("新規登録成功")
+                            print("ユーザー登録成功")
                             // タイムラインへ遷移
                             // 遷移する先
                             let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
@@ -355,6 +342,40 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
             // 消えます
             activityIndicatorView.stopAnimating()
         }
+    
+    // nortificationメソッド化
+    func configureNotification () {
+        
+           // キーボード出てくるときに発動
+        NotificationCenter.default.addObserver(self, selector: #selector(NewMemberSettingViewController.keyboardWillShow(_ :)), name: UIResponder.keyboardWillShowNotification, object: nil)
+           
+           // キーボード閉じるときに発動
+        NotificationCenter.default.addObserver(self, selector: #selector(NewMemberSettingViewController.keyboardWillHide(_ :)), name: UIResponder.keyboardWillHideNotification, object: nil)
+       }
+       
+       // キーボードが呼び出される時
+       @objc func keyboardWillShow(_ notification: NSNotification) {
+           guard let rect = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
+               let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+           UIView.animate(withDuration: duration) {
+               let transform = CGAffineTransform(translationX: 0, y: -(rect.size.height))
+               self.view.transform = transform
+           }
+           print("keyboardwillshow発動")
+       }
+       // キーボードを消す時
+       @objc func keyboardWillHide(_ notification: NSNotification) {
+           
+           guard let duration = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? TimeInterval else { return }
+           UIView.animate(withDuration: duration) {
+               self.view.transform = CGAffineTransform.identity
+           }
+           print("keyboardWillHideを実行")
+       }
+       
+      
+       
+    
     
 }
 

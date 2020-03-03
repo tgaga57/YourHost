@@ -12,7 +12,6 @@ class Post5ViewController: UIViewController{
     
     // 受付開始日
     @IBOutlet weak var startDay: UIDatePicker!
-    
     // 終了日
     @IBOutlet weak var lastDay: UIDatePicker!
     
@@ -29,6 +28,7 @@ class Post5ViewController: UIViewController{
     var selectedfirstDay:String! = ""
     var selectedLastDay:String! = ""
     
+    var userID = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,14 +50,11 @@ class Post5ViewController: UIViewController{
     
     // 受け入れ最終日
     @IBAction func slectLastDay(_ sender: Any) {
-        
-        // startDayから60日後までしか選ばせなくする?
-        let lastdayMaximum = Date(timeInterval: 60 * 60 * 1440, since: lastDay.date)
+        // startDayから30日後までしか選ばせなくする?
+        let lastdayMaximum = Date(timeInterval: 60 * 60 * 720, since: lastDay.date)
         // 最大で選べる日数
         lastDay.maximumDate = lastdayMaximum
     }
-    
-    
     
     // next
     @IBAction func next(_ sender: Any) {
@@ -93,10 +90,8 @@ class Post5ViewController: UIViewController{
             // 遷移する際に情報を渡す
             nextVC.beginAcceptanceDate = formatter.string(from: startDay.date)
             nextVC.finishAcceptanceDate = formatter.string(from: lastDay.date)
-
-            
+            nextVC.userID = userID
             present(nextVC, animated: true, completion: nil)
-            
         }
     }
     

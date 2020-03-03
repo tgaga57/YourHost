@@ -19,6 +19,5 @@ target 'YourHost' do
   pod 'FacebookShare'
   pod 'NVActivityIndicatorView'
   pod 'SDWebImage'
-  pod 'FSCalendar'
-
+  
  end

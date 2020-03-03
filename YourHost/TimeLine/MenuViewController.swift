@@ -16,15 +16,16 @@ class MenuViewController: UITableViewController {
     
     let transition = SlideTransition()
     
-    var ref: DocumentReference!
-    // インスタンス
-    let db = Firestore.firestore()
     // DBのログインしたuserの情報が入ってくる from home
     var userId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(userId)
+        
+        var user = UserDefaults.standard.object(forKey: "userID")!
+        
+        print(user)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +71,7 @@ class MenuViewController: UITableViewController {
             break
         }
     }
+    
     // 情報を受け渡す
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

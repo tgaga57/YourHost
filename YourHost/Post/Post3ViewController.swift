@@ -22,6 +22,7 @@ class Post3ViewController: UIViewController,UITextFieldDelegate{
     
     var allY:CGFloat  = 0.0
     
+    var userID = ""
     // 住所
     @IBOutlet weak var yourStreetAddressTextFiled: UITextField!
     // マップ
@@ -161,6 +162,7 @@ class Post3ViewController: UIViewController,UITextFieldDelegate{
             UserDefaults.standard.set(yourKeyWord, forKey: "yourKeyWord")
             // フルスクリーンに
             nextVC.modalPresentationStyle = .fullScreen
+            nextVC.userID = userID
             // 遷移
             self.present(nextVC, animated: true, completion: nil)
         }

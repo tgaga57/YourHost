@@ -14,6 +14,8 @@ class Post4ViewController: UIViewController {
     let image0:UIImage! = UIImage(named: "丸")
     let image1:UIImage! = UIImage(named: "チェック")
     
+    var userID = ""
+    
     // ボタン
     @IBOutlet weak var necessitiesButton: UIButton!
     @IBOutlet weak var wifiButton: UIButton!
@@ -154,7 +156,7 @@ class Post4ViewController: UIViewController {
         let nextVC = storyboard?.instantiateViewController(withIdentifier: "Post5") as! Post5ViewController
         // fullscreanに
         nextVC.modalPresentationStyle = .fullScreen
-        
+        nextVC.userID = userID
         self.present(nextVC, animated: true, completion: nil)
     }
     
