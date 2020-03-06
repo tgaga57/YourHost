@@ -105,7 +105,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         }
     }
     
-    
     // カメラ立ち上げ
     func openCamera() {
         let sourceType:UIImagePickerController.SourceType = .camera
@@ -138,7 +137,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     
     // カメラで取られた画像、アルバムで選ばれた画像が入る
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         
         if info[.originalImage] as? UIImage != nil {
             

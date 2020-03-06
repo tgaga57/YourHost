@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseStorage
+import FirebaseFirestore
 
 class HomeTableViewCell: UITableViewCell{
     
@@ -25,6 +28,11 @@ class HomeTableViewCell: UITableViewCell{
     // pagescroll
     @IBOutlet weak var pageControl: UIPageControl!
     
+    // firebase
+    let db = Firestore.firestore()
+    
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -33,11 +41,28 @@ class HomeTableViewCell: UITableViewCell{
     }
     
     
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
+    func set(dict:NSDictionary) {
+        // row番目のデータ
+        postUserName.text = dict["userName"] as? String
+        startDay.text = dict["startDay"] as? String
+        lastDay.text = dict["lastDay"] as? String
+        postUserLocation.text = dict["yourKeyWord"] as? String
+        let profileImage = dict["userImage"] as! String
+        //　NSData型に変更
+        let dataProfImage = NSData(base64Encoded: profileImage , options: .ignoreUnknownCharacters)
+        // UIImage型に
+        let decodeProImage = UIImage(data: dataProfImage! as Data)
+        // proImageに
+        postUserImage.image = decodeProImage
+    }
+    
+    
+    
+    
 }
