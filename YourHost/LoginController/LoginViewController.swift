@@ -61,13 +61,26 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         emailTextField.layer.cornerRadius = 10
         passWordTextField.layer.cornerRadius = 10
         
-      
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // navigationbarを消す
         self.navigationController?.isNavigationBarHidden = true
+        
+        // Add a second document with a generated ID.
+        ref = db.collection("users").document("Post").collection("name").addDocument(data: [
+            "first": "Alan",
+            "middle": "Mathison",
+            "last": "Turing",
+            "born": 1912
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(self.ref!.documentID)")
+            }
+        }
         
     }
     

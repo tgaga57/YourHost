@@ -77,6 +77,7 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
         }
     }
     
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // Pickerのtagが１だったら
         if pickerView.tag == 1 {

@@ -55,6 +55,8 @@ class ViewController: UIViewController,UIScrollViewDelegate{
         super.viewWillAppear(animated)
         // navigationcontrollerを消した
         self.navigationController?.isNavigationBarHidden = true
+        
+        
     }
     
     func setScroll() {

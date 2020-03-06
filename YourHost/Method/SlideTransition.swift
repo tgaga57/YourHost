@@ -44,7 +44,6 @@ class SlideTransition: NSObject,UIViewControllerAnimatedTransitioning {
             fromViewController.view.transform = .identity
         }
         
-        
         let duration = transitionDuration(using: transitionContext)
         let isCancelled = transitionContext.transitionWasCancelled
         UIView.animate(withDuration: duration, animations: {

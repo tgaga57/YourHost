@@ -115,28 +115,23 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
             cameraPicker.sourceType = sourceType
             cameraPicker.delegate = self
             self.present(cameraPicker, animated: true, completion: nil)
-            
             print("アルバムを開きました")
+            
         }
-        
     }
     
     // カメラで取られた画像、アルバムで選ばれた画像が入る
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if info[.originalImage] as? UIImage != nil {
-            
             let selctedImage = info[.originalImage] as! UIImage
-            
             // 画像を画面全体に反映
             userProfImage.contentMode = .scaleToFill
             // userProfileに反映
             userProfImage.image = selctedImage
             // 戻る
             picker.dismiss(animated: true, completion: nil)
-            
         }
-        
     }
     
     //キャンセルが押されたとき
@@ -154,7 +149,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     // 新規登録ボタン
     @IBAction func createAccount(_ sender: Any) {
       
-            // ここは本当にできているのか確認する必要がある///////////////////////////////////////
+            // ここは本当にできているのか確認する必要がある　//
         
             // emailが既に使用されていないかの確認
             if emailTextField.text == Auth.auth().currentUser?.email  {
@@ -169,13 +164,12 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                 createAlert(title: "入力されていない項目があります", message: "もう一度お願いします")
                 return
             }
-            
+        
             Auth.auth().createUser(withEmail: email, password: passWord) { (result, error) in
                 // nilないかチェック
                 if error != nil{
                     self.showErrorAlert(error: error)
                 }else{
-                    // プロフィールの顔写真をアップロードする
                     // uIDをオプショナルバインディング
                     guard let uID = result?.user.uid else {
                         return
@@ -191,7 +185,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                         profImageData = profileImage.jpegData(compressionQuality: 0.1)! as NSData
                     }
                     let base64UserImage = profImageData.base64EncodedString(options: .lineLength64Characters) as String
-                    
                     // userdatabase ドキュメントとコレクション
                     let userData = self.db.document("users/\(String(describing: uID))")
                     
@@ -202,7 +195,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                         if error != nil {
                             self.showErrorAlert(error: error)
                             print("ユーザー登録失敗")
-                            
                         } else {
                             print("ユーザー登録成功")
                             // タイムラインへ遷移
@@ -217,7 +209,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                             print("タイムラインへ")
                             self.stopLoadIndicator()
                             self.present(toTimeLineVC, animated: true, completion: nil)
-                            
                         }
                     }
                 }
@@ -235,7 +226,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
             
             return true
         }
-        
+        // 他のところを触ったらキーボードを閉じる処理
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             self.view.endEditing(true)
         }
@@ -345,7 +336,6 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     
     // nortificationメソッド化
     func configureNotification () {
-        
            // キーボード出てくるときに発動
         NotificationCenter.default.addObserver(self, selector: #selector(NewMemberSettingViewController.keyboardWillShow(_ :)), name: UIResponder.keyboardWillShowNotification, object: nil)
            

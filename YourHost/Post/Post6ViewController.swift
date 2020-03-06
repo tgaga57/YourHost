@@ -22,6 +22,8 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     let db = Firestore.firestore()
     // strage
     let storage = Storage.storage()
+    
+    var ref: DocumentReference? = nil
     // images
     private var images: [UIImage] = []
     // 何が選択されたかを判断
@@ -57,9 +59,8 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         userPickedImage3.tag = 2
         userPickedImage4.tag = 3
         
+        // キーボードをかぶらないように
         configureNotification()
-        
-       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,6 +126,7 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         }
     }
     
+    // imageのロード
     func loadImage () {
         userPickedImage1.contentMode = .scaleToFill
         userPickedImage1.image = self.images[0]
@@ -235,7 +237,7 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     
     // 掲載するボタン
     @IBAction func postAll(_ sender: Any) {
-        
+        // 投稿するに写真などが入ってるか確認
         postconfirmationAlert()
         
         if self.userPickedImage1.image == UIImage(named: "アルバム") && self.userPickedImage2.image == UIImage(named: "アルバム") && self.userPickedImage3.image == UIImage(named: "アルバム") && self.userPickedImage4.image == UIImage(named: "アルバム") {
@@ -276,18 +278,37 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     print("nil")
     return
     }
+        // userのプロフィール情報を持ってくる
+        var uName:String = ""
+        var uImage:String = ""
         
+        let currentUserProfile = db.collection("users").document(uid)
+        currentUserProfile.getDocument { (snapshot, error) in
+            if let error = error{
+                print("\(error)")
+            }
+            guard let data = snapshot?.data() else {return}
+                       print(data)
+            uName = data["userName"] as! String
+            print(uName)
+            uImage = data["userImage"] as! String
+            print(uImage)
+       
     // imagedata
-       guard let imageData1 = self.userPickedImage1.image,let imageDate2 = self.userPickedImage2.image,let imageData3 = self.userPickedImage3.image,let imageData4 = self.userPickedImage4.image else{return}
+            guard let imageData1 = self.userPickedImage1.image,let imageDate2 = self.userPickedImage2.image,let imageData3 = self.userPickedImage3.image,let imageData4 = self.userPickedImage4.image,let startDay = self.beginAcceptanceDate,let lastDay = self.finishAcceptanceDate else{return}
     
+    //　投稿した日にち
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyyMMddHHmmss"
+    let timestamp = formatter.string(from: Date())
+        
     // 辞書型で入れていく
-        let toDataSave = ["categoryText":categoryText,"buildingText":buildingText,"selectedTag":selectedTag,"numberOfGuestCount":numberOfGuestCount,"numberOfGuestBedroomCount":numberOfGuestBedroomCount,"numberOfGuestBedCount":numberOfGuestBedCount,"yourAdress":yourAdress,"yourKeyWord":yourKeyWord,"count1":count1,"count2":count2,"count3":count3,"count4":count4,"count5":count5,"count6":count6,"count7":count7,"count8":count8,"forGuestMessage":forGuestMessage]
-    
-    // userの投稿情報の新しいコレクションを作る
-    // ドキュメントはuidとする
-    let userData = db.document("userPosts/\(String(describing: uid))/\(Timestamp(date: Date()))")
-    
-    userData.setData(toDataSave as [String : Any]) { (error) in
+        let toDataSave = ["categoryText":categoryText,"buildingText":buildingText,"selectedTag":selectedTag,"numberOfGuestCount":numberOfGuestCount,"numberOfGuestBedroomCount":numberOfGuestBedroomCount,"numberOfGuestBedCount":numberOfGuestBedCount,"yourAdress":yourAdress,"yourKeyWord":yourKeyWord,"count1":count1,"count2":count2,"count3":count3,"count4":count4,"count5":count5,"count6":count6,"count7":count7,"count8":count8,"forGuestMessage":forGuestMessage,"createdAt": timestamp,"uid":uid,"startDay":startDay,"lastDay":lastDay,"userName":uName,"userImage":uImage]
+    // userの投稿情報の新しいPOSTSコレクションを作る
+            
+        let userData = self.db.collection("userPosts").document()
+        let uuID = UUID.init().uuid
+       userData.setData(toDataSave as [String : Any]) { (error) in
     // errorなら
     if let error = error {
     print("\(error)")
@@ -300,11 +321,12 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     let arrayImage = [imageData1,imageDate2,imageData3,imageData4]
     // for文で回す
     for image in arrayImage {
+        
     let imageName = UUID.init().uuidString
     // uploadRefの中に入れる
-        let uploadRef = self.storage.reference(withPath:"userPosts").child("\(String(describing: uid))").child("\(Timestamp(date: Date()))").child(imageName)
+        let uploadRef = self.storage.reference(withPath:"userPosts").child("\(String(describing: uid))").child(String(timestamp)).child(imageName)
     // imageDataの中にはfor文で回されたimageの中のが入ってくる
-    guard let imageData = image.jpegData(compressionQuality: 0.05) else {return}
+    guard let imageData = image.jpegData(compressionQuality: 0.1) else {return}
     
     let uploadMetaData = StorageMetadata.init()
     // imageのタイプ
@@ -316,23 +338,22 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     return
     }
     print("画像をアップロードしたよ")
-    
-    let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "TimeLine") as! HomeViewController
-    self.present(nextVC, animated: true, completion: nil)
+    self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+    // userdefalutsのデータは後で消し去る //
          }
         }
       }
     }
+  }
 }
+        
 
 
-    
 // back
 @IBAction func back(_ sender: Any) {
     
     self.dismiss(animated: true, completion: nil)
 }
-
 
 }
 

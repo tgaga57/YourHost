@@ -85,9 +85,9 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
                 print(error.localizedDescription)
                 return
             }
+            
             guard let data = snap?.data() else {return}
             print(data)
-            
             // ドキュメントのデータを反映
             self.nameTextFiled.text = data["userName"] as! String
             self.ageTextFiled.text = data["userAge"] as! String
@@ -102,9 +102,9 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
             self.profImageView.image = decodePostImage
             self.profImageView.contentMode = .scaleToFill
             self.introduceYourSelfTextView.text = (data["userInfo"] as! String)
-            
         }
     }
+    
     
     // カメラ立ち上げ
     func openCamera() {
@@ -152,7 +152,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
             picker.dismiss(animated: true, completion: nil)
         }
     }
-    
     
     // カメラ使用時のアラート
     func cameraAlert() {
