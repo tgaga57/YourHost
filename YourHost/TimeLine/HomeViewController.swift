@@ -101,18 +101,13 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let dict = items[(indexPath as NSIndexPath).row]
         // 投稿情報
         cell.set(dict: dict)
-        // userId
-        cell.uID = userID
         
         return cell
     }
     
-    // UIImageViewを生成
-    func createImageView(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, image: String) -> UIImageView {
-        let imageView = UIImageView(frame: CGRect(x: x, y: y, width: width, height: height))
-        let image = UIImage(named:  image)
-        imageView.image = image
-        return imageView
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 550
     }
     
     

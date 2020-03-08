@@ -11,7 +11,6 @@ import FacebookCore
 import Firebase
 import FacebookLogin
 
-
 class MenuViewController: UITableViewController {
     
     let transition = SlideTransition()
@@ -75,10 +74,10 @@ class MenuViewController: UITableViewController {
     // 情報を受け渡す
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "Post"{
-            let postVC = segue.destination as! PostViewController
+        if segue.identifier == "Profile"{
+            let profileVC = segue.destination as! ProfViewController
             // ログインしているuserId情報
-            postVC.userID = userId
+            profileVC.uID = userId
         }
     }
     
@@ -97,7 +96,7 @@ class MenuViewController: UITableViewController {
            }
            
            let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
-               self.presentingViewController?.dismiss(animated: true, completion: nil)
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
            }
            // アラートにadd
            alert.addAction(okAction)

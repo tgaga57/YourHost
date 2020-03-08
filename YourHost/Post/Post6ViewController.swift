@@ -34,8 +34,6 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     var fileName2:String?
     var fileName3:String?
     var fileName4:String?
-    // randamID
-    var randamID = UUID.init().uuid
     
     // ユーザーが選ぶ写真
     @IBOutlet weak var userPickedImage1: UIImageView!
@@ -105,21 +103,21 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         }
         print("keyboardWillHideを実行")
     }
-    
-    // カメラ立ち上げ
-    func openCamera() {
-        let sourceType:UIImagePickerController.SourceType = .camera
-        // カメラが利用可能かチェックする
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let cameraPicker = UIImagePickerController()
-            cameraPicker.allowsEditing = true
-            cameraPicker.sourceType = sourceType
-            cameraPicker.delegate = self
-            self.present(cameraPicker, animated: true, completion: nil)
-            print("カメラが開かれました")
-        }
-    }
-    
+
+//    // カメラ立ち上げ
+//    func openCamera() {
+//        let sourceType:UIImagePickerController.SourceType = .camera
+//        // カメラが利用可能かチェックする
+//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//            let cameraPicker = UIImagePickerController()
+//            cameraPicker.allowsEditing = true
+//            cameraPicker.sourceType = sourceType
+//            cameraPicker.delegate = self
+//            self.present(cameraPicker, animated: true, completion: nil)
+//            print("カメラが開かれました")
+//        }
+//    }
+//
     // アルバム立ち上げ
     func openAlbum() {
         let sourceType:UIImagePickerController.SourceType = .photoLibrary
@@ -159,18 +157,23 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         let selectedImage = info[.originalImage] as! UIImage
         //　投稿写真を反映
         self.images[selectedImageNo] = selectedImage
+        
         // imageUrlをtagの番号によって付けていく
         switch selectedImageNo {
         case 0:
+           
             fileName1 = imageURL.lastPathComponent
             print(fileName1!)
         case 1:
+             
             fileName2 = imageURL.lastPathComponent
             print(fileName2!)
         case 2:
+            
             fileName3 = imageURL.lastPathComponent
             print(fileName3!)
         case 3:
+           
             fileName4 = imageURL.lastPathComponent
             print(fileName4!)
         default:
@@ -185,18 +188,17 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     // カメラ使用時のアラート
     func cameraAlert() {
         let alertController = UIAlertController(title: "選択してください", message: "こちらから選べます", preferredStyle: .actionSheet)
-        
-        let action1 = UIAlertAction(title: "カメラ", style: .default) { (alert) in
-            self.openCamera()
-        }
-        let action2 = UIAlertAction(title: "アルバム", style: .default) { (alert) in
+//
+//        let action1 = UIAlertAction(title: "カメラ", style: .default) { (alert) in
+//            self.openCamera()
+//        }
+        let action1 = UIAlertAction(title: "アルバム", style: .default) { (alert) in
             self.openAlbum()
         }
         let action3 = UIAlertAction(title: "キャンセル", style: .cancel)
         
         // addAction
         alertController.addAction(action1)
-        alertController.addAction(action2)
         alertController.addAction(action3)
         
         self.present(alertController, animated: true, completion: nil)
@@ -337,12 +339,17 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                 let imageName1 = self.fileName1,
                 let imageName2 = self.fileName2,
                 let imageName3 = self.fileName3,
-                let imageName4 = self.fileName4 else{return}
+                let imageName4 = self.fileName4
+                 else {return}
             
             //　投稿した日付
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyyMMddHHmmss"
             let timestamp = formatter.string(from: Date())
+            
+            // randamID
+            let randamID = UUID.init().uuidString
+            
             // 辞書型で入れていく
             let toDataSave = ["categoryText":categoryText,
                               "buildingText":buildingText,
@@ -370,11 +377,13 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                               "postImage1":imageName1,
                               "postImage2":imageName2,
                               "postImage3":imageName3,
-                              "postImage4":imageName4
+                              "postImage4":imageName4,
+                              "ThisPostID":randamID
             ]
             
+            
             // userの投稿情報の新しいPOSTSコレクションを作る
-            let userData = self.db.collection("userPosts").document(uid)
+            let userData = self.db.collection("userPosts").document(randamID)
             userData.setData(toDataSave as [String : Any]) { (error) in
                 // errorなら
                 if let error = error {
@@ -390,10 +399,10 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                     for image in arrayImage {
                         for imageName in arrayImageName {
                             // uploadRefの中に入れる
-                            let uploadRef = self.storage.reference().child("userPosts").child("\( uid)").child(imageName)
-                            // imageDataの中にはfor文で回されたimageの中のが入ってくる
+                            let uploadRef = self.storage.reference().child("userPosts").child(uid).child(imageName)
+                             // imageDataの中にはfor文で回されたimageの中のが入ってくる
                             guard let imageData = image.jpegData(compressionQuality: 0.01) else {return}
-                            
+
                             let uploadMetaData = StorageMetadata()
                             // imageのタイプ
                             uploadMetaData.contentType = "image/jpeg"
@@ -405,28 +414,19 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                                 }
                                 print("画像をアップロードしたよ")
                                 print("\(String(describing: downloadMetaData))")
-                             // 画像がアップロードされたら、ダウンロードURLを取得
-                                uploadRef.downloadURL { (url, error) in
-                                    if let error = error {
-                                        print("downloadURL取得失敗\(error)")
-                                    return
-                                    }
-                                  guard let downloadURL = url else { return }
-                                    print("\(url?.absoluteString)")
-                                    
-                                    //タイムラインへ
-                                    self.backToTimeLine()
-                                }
-                            }
+                                
+                                self.backToTimeLine()
                         }
                     }
                 }
             }
+         }
         }
     }
     
+    
+    // タイムラインへの遷移
     func backToTimeLine() {
-        // タイムラインへ戻る
 self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
