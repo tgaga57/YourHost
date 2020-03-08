@@ -50,8 +50,7 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // アラート
-        postconfirmationAlert()
+       
     }
     
     
@@ -125,24 +124,6 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
         view.endEditing(true)
     }
     
-    
-    // 投稿していいかのアラートを出す
-    func postconfirmationAlert() {
-        let alert:UIAlertController = UIAlertController(title: "確認", message: "ホスティングを行うとタイムラインに掲載されますがよろしいですか？", preferredStyle: UIAlertController.Style.alert)
-        
-        let okAction:UIAlertAction = UIAlertAction(title: "Okay", style: .default) { (alert) in
-            print("Ok")
-        }
-        
-        let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
-            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-        }
-        // アラートにadd
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true, completion: nil)
-    }
     
     
     // buttonTag
@@ -228,7 +209,6 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
             nextVC.userID = userID
         self.present(nextVC, animated: true, completion: nil)
             
-
         }
     }
 }

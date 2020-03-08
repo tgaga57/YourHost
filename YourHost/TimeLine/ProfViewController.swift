@@ -100,7 +100,7 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
             let decodePostImage = UIImage(data: dataProfileimage! as Data)
             // profileImageに反映
             self.profImageView.image = decodePostImage
-            self.profImageView.contentMode = .scaleToFill
+            self.profImageView.contentMode = .scaleAspectFill
             self.introduceYourSelfTextView.text = (data["userInfo"] as! String)
         }
     }
@@ -191,7 +191,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
             return
         }
         print("nilはなかったよ!")
-        
         activityIndicatorView.startAnimating()
         // data型
         var profImageData: NSData = NSData()
@@ -230,7 +229,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         }
     }
     
-    
     // リターンを押した時の処理
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nameTextFiled.resignFirstResponder()
@@ -263,7 +261,7 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
                    
                    // 入力を反映させたテキストを取得する
                    // 文字数の制限
-                   // 文字数は2まで
+                   // 文字数は十のくらいまで
                    let resultText: String = (textField.text! as NSString).replacingCharacters(in: range, with: string)
                    if resultText.count <= 2 {
                        return charactersSet.isSuperset(of: typedCharacterSet)

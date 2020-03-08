@@ -49,8 +49,8 @@ class MenuViewController: UITableViewController {
             performSegue(withIdentifier: "Profile", sender: nil)
             print("プロフィールへ")
         case 3:
-            performSegue(withIdentifier: "Post", sender: nil)
-            print("ホスティングへ")
+            // 確認
+            postconfirmationAlert()
         case 4:
             performSegue(withIdentifier: "Booking", sender: nil)
             print("予約へ")
@@ -75,17 +75,36 @@ class MenuViewController: UITableViewController {
     // 情報を受け渡す
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "Profile"{
-            let profVC = segue.destination as! ProfViewController
-            // ログインしているuserId情報
-            profVC.uID = userId
-        }
-        else if segue.identifier == "Post"{
+        if segue.identifier == "Post"{
             let postVC = segue.destination as! PostViewController
             // ログインしているuserId情報
             postVC.userID = userId
         }
     }
+    
+    // 投稿していいかのアラートを出す
+       func postconfirmationAlert() {
+           let alert:UIAlertController = UIAlertController(title: "確認", message: "ホスティングを行うとタイムラインに掲載されますがよろしいですか？", preferredStyle: UIAlertController.Style.alert)
+           
+           let okAction:UIAlertAction = UIAlertAction(title: "Okay", style: .default) { (alert) in
+             print("Ok")
+            let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "Post") as! PostViewController
+            nextVC.userID = self.userId
+            nextVC.modalPresentationStyle = .fullScreen
+            self.present(nextVC, animated: true, completion: nil)
+            print("ホスティングへ")
+              
+           }
+           
+           let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
+               self.presentingViewController?.dismiss(animated: true, completion: nil)
+           }
+           // アラートにadd
+           alert.addAction(okAction)
+           alert.addAction(cancelAction)
+           
+           present(alert, animated: true, completion: nil)
+       }
     
     // このviewを消す
     // 消さないと遷移先の画面から

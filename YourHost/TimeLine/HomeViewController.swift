@@ -22,12 +22,10 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     var userID:String = ""
     // 更新のぐるぐる
     let refreshControl = UIRefreshControl()
-    
     var item:Int = 3
     // 投稿情報
     var items = [NSDictionary]()
-    // 投稿された写真
-    var postImages:[String] = []
+    
     // tableView
     @IBOutlet weak var hometableView: UITableView!
     
@@ -69,7 +67,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     //　情報を持ってくる
     func fetch(){
-        db.collection("userPosts").order(by: "createdAt",descending: true).limit(to: 15).getDocuments { (Snapshot, error) in
+        db.collection("userPosts").order(by: "createdAt",descending: true).limit(to: 15).getDocuments{ (Snapshot, error) in
             var tempItems = [NSDictionary]()
             // for文で回し`item`に格納
             for item in Snapshot!.documents {
@@ -93,6 +91,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     // 各セルを返却してセルを生成します。
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // 行き先
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as! HomeTableViewCell
         
         // 選択不可にする
@@ -100,13 +99,13 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         
         // itemsの中からindexpathのrow番目を取得
         let dict = items[(indexPath as NSIndexPath).row]
-        
+        // 投稿情報
         cell.set(dict: dict)
+        // userId
+        cell.uID = userID
         
         return cell
     }
-    
-    
     
     // UIImageViewを生成
     func createImageView(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, image: String) -> UIImageView {
@@ -131,8 +130,6 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     }
 }
 
-
-
 // スライドメニュー
 extension HomeViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -145,7 +142,6 @@ extension HomeViewController: UIViewControllerTransitioningDelegate {
         print("戻る")
         return transition
     }
-    
     
     
 }
