@@ -70,7 +70,7 @@ class HomeTableViewCell: UITableViewCell{
         // 写真の大きさを見やすいように
         postUserImage.contentMode = .scaleAspectFill
         // 投稿写真に入れていく
-        userPostImage(fileName1: dict["postImage1"] as! String, fileName2: dict["postImage2"] as! String, fileName3: dict["postImage3"] as! String, fileName4: dict["postImage4"] as! String)
+        userPostImage(fileName1: dict["postImage1"] as! String, fileName2: dict["postImage2"] as! String, fileName3: dict["postImage3"] as! String, fileName4: dict["postImage4"] as! String,uid: (dict["uid"] as? String)!)
         // 初期化する
         // ここで初期化をしないと画像が読み込まれると無限に足されてします!
         postImages = []
@@ -78,10 +78,9 @@ class HomeTableViewCell: UITableViewCell{
 
     // 引数でFileNameを入れてfor文で取ってくる
     // userpostの情報をstorageから取ってくる
-    func userPostImage(fileName1:String,fileName2:String,fileName3:String,fileName4:String) {
+    func userPostImage(fileName1:String,fileName2:String,fileName3:String,fileName4:String,uid:String) {
         // ストレージを参照
         let storageRef = storage.reference(withPath: "userPosts")
-        guard let uid =  UserDefaults.standard.string(forKey: "userID") else {return}
         // fileNameを入れてfirebase Storageから情報を持ってくる
         let downloadRef1 = storageRef.child(uid).child(fileName1)
         print(downloadRef1)
@@ -155,8 +154,6 @@ class HomeTableViewCell: UITableViewCell{
                 self.postImageView4.contentMode = .scaleAspectFill
               }
          }
-    
-    
 }
 
 extension HomeTableViewCell:UIScrollViewDelegate{

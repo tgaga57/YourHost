@@ -103,21 +103,21 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         }
         print("keyboardWillHideを実行")
     }
-
-//    // カメラ立ち上げ
-//    func openCamera() {
-//        let sourceType:UIImagePickerController.SourceType = .camera
-//        // カメラが利用可能かチェックする
-//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-//            let cameraPicker = UIImagePickerController()
-//            cameraPicker.allowsEditing = true
-//            cameraPicker.sourceType = sourceType
-//            cameraPicker.delegate = self
-//            self.present(cameraPicker, animated: true, completion: nil)
-//            print("カメラが開かれました")
-//        }
-//    }
-//
+    
+    //    // カメラ立ち上げ
+    //    func openCamera() {
+    //        let sourceType:UIImagePickerController.SourceType = .camera
+    //        // カメラが利用可能かチェックする
+    //        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+    //            let cameraPicker = UIImagePickerController()
+    //            cameraPicker.allowsEditing = true
+    //            cameraPicker.sourceType = sourceType
+    //            cameraPicker.delegate = self
+    //            self.present(cameraPicker, animated: true, completion: nil)
+    //            print("カメラが開かれました")
+    //        }
+    //    }
+    //
     // アルバム立ち上げ
     func openAlbum() {
         let sourceType:UIImagePickerController.SourceType = .photoLibrary
@@ -161,19 +161,15 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         // imageUrlをtagの番号によって付けていく
         switch selectedImageNo {
         case 0:
-           
             fileName1 = imageURL.lastPathComponent
             print(fileName1!)
         case 1:
-             
             fileName2 = imageURL.lastPathComponent
             print(fileName2!)
         case 2:
-            
             fileName3 = imageURL.lastPathComponent
             print(fileName3!)
         case 3:
-           
             fileName4 = imageURL.lastPathComponent
             print(fileName4!)
         default:
@@ -188,10 +184,10 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     // カメラ使用時のアラート
     func cameraAlert() {
         let alertController = UIAlertController(title: "選択してください", message: "こちらから選べます", preferredStyle: .actionSheet)
-//
-//        let action1 = UIAlertAction(title: "カメラ", style: .default) { (alert) in
-//            self.openCamera()
-//        }
+        //
+        //        let action1 = UIAlertAction(title: "カメラ", style: .default) { (alert) in
+        //            self.openCamera()
+        //        }
         let action1 = UIAlertAction(title: "アルバム", style: .default) { (alert) in
             self.openAlbum()
         }
@@ -268,15 +264,15 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     
     // 投稿をチェック
     func checkPost(){
-     if self.userPickedImage1.image == UIImage(named: "アルバム") && self.userPickedImage2.image == UIImage(named: "アルバム") && self.userPickedImage3.image == UIImage(named: "アルバム") && self.userPickedImage4.image == UIImage(named: "アルバム") {
-               self.Alert(title: "写真が全て投稿されていません", message: "もう一度お願いします")
-               print("写真が全て投稿されていない")
-               return
-           } else if self.textView.text == "" {
-               self.Alert(title: "ゲストへのメッセージが何も入力されていません", message: "もう一度お願いします")
-               print("ゲストへのメッセージなし")
-               return
-           }
+        if self.userPickedImage1.image == UIImage(named: "アルバム") && self.userPickedImage2.image == UIImage(named: "アルバム") && self.userPickedImage3.image == UIImage(named: "アルバム") && self.userPickedImage4.image == UIImage(named: "アルバム") {
+            self.Alert(title: "写真が全て投稿されていません", message: "もう一度お願いします")
+            print("写真が全て投稿されていない")
+            return
+        } else if self.textView.text == "" {
+            self.Alert(title: "ゲストへのメッセージが何も入力されていません", message: "もう一度お願いします")
+            print("ゲストへのメッセージなし")
+            return
+        }
     }
     
     // 掲載するボタン
@@ -340,7 +336,7 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                 let imageName2 = self.fileName2,
                 let imageName3 = self.fileName3,
                 let imageName4 = self.fileName4
-                 else {return}
+                else {return}
             
             //　投稿した日付
             let formatter = DateFormatter()
@@ -394,54 +390,86 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                     // imageNameも配列の中に入れていく
                     let arrayImageName = [imageName1,imageName2,imageName3,imageName4]
                     
-                    // for文で回す
-                    for image in arrayImage {
-                        for imageName in arrayImageName {
-                            // uploadRefの中に入れる
-                            let uploadRef = self.storage.reference().child("userPosts").child(uid).child(imageName)
-                             // imageDataの中にはfor文で回されたimageの中のが入ってくる
-                            guard let imageData = image.jpegData(compressionQuality: 0.01) else {return}
-
-                            let uploadMetaData = StorageMetadata()
-                            // imageのタイプ
-                            uploadMetaData.contentType = "image/jpeg"
-                            uploadRef.putData(imageData, metadata: uploadMetaData) { (downloadMetaData, error) in
-                                if let error = error {
-                                    print("画像をアップロードできません")
-                                    print("errorを見つけました\(error.localizedDescription)")
-                                    return
-                                }
-                                print("画像をアップロードしたよ")
-                                print("\(String(describing: downloadMetaData))")
-                                
-                                self.backToTimeLine()
+                    // uploadRefの中に入れる
+                    let uploadRef1 = self.storage.reference().child("userPosts").child(uid).child(arrayImageName[0])
+                    let uploadRef2 = self.storage.reference().child("userPosts").child(uid).child(arrayImageName[1])
+                    let uploadRef3 = self.storage.reference().child("userPosts").child(uid).child(arrayImageName[2])
+                    let uploadRef4 = self.storage.reference().child("userPosts").child(uid).child(arrayImageName[3])
+                    
+                    guard let imageData1 = arrayImage[0].jpegData(compressionQuality: 0.05) else {return}
+                    guard let imageData2 = arrayImage[1].jpegData(compressionQuality: 0.05) else {return}
+                    guard let imageData3 = arrayImage[2].jpegData(compressionQuality: 0.05) else {return}
+                    guard let imageData4 = arrayImage[3].jpegData(compressionQuality: 0.05) else {return}
+                    
+                    let uploadMetaData = StorageMetadata()
+                    // imageのタイプ
+                    uploadMetaData.contentType = "image/jpeg"
+                    uploadRef1.putData(imageData1, metadata: uploadMetaData) { (downloadMetaData, error) in
+                        if let error = error {
+                            print("画像をアップロードできません")
+                            print("errorを見つけました\(error.localizedDescription)")
+                            return
                         }
+                        print("画像をアップロードしたよ")
+                        print("\(String(describing: downloadMetaData))")
+                        self.backToTimeLine()
+                    }
+                    
+                    uploadRef2.putData(imageData2, metadata: uploadMetaData) { (downloadMetaData, error) in
+                        if let error = error {
+                            print("画像をアップロードできません")
+                            print("errorを見つけました\(error.localizedDescription)")
+                            return
+                        }
+                        print("画像をアップロードしたよ")
+                        print("\(String(describing: downloadMetaData))")
+                        self.backToTimeLine()
+                    }
+                    
+                    uploadRef3.putData(imageData3, metadata: uploadMetaData) { (downloadMetaData, error) in
+                        if let error = error {
+                            print("画像をアップロードできません")
+                            print("errorを見つけました\(error.localizedDescription)")
+                            return
+                        }
+                        print("画像をアップロードしたよ")
+                        print("\(String(describing: downloadMetaData))")
+                        self.backToTimeLine()
+                    }
+                    
+                    uploadRef4.putData(imageData4, metadata: uploadMetaData) { (downloadMetaData, error) in
+                        if let error = error {
+                            print("画像をアップロードできません")
+                            print("errorを見つけました\(error.localizedDescription)")
+                            return
+                        }
+                        print("画像をアップロードしたよ")
+                        print("\(String(describing: downloadMetaData))")
+                        self.backToTimeLine()
                     }
                 }
             }
-         }
         }
     }
     
+// タイムラインへの遷移
+func backToTimeLine() {
+    self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+}
+
+
+// back
+@IBAction func back(_ sender: Any) {
+    self.dismiss(animated: true, completion: nil)
+}
+
+// 情報を遷移するためにuserDefalutsは使っていたので
+// 投稿が終わったら消す
+func userDefalutsDelated() {
     
-    // タイムラインへの遷移
-    func backToTimeLine() {
-self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    // back
-    @IBAction func back(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    // 情報を遷移するためにuserDefalutsは使っていたので
-    // 投稿が終わったら消す
-    func userDefalutsDelated() {
-        
-    }
-    
-    
+}
+
+
 }
 
 
