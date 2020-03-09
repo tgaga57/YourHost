@@ -23,8 +23,11 @@ class HomeTableViewCell: UITableViewCell{
     @IBOutlet weak var startDay: UILabel!
     // ゲストが宿泊最終日
     @IBOutlet weak var lastDay: UILabel!
-       
-
+    //スクロールview
+    @IBOutlet weak var scrollView: UIScrollView!
+    // pageContorol
+    @IBOutlet weak var postPageControl: UIPageControl!
+    
     // firebase
     let db = Firestore.firestore()
     // ストレージ使うときに必要
@@ -32,14 +35,14 @@ class HomeTableViewCell: UITableViewCell{
     // PostImageの配列
     var postImages:[UIImage] = []
     
-    var createdAt = ""
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         postUserImage.layer.cornerRadius = 15.0
         // 写真の数だけ
         print(postImages.count)
+        
+        self.scrollView.delegate = self
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -79,7 +82,6 @@ class HomeTableViewCell: UITableViewCell{
         guard let uid =  UserDefaults.standard.string(forKey: "userID") else {return}
         let arrayFilename = [fileName1,fileName2,fileName3,fileName4]
         // fileNameを入れてfirebase Storageから情報を持ってくる
-        
         for fileName in arrayFilename {
             print(fileName.count)
             let downloadRef = storageRef.child(uid).child(fileName)
@@ -99,9 +101,17 @@ class HomeTableViewCell: UITableViewCell{
                     // どっちを使う?
                 self.postImages.append(UIImage(data: data)!)
                 print(self.postImages.count)
-                  }
-               }
-            }
+                print(self.postImages)
+              }
+          }
+       
+    }
 }
 
+extension HomeTableViewCell:UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
+        self.postPageControl.currentPage = index
+    }
+}
 
