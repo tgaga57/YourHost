@@ -33,12 +33,19 @@ class HomeTableViewCell: UITableViewCell{
     let storage = Storage.storage()
     // PostImageの配列
     var postImages:[UIImage] = []
-    
+    // PostUserID
+    var postUserID:String = ""
+
+    // uiimageview
     @IBOutlet weak var postImageView1: UIImageView!
     @IBOutlet weak var postImageView2: UIImageView!
     @IBOutlet weak var postImageView3: UIImageView!
     @IBOutlet weak var postImageView4: UIImageView!
     
+    // postID
+    var postID:String = ""
+    
+    var homeViewController:HomeViewController?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,6 +67,10 @@ class HomeTableViewCell: UITableViewCell{
         startDay.text = dict["startDay"] as? String
         lastDay.text = dict["lastDay"] as? String
         postUserLocation.text = dict["yourKeyWord"] as? String
+        // postIDを持ってくる
+        postID = dict["ThisPostID"] as! String
+        // PostUsrIDを持ってくる
+        postUserID = dict["uid"] as! String
         let profileImage = dict["userImage"] as! String
         //　NSData型に変更
         let dataProfImage = NSData(base64Encoded: profileImage , options: .ignoreUnknownCharacters)
@@ -154,7 +165,16 @@ class HomeTableViewCell: UITableViewCell{
                 self.postImageView4.contentMode = .scaleAspectFill
               }
          }
+    
+     // 投稿情報をもっと詳しく
+    @IBAction func moreInfo(_ sender: Any) {
+        print("遷移しますよおおおん")
+        // 引数の中に現在ユーザーが見ているpostIDを入れる
+        homeViewController?.goPostInfomation(userPostID: postID, postUserID: postUserID)
+    }
 }
+
+
 
 extension HomeTableViewCell:UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

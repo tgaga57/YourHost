@@ -85,7 +85,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
                 print(error.localizedDescription)
                 return
             }
-            
             guard let data = snap?.data() else {return}
             print(data)
             // ドキュメントのデータを反映

@@ -11,7 +11,6 @@ import FirebaseFirestore
 import Firebase
 import NVActivityIndicatorView
 
-
 class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDelegate{
     
     // slideメニュー
@@ -25,9 +24,9 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     var item:Int = 3
     // 投稿情報
     var items = [NSDictionary]()
+    
     // tableView
     @IBOutlet weak var hometableView: UITableView!
-    
     
     
     override func viewDidLoad() {
@@ -46,6 +45,9 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         hometableView.addSubview(refreshControl)
         // データの更新
         refresh()
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,18 +102,22 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         
         // itemsの中からindexpathのrow番目を取得
         let dict = items[(indexPath as NSIndexPath).row]
+        
         // 投稿情報
         cell.set(dict: dict)
+        
+        // ViewControllerのポインタをセット
+        cell.homeViewController = self
         
         return cell
     }
     
+    
+    // セルの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         return 550
     }
-    
-    
+
     @IBAction func didTaped(_ sender: Any) {
         let nextVC = storyboard?.instantiateViewController(withIdentifier: "Menu") as! MenuViewController
         
@@ -124,7 +130,20 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         present(nextVC, animated: true)
         
     }
+     
+    // 遷移処理
+    // goPostInfo
+    func goPostInfomation(userPostID:String,postUserID:String) {
+        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        let toPostInfoVC = storyboard.instantiateViewController(withIdentifier: "toPostInfo") as! PostInformationViewController
+        toPostInfoVC.thisPostID = userPostID
+        toPostInfoVC.postUserID = postUserID
+        toPostInfoVC.modalPresentationStyle = .fullScreen
+        self.present(toPostInfoVC, animated: true, completion: nil)
+    }
+    
 }
+
 
 // スライドメニュー
 extension HomeViewController: UIViewControllerTransitioningDelegate {
@@ -139,5 +158,5 @@ extension HomeViewController: UIViewControllerTransitioningDelegate {
         return transition
     }
     
-    
+
 }
