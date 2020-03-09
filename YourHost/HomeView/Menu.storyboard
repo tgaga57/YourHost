@@ -239,6 +239,10 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="lastDay" destination="MYi-7Y-rzw" id="b2i-dU-4D1"/>
+                                            <outlet property="postImageView1" destination="1F1-S7-Ou0" id="JSA-bK-GP6"/>
+                                            <outlet property="postImageView2" destination="YvZ-eX-ST3" id="e17-wV-FFm"/>
+                                            <outlet property="postImageView3" destination="Gwl-sv-P7s" id="gjI-Ys-8qX"/>
+                                            <outlet property="postImageView4" destination="fN6-X5-KLh" id="ydE-w8-fJa"/>
                                             <outlet property="postPageControl" destination="nNw-fw-LL6" id="KgR-8X-KSd"/>
                                             <outlet property="postUserImage" destination="U3i-41-Ddt" id="3h7-1N-hfz"/>
                                             <outlet property="postUserLocation" destination="sux-8U-nDM" id="KUY-5b-meD"/>

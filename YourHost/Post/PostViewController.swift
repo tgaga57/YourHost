@@ -125,7 +125,6 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
     }
     
     
-    
     // buttonTag
     enum buttonTag:Int {
         case action1 = 1

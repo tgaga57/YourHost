@@ -381,7 +381,6 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                               "ThisPostID":randamID
             ]
             
-            
             // userの投稿情報の新しいPOSTSコレクションを作る
             let userData = self.db.collection("userPosts").document(randamID)
             userData.setData(toDataSave as [String : Any]) { (error) in

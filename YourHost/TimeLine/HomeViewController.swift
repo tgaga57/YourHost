@@ -25,9 +25,10 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     var item:Int = 3
     // 投稿情報
     var items = [NSDictionary]()
-    
     // tableView
     @IBOutlet weak var hometableView: UITableView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
