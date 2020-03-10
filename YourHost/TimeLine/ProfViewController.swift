@@ -52,7 +52,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         ageTextFiled.addBorderBottom(height: 1, color: .systemPink)
         
         prfofileUpdate.layer.cornerRadius = 15
-
         // プロフィールの情報を反映
         getProfile()
         
@@ -73,7 +72,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         activityIndicatorView.color = .green
         // viewにaddsubview
         self.view.addSubview(activityIndicatorView)
-        
     }
     
     //userの情報を反映させる

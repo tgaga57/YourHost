@@ -45,9 +45,6 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         hometableView.addSubview(refreshControl)
         // データの更新
         refresh()
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,6 +135,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let toPostInfoVC = storyboard.instantiateViewController(withIdentifier: "toPostInfo") as! PostInformationViewController
         toPostInfoVC.thisPostID = userPostID
         toPostInfoVC.postUserID = postUserID
+        toPostInfoVC.userID = userID
         toPostInfoVC.modalPresentationStyle = .fullScreen
         self.present(toPostInfoVC, animated: true, completion: nil)
     }

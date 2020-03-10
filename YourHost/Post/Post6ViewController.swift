@@ -255,6 +255,7 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         }
         let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
             return
+            
         }
         // アラートにadd
         alert.addAction(okAction)
@@ -396,10 +397,10 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                     let uploadRef3 = self.storage.reference().child("userPosts").child(uid).child(arrayImageName[2])
                     let uploadRef4 = self.storage.reference().child("userPosts").child(uid).child(arrayImageName[3])
                     
-                    guard let imageData1 = arrayImage[0].jpegData(compressionQuality: 0.05) else {return}
-                    guard let imageData2 = arrayImage[1].jpegData(compressionQuality: 0.05) else {return}
-                    guard let imageData3 = arrayImage[2].jpegData(compressionQuality: 0.05) else {return}
-                    guard let imageData4 = arrayImage[3].jpegData(compressionQuality: 0.05) else {return}
+                    guard let imageData1 = arrayImage[0].jpegData(compressionQuality: 0.08) else {return}
+                    guard let imageData2 = arrayImage[1].jpegData(compressionQuality: 0.08) else {return}
+                    guard let imageData3 = arrayImage[2].jpegData(compressionQuality: 0.08) else {return}
+                    guard let imageData4 = arrayImage[3].jpegData(compressionQuality: 0.08) else {return}
                     
                     let uploadMetaData = StorageMetadata()
                     // imageのタイプ

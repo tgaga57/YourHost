@@ -12,16 +12,15 @@ class PostInformationViewController: UIViewController {
 
     var thisPostID = ""
     var postUserID = ""
-    
+    var userID = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("post情報をもっと詳しくお伝えします")
         print(thisPostID)
         print(postUserID)
-        
+        print(userID)
     }
-    
     
   // back
     @IBAction func back(_ sender: Any) {

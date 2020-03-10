@@ -15,7 +15,7 @@ class ViewController: UIViewController,UIScrollViewDelegate{
     
     var jsonImageArray = ["1","2","3"]
     
-    var introStringArray = ["旅先ボランティアで宿泊費無料","新しい旅の形を","気になるホストに連絡してみよう"]
+    var introStringArray = ["旅先で宿泊費無料??","新しい旅の形を","気になるホストに連絡してみよう"]
     
     // スクロールView
     @IBOutlet weak var scrollView: UIScrollView!
