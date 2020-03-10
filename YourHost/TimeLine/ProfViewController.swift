@@ -191,13 +191,11 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         activityIndicatorView.startAnimating()
         // data型
         var profImageData: NSData = NSData()
-        
         if let profileImage = profImageView.image{
             profImageData = profileImage.jpegData(compressionQuality: 0.1) as! NSData
         }
         // base64にエンコード
         let base64UserImage = profImageData.base64EncodedString(options: .lineLength64Characters) as String
-        
         // usergender
         var userGender = String(sexSegment.selectedSegmentIndex)
         
@@ -226,6 +224,7 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         }
     }
     
+    
     // リターンを押した時の処理
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nameTextFiled.resignFirstResponder()
@@ -243,6 +242,7 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     @IBAction func backButton(_ sender: Any) {
         presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
+    
     
     // Agetextのところは数字しか使えなくする
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -268,6 +268,8 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
                }
                return true
            }
+    
+    
     
 }
 

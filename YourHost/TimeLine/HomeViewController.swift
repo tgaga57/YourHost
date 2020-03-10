@@ -24,19 +24,15 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     var item:Int = 3
     // 投稿情報
     var items = [NSDictionary]()
-    
     // tableView
     @IBOutlet weak var hometableView: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // userdefaultsに保存
         UserDefaults.standard.set(userID, forKey: "userID")
-        
         print(userID)
-        
         // refreshControlに文言を追加
         refreshControl.attributedTitle = NSAttributedString(string: "更新中")
         // アクションを指定

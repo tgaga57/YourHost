@@ -35,16 +35,14 @@ class HomeTableViewCell: UITableViewCell{
     var postImages:[UIImage] = []
     // PostUserID
     var postUserID:String = ""
-
     // uiimageview
     @IBOutlet weak var postImageView1: UIImageView!
     @IBOutlet weak var postImageView2: UIImageView!
     @IBOutlet weak var postImageView3: UIImageView!
     @IBOutlet weak var postImageView4: UIImageView!
-    
     // postID
     var postID:String = ""
-    
+    // 遷移処理に必要なもの
     var homeViewController:HomeViewController?
     
     override func awakeFromNib() {

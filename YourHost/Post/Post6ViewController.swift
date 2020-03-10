@@ -255,8 +255,8 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         }
         let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
             return
-            
         }
+        
         // アラートにadd
         alert.addAction(okAction)
         alert.addAction(cancelAction)
@@ -346,7 +346,7 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
             
             // randamID
             let randamID = UUID.init().uuidString
-            
+                    
             // 辞書型で入れていく
             let toDataSave = ["categoryText":categoryText,
                               "buildingText":buildingText,
@@ -377,6 +377,7 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                               "postImage4":imageName4,
                               "ThisPostID":randamID
             ]
+            
             
             // userの投稿情報の新しいPOSTSコレクションを作る
             let userData = self.db.collection("userPosts").document(randamID)
