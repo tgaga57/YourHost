@@ -276,7 +276,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsp-gq-rsQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5489" y="132"/>
+            <point key="canvasLocation" x="3486" y="1159"/>
         </scene>
         <!--Post Information View Controller-->
         <scene sceneID="0Hn-Jw-6YP">
@@ -447,7 +447,7 @@
                                                     <constraint firstAttribute="width" constant="198" id="B6C-ZZ-T6I"/>
                                                     <constraint firstAttribute="height" constant="32" id="rTV-VA-imu"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -773,6 +773,9 @@
                                                 <state key="normal" title="ホストにメッセージを送る">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="YSh-ca-NGR" kind="presentation" modalPresentationStyle="fullScreen" id="gxe-bz-QJT"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cID-tp-opP">
                                                 <rect key="frame" x="235" y="1196" width="90" height="29"/>
@@ -925,25 +928,86 @@
             </objects>
             <point key="canvasLocation" x="4461.6000000000004" y="131.78410794602701"/>
         </scene>
-        <!--View Controller-->
+        <!--Message Room View Controller-->
         <scene sceneID="j3J-IW-CSf">
             <objects>
-                <viewController id="5PJ-N4-DFH" sceneMemberID="viewController">
+                <viewController id="5PJ-N4-DFH" customClass="MessageRoomViewController" customModule="YourHost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zeb-mj-VFy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dih-Xu-vd8">
+                                <rect key="frame" x="0.0" y="65" width="375" height="602"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="97" id="pZb-TW-DxH">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="97"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pZb-TW-DxH" id="in4-zp-8rY">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VVo-B5-Svw">
+                                                    <rect key="frame" x="22" y="6" width="86" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="messanger name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QR6-2k-8lO">
+                                                    <rect key="frame" x="123" y="6" width="231" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="messange" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVW-h2-fmj">
+                                                    <rect key="frame" x="123" y="55" width="231" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lvR-0m-2kJ">
+                                <rect key="frame" x="10" y="15" width="70" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="back:" destination="5PJ-N4-DFH" eventType="touchUpInside" id="aPG-nc-PIr"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Message Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSM-JJ-3zi">
+                                <rect key="frame" x="106" y="20" width="178" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.79790485189190496" green="1" blue="0.78777737378914248" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Dih-Xu-vd8" firstAttribute="top" secondItem="iYq-Ys-rCL" secondAttribute="top" constant="65" id="Ajk-vN-dRR"/>
+                            <constraint firstItem="Dih-Xu-vd8" firstAttribute="leading" secondItem="iYq-Ys-rCL" secondAttribute="leading" id="R3y-TQ-dyc"/>
+                            <constraint firstItem="Dih-Xu-vd8" firstAttribute="trailing" secondItem="iYq-Ys-rCL" secondAttribute="trailing" id="dij-ki-pmz"/>
+                            <constraint firstItem="Dih-Xu-vd8" firstAttribute="bottom" secondItem="iYq-Ys-rCL" secondAttribute="bottom" id="q0v-tw-z3b"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="iYq-Ys-rCL"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Gm-Rn-Jxu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2602" y="137"/>
+            <point key="canvasLocation" x="2606" y="132"/>
         </scene>
-        <!--View Controller-->
+        <!--Message View Controller-->
         <scene sceneID="DAt-fZ-fVf">
             <objects>
-                <viewController id="YSh-ca-NGR" sceneMemberID="viewController">
+                <viewController id="YSh-ca-NGR" customClass="MessageViewController" customModule="YourHost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bOn-F3-5e9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -964,9 +1028,12 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
                                         <state key="normal" title="Back"/>
+                                        <connections>
+                                            <segue destination="5PJ-N4-DFH" kind="presentation" modalPresentationStyle="fullScreen" id="eET-uF-snL"/>
+                                        </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.76909561056124853" green="1" blue="0.83931724660356788" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.70540079952775625" green="1" blue="0.79820831517885149" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="VEe-lu-pRr"/>
                                 </constraints>
@@ -1076,7 +1143,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="82" id="oLo-3R-CUS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="message" rowHeight="82" id="oLo-3R-CUS">
                                         <rect key="frame" x="0.0" y="100" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oLo-3R-CUS" id="1UA-H2-p5m">
@@ -1116,6 +1183,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <segue destination="5PJ-N4-DFH" kind="presentation" identifier="message" trigger="accessoryAction" modalPresentationStyle="fullScreen" id="R7A-oQ-caj"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="82" id="GfM-0B-rbC">
                                         <rect key="frame" x="0.0" y="182" width="375" height="82"/>
@@ -1296,7 +1366,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RN3-fA-bxl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5490" y="1029"/>
+            <point key="canvasLocation" x="4514" y="1158"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="wSA-p2-nWq">
@@ -2702,4 +2772,7 @@
         <image name="ログアウト" width="64" height="64"/>
         <image name="丸" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="R7A-oQ-caj"/>
+    </inferredMetricsTieBreakers>
 </document>

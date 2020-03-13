@@ -12,9 +12,11 @@ import Firebase
 class MenuViewController: UITableViewController {
     
     let transition = SlideTransition()
-    
     // DBのログインしたuserの情報が入ってくる from home
     var userId = ""
+    var homeViewController = HomeViewController()
+    // segueMessageの時
+    var whereIsGoingCount = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,15 +56,6 @@ class MenuViewController: UITableViewController {
         case 5:
             // ログアウト
             try! Auth.auth().signOut()
-//            // storyboardの指定
-//            let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//
-//            let VC = storyboard.instantiateViewController(identifier: "Login")
-//            //  フルスクリーンに
-//            VC.modalPresentationStyle = .fullScreen
-//            // 遷移処理
-//            self.present(VC, animated: true, completion: nil)
-            
             self.presentingViewController?.presentingViewController?
                 .dismiss(animated: true, completion: nil)
             print("ログアウト")
@@ -79,13 +72,17 @@ class MenuViewController: UITableViewController {
             let profileVC = segue.destination as! ProfViewController
             // ログインしているuserId情報
             profileVC.uID = userId
+        }else if segue.identifier == "message" {
+            let messageVC = segue.destination as! MessageRoomViewController
+            // どこからきたかの情報を与える
+            messageVC.whrereIsFromCount = whereIsGoingCount
         }
     }
     
     // 投稿していいかのアラートを出す
        func postconfirmationAlert() {
            let alert:UIAlertController = UIAlertController(title: "確認", message: "ホスティングを行うとタイムラインに掲載されますがよろしいですか？", preferredStyle: UIAlertController.Style.alert)
-           
+    
            let okAction:UIAlertAction = UIAlertAction(title: "Okay", style: .default) { (alert) in
              print("Ok")
             let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "Post") as! PostViewController
@@ -93,7 +90,6 @@ class MenuViewController: UITableViewController {
             nextVC.modalPresentationStyle = .fullScreen
             self.present(nextVC, animated: true, completion: nil)
             print("ホスティングへ")
-              
            }
            
            let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
@@ -111,5 +107,12 @@ class MenuViewController: UITableViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         view.isHidden = true
+        
     }
+    
+    
+    
+    
+    
+    
 }

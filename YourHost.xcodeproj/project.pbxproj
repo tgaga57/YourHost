@@ -11,6 +11,8 @@
 		B10205A623ED6729003F01AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B10205A523ED6729003F01AC /* GoogleService-Info.plist */; };
 		B11530B623EAB91600540788 /* SlideTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11530B523EAB91600540788 /* SlideTransition.swift */; };
 		B140D22D2400FC8400F8B0FF /* Post2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140D22C2400FC8400F8B0FF /* Post2ViewController.swift */; };
+		B1470B3F241B44A80054E126 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1470B3E241B44A80054E126 /* MessageViewController.swift */; };
+		B1470B41241B5D900054E126 /* MessageRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1470B40241B5D900054E126 /* MessageRoomViewController.swift */; };
 		B151401624120C44002C45DA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B151401524120C43002C45DA /* UserProfile.swift */; };
 		B151401E24162370002C45DA /* PostInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B151401D24162370002C45DA /* PostInformationViewController.swift */; };
 		B1518B4A240F8A0A0015962A /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1518B49240F8A0A0015962A /* HomeTableViewCell.swift */; };
@@ -44,6 +46,8 @@
 		B10205A523ED6729003F01AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B11530B523EAB91600540788 /* SlideTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideTransition.swift; sourceTree = "<group>"; };
 		B140D22C2400FC8400F8B0FF /* Post2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post2ViewController.swift; sourceTree = "<group>"; };
+		B1470B3E241B44A80054E126 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		B1470B40241B5D900054E126 /* MessageRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRoomViewController.swift; sourceTree = "<group>"; };
 		B151401524120C43002C45DA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		B151401D24162370002C45DA /* PostInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInformationViewController.swift; sourceTree = "<group>"; };
 		B1518B49240F8A0A0015962A /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
@@ -103,6 +107,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B1470B3D241B44610054E126 /* Mesage */ = {
+			isa = PBXGroup;
+			children = (
+				B1470B3E241B44A80054E126 /* MessageViewController.swift */,
+				B1470B40241B5D900054E126 /* MessageRoomViewController.swift */,
+			);
+			path = Mesage;
+			sourceTree = "<group>";
+		};
 		B162931723E29DC800C8463A = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +143,7 @@
 				B1A2129123EA98420090E467 /* HomeView */,
 				B162933923E2A8FB00C8463A /* LoginView */,
 				B162933823E2A8F000C8463A /* LoginController */,
+				B1470B3D241B44610054E126 /* Mesage */,
 				B1A2128923EA85150090E467 /* TimeLine */,
 				B1FCCD2323FFAA030065FA1F /* Post */,
 				B162933123E29DC900C8463A /* Info.plist */,
@@ -348,6 +362,7 @@
 				B1748C432403A1FC00FB8F40 /* Post4ViewController.swift in Sources */,
 				B162933B23E2A9D800C8463A /* IntoroViewController.swift in Sources */,
 				B16CE0452408D96200FB5BF3 /* Post6ViewController.swift in Sources */,
+				B1470B41241B5D900054E126 /* MessageRoomViewController.swift in Sources */,
 				B1748C3F240139DF00FB8F40 /* Post3ViewController.swift in Sources */,
 				B102059E23EBD27D003F01AC /* ProfViewController.swift in Sources */,
 				B140D22D2400FC8400F8B0FF /* Post2ViewController.swift in Sources */,
@@ -355,6 +370,7 @@
 				B162932423E29DC800C8463A /* AppDelegate.swift in Sources */,
 				B162932623E29DC800C8463A /* SceneDelegate.swift in Sources */,
 				B1B7318923E67F950081D0A7 /* NewMemberSettingViewController.swift in Sources */,
+				B1470B3F241B44A80054E126 /* MessageViewController.swift in Sources */,
 				B1A2128B23EA86800090E467 /* HomeViewController.swift in Sources */,
 				B1518B4A240F8A0A0015962A /* HomeTableViewCell.swift in Sources */,
 				B1A2129023EA8B360090E467 /* MenuViewController.swift in Sources */,
