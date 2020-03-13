@@ -72,7 +72,41 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         activityIndicatorView.color = .green
         // viewにaddsubview
         self.view.addSubview(activityIndicatorView)
+        
+        // キーボード閉じる処理
+        configureNotification()
     }
+    
+    
+    // nortificationメソッド化
+       func configureNotification () {
+           // キーボード出てくるときに発動
+           NotificationCenter.default.addObserver(self, selector: #selector(ProfViewController.keyboardWillShow(_ :)), name: UIResponder.keyboardWillShowNotification, object: nil)
+           
+           // キーボード閉じるときに発動
+           NotificationCenter.default.addObserver(self, selector: #selector(ProfViewController.keyboardWillHide(_ :)), name: UIResponder.keyboardWillHideNotification, object: nil)
+       }
+       
+       // キーボードが呼び出される時
+       @objc func keyboardWillShow(_ notification: NSNotification) {
+           guard let rect = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
+               let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+           UIView.animate(withDuration: duration) {
+               let transform = CGAffineTransform(translationX: 0, y: -(rect.size.height))
+               self.view.transform = transform
+           }
+           print("keyboardwillshow発動")
+       }
+       // キーボードを消す時
+       @objc func keyboardWillHide(_ notification: NSNotification) {
+           
+           guard let duration = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? TimeInterval else { return }
+           UIView.animate(withDuration: duration) {
+               self.view.transform = CGAffineTransform.identity
+           }
+           print("keyboardWillHideを実行")
+       }
+
     
     //userの情報を反映させる
     func getProfile(){
@@ -86,8 +120,8 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
             guard let data = snap?.data() else {return}
             print(data)
             // ドキュメントのデータを反映
-            self.nameTextFiled.text = data["userName"] as! String
-            self.ageTextFiled.text = data["userAge"] as! String
+            self.nameTextFiled.text = (data["userName"] as! String)
+            self.ageTextFiled.text = (data["userAge"] as! String)
             self.sexSegment.selectedSegmentIndex = Int(data["userGender"] as! String)!
             // 画像情報を取得
             let profileImage = data["userImage"] as! String

@@ -45,11 +45,14 @@ class HomeTableViewCell: UITableViewCell{
     // 遷移処理に必要なもの
     var homeViewController:HomeViewController?
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         postUserImage.layer.cornerRadius = 15.0
+        // デリゲート
         self.scrollView.delegate = self
+        // スクロールバーを消した
+        scrollView.showsVerticalScrollIndicator = false
         
     }
     

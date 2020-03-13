@@ -19,7 +19,7 @@
 		B162932B23E29DC800C8463A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B162932923E29DC800C8463A /* Main.storyboard */; };
 		B162932D23E29DC900C8463A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B162932C23E29DC900C8463A /* Assets.xcassets */; };
 		B162933023E29DC900C8463A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B162932E23E29DC900C8463A /* LaunchScreen.storyboard */; };
-		B162933B23E2A9D800C8463A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162933A23E2A9D800C8463A /* ViewController.swift */; };
+		B162933B23E2A9D800C8463A /* IntoroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162933A23E2A9D800C8463A /* IntoroViewController.swift */; };
 		B162933D23E2ABDD00C8463A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162933C23E2ABDD00C8463A /* LoginViewController.swift */; };
 		B16CE0432407831400FB5BF3 /* Post5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CE0422407831400FB5BF3 /* Post5ViewController.swift */; };
 		B16CE0452408D96200FB5BF3 /* Post6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CE0442408D96200FB5BF3 /* Post6ViewController.swift */; };
@@ -28,7 +28,7 @@
 		B1748C432403A1FC00FB8F40 /* Post4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1748C422403A1FC00FB8F40 /* Post4ViewController.swift */; };
 		B1A2128B23EA86800090E467 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A2128A23EA86800090E467 /* HomeViewController.swift */; };
 		B1A2129023EA8B360090E467 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A2128F23EA8B360090E467 /* MenuViewController.swift */; };
-		B1A2129323EA98860090E467 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A2129223EA98860090E467 /* Menu.storyboard */; };
+		B1A2129323EA98860090E467 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1A2129223EA98860090E467 /* Home.storyboard */; };
 		B1A9BE1523FD402A00E398F2 /* 3.json in Resources */ = {isa = PBXBuildFile; fileRef = B1A9BE1423FD402A00E398F2 /* 3.json */; };
 		B1B7318923E67F950081D0A7 /* NewMemberSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B7318823E67F950081D0A7 /* NewMemberSettingViewController.swift */; };
 		B1BECA6123E2DA3D000CE5AD /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = B1BECA6023E2DA3D000CE5AD /* 1.json */; };
@@ -54,7 +54,7 @@
 		B162932C23E29DC900C8463A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B162932F23E29DC900C8463A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B162933123E29DC900C8463A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B162933A23E2A9D800C8463A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B162933A23E2A9D800C8463A /* IntoroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntoroViewController.swift; sourceTree = "<group>"; };
 		B162933C23E2ABDD00C8463A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B16CE0422407831400FB5BF3 /* Post5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post5ViewController.swift; sourceTree = "<group>"; };
 		B16CE0442408D96200FB5BF3 /* Post6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post6ViewController.swift; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 		B1748C422403A1FC00FB8F40 /* Post4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post4ViewController.swift; sourceTree = "<group>"; };
 		B1A2128A23EA86800090E467 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B1A2128F23EA8B360090E467 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		B1A2129223EA98860090E467 /* Menu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
+		B1A2129223EA98860090E467 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		B1A9BE1423FD402A00E398F2 /* 3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = 3.json; path = ../../../../Downloads/3.json; sourceTree = "<group>"; };
 		B1B7318823E67F950081D0A7 /* NewMemberSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemberSettingViewController.swift; sourceTree = "<group>"; };
 		B1BECA6023E2DA3D000CE5AD /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 1.json; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 		B162933823E2A8F000C8463A /* LoginController */ = {
 			isa = PBXGroup;
 			children = (
-				B162933A23E2A9D800C8463A /* ViewController.swift */,
+				B162933A23E2A9D800C8463A /* IntoroViewController.swift */,
 				B162933C23E2ABDD00C8463A /* LoginViewController.swift */,
 				B1B7318823E67F950081D0A7 /* NewMemberSettingViewController.swift */,
 			);
@@ -176,7 +176,7 @@
 		B1A2129123EA98420090E467 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				B1A2129223EA98860090E467 /* Menu.storyboard */,
+				B1A2129223EA98860090E467 /* Home.storyboard */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -269,7 +269,7 @@
 				B162932D23E29DC900C8463A /* Assets.xcassets in Resources */,
 				B10205A623ED6729003F01AC /* GoogleService-Info.plist in Resources */,
 				B1FE7C2923E2DCF800B1AF3C /* 2.json in Resources */,
-				B1A2129323EA98860090E467 /* Menu.storyboard in Resources */,
+				B1A2129323EA98860090E467 /* Home.storyboard in Resources */,
 				B162932B23E29DC800C8463A /* Main.storyboard in Resources */,
 				B1BECA6123E2DA3D000CE5AD /* 1.json in Resources */,
 			);
@@ -346,7 +346,7 @@
 				B162933D23E2ABDD00C8463A /* LoginViewController.swift in Sources */,
 				B11530B623EAB91600540788 /* SlideTransition.swift in Sources */,
 				B1748C432403A1FC00FB8F40 /* Post4ViewController.swift in Sources */,
-				B162933B23E2A9D800C8463A /* ViewController.swift in Sources */,
+				B162933B23E2A9D800C8463A /* IntoroViewController.swift in Sources */,
 				B16CE0452408D96200FB5BF3 /* Post6ViewController.swift in Sources */,
 				B1748C3F240139DF00FB8F40 /* Post3ViewController.swift in Sources */,
 				B102059E23EBD27D003F01AC /* ProfViewController.swift in Sources */,

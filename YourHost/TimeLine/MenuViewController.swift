@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import FacebookCore
 import Firebase
-import FacebookLogin
 
 class MenuViewController: UITableViewController {
     
@@ -56,14 +54,17 @@ class MenuViewController: UITableViewController {
         case 5:
             // ログアウト
             try! Auth.auth().signOut()
-            // storyboardの指定
-            let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            // storyboardの指定
+//            let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//            let VC = storyboard.instantiateViewController(identifier: "Login")
+//            //  フルスクリーンに
+//            VC.modalPresentationStyle = .fullScreen
+//            // 遷移処理
+//            self.present(VC, animated: true, completion: nil)
             
-            let VC = storyboard.instantiateViewController(identifier: "Login")
-            //  フルスクリーンに
-            VC.modalPresentationStyle = .fullScreen
-            // 遷移処理
-            self.present(VC, animated: true, completion: nil)
+            self.presentingViewController?.presentingViewController?
+                .dismiss(animated: true, completion: nil)
             print("ログアウト")
             
         default:

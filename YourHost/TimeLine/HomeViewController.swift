@@ -127,7 +127,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     // 遷移処理
     // goPostInfo
     func goPostInfomation(userPostID:String,postUserID:String) {
-        let storyboard = UIStoryboard(name: "Menu", bundle: nil)
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let toPostInfoVC = storyboard.instantiateViewController(withIdentifier: "toPostInfo") as! PostInformationViewController
         toPostInfoVC.thisPostID = userPostID
         toPostInfoVC.postUserID = postUserID

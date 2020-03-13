@@ -6,12 +6,11 @@
 //  Copyright © 2020 Taiga Shiga. All rights reserved.
 //
 
-import Foundation
-import Firebase
+import MapKit
 
 class UserProfile{
 
-static var currentUserProfile:UserProfile?
  
+    
 
 }

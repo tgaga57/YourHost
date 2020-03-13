@@ -116,8 +116,7 @@ class Post2ViewController: UIViewController{
                     if numberOfGuestBedCount >= 1 {
                         guestBedMinusButton.isEnabled = true
                     }
-                default:
-                    break
+
                 }
             }
         }

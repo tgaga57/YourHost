@@ -45,7 +45,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     var activityIndicatorView: NVActivityIndicatorView!
     // ロード時画面のview
     var indicatorBackgroundView: UIView!
-    
+    // firebase
     let db = Firestore.firestore()
     
     var ref:DocumentReference!
@@ -126,7 +126,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
         if info[.originalImage] as? UIImage != nil {
             let selctedImage = info[.originalImage] as! UIImage
             // 画像を画面全体に反映
-            userProfImage.contentMode = .scaleToFill
+            userProfImage.contentMode = .scaleAspectFill
             // userProfileに反映
             userProfImage.image = selctedImage
             // 戻る
@@ -199,7 +199,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                             print("ユーザー登録成功")
                             // タイムラインへ遷移
                             // 遷移する先
-                            let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
+                            let storyboard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
                             let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine") as! HomeViewController
                             // 次の画面にuserの情報を受け渡す
                             toTimeLineVC.userID = uID
@@ -207,6 +207,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                             toTimeLineVC.modalPresentationStyle = .fullScreen
                             print(uID as Any)
                             print("タイムラインへ")
+                            // ストップ
                             self.stopLoadIndicator()
                             self.present(toTimeLineVC, animated: true, completion: nil)
                         }

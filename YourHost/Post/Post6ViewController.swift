@@ -10,11 +10,15 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseStorage
+import NVActivityIndicatorView
 
 class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
-    // title label
-    @IBOutlet weak var titleLabel: UILabel!
+    // インジゲーターの変数
+    var activityIndicatorView: NVActivityIndicatorView!
+    // ロード時画面のview
+    var indicatorBackgroundView: UIView!
+    
     // ホスティングできる日にち
     var beginAcceptanceDate:String! = ""
     var finishAcceptanceDate:String! = ""
@@ -23,7 +27,6 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     // strage
     let storage = Storage.storage()
     
-    var ref: DocumentReference? = nil
     // images
     private var images: [UIImage] = []
     // 何が選択されたかを判断
@@ -35,6 +38,16 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     var fileName3:String?
     var fileName4:String?
     
+    // アラート
+    var alertController = UIAlertController()
+    // userDefaluts
+    let userdefaluts = UserDefaults.standard
+    // uis
+    var userID = ""
+    
+    
+    // title label
+    @IBOutlet weak var titleLabel: UILabel!
     // ユーザーが選ぶ写真
     @IBOutlet weak var userPickedImage1: UIImageView!
     @IBOutlet weak var userPickedImage2: UIImageView!
@@ -43,12 +56,6 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     
     // textView
     @IBOutlet weak var textView: UITextView!
-    // アラート
-    var alertController = UIAlertController()
-    // userDefaluts
-    let userdefaluts = UserDefaults.standard
-    
-    var userID = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +79,13 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // キーボードを閉じる
         configureNotification()
+        
+        // インジゲーターのサイズ
+        activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0, y: 100, width: 60, height: 60))
+        // インジゲーターをセンターへ
+        activityIndicatorView.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 50)
     }
     
     // nortificationメソッド化
@@ -104,20 +117,6 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         print("keyboardWillHideを実行")
     }
     
-    //    // カメラ立ち上げ
-    //    func openCamera() {
-    //        let sourceType:UIImagePickerController.SourceType = .camera
-    //        // カメラが利用可能かチェックする
-    //        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-    //            let cameraPicker = UIImagePickerController()
-    //            cameraPicker.allowsEditing = true
-    //            cameraPicker.sourceType = sourceType
-    //            cameraPicker.delegate = self
-    //            self.present(cameraPicker, animated: true, completion: nil)
-    //            print("カメラが開かれました")
-    //        }
-    //    }
-    //
     // アルバム立ち上げ
     func openAlbum() {
         let sourceType:UIImagePickerController.SourceType = .photoLibrary
@@ -184,10 +183,7 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     // カメラ使用時のアラート
     func cameraAlert() {
         let alertController = UIAlertController(title: "選択してください", message: "こちらから選べます", preferredStyle: .actionSheet)
-        //
-        //        let action1 = UIAlertAction(title: "カメラ", style: .default) { (alert) in
-        //            self.openCamera()
-        //        }
+        
         let action1 = UIAlertAction(title: "アルバム", style: .default) { (alert) in
             self.openAlbum()
         }
@@ -240,9 +236,7 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     // アラート
     func Alert(title:String,message:String) {
         alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        
         present(alertController,animated: true)
     }
     
@@ -252,11 +246,20 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         
         let okAction:UIAlertAction = UIAlertAction(title: "Okay", style: .default) { (alert) in
             print("Ok")
+            if self.userPickedImage1.image == UIImage(named: "アルバム") && self.userPickedImage2.image == UIImage(named: "アルバム") && self.userPickedImage3.image == UIImage(named: "アルバム") && self.userPickedImage4.image == UIImage(named: "アルバム") {
+                self.Alert(title: "写真が全て投稿されていません", message: "もう一度お願いします")
+                print("写真が全て投稿されていない")
+                return;
+            } else if self.textView.text == "" {
+                self.Alert(title: "ゲストへのメッセージが何も入力されていません", message: "もう一度お願いします")
+                print("ゲストへのメッセージなし")
+                return;
+            }
+            
         }
         let cancelAction:UIAlertAction = UIAlertAction(title: "キャンセル", style: .cancel) { (alert) in
             return
         }
-        
         // アラートにadd
         alert.addAction(okAction)
         alert.addAction(cancelAction)
@@ -265,23 +268,35 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
     
     // 投稿をチェック
     func checkPost(){
-        if self.userPickedImage1.image == UIImage(named: "アルバム") && self.userPickedImage2.image == UIImage(named: "アルバム") && self.userPickedImage3.image == UIImage(named: "アルバム") && self.userPickedImage4.image == UIImage(named: "アルバム") {
+        if self.userPickedImage1.image == UIImage(named: "アルバム") || self.userPickedImage2.image == UIImage(named: "アルバム") || self.userPickedImage3.image == UIImage(named: "アルバム") || self.userPickedImage4.image == UIImage(named: "アルバム") {
             self.Alert(title: "写真が全て投稿されていません", message: "もう一度お願いします")
             print("写真が全て投稿されていない")
-            return
+            return;
         } else if self.textView.text == "" {
             self.Alert(title: "ゲストへのメッセージが何も入力されていません", message: "もう一度お願いします")
             print("ゲストへのメッセージなし")
-            return
+            return;
         }
     }
     
     // 掲載するボタン
     @IBAction func postAll(_ sender: Any) {
-        // 投稿するに写真などが入ってるか確認
-        postconfirmationAlert()
-        // postをチェック
-        checkPost()
+        
+        if self.userPickedImage1.image == UIImage(named: "アルバム") || self.userPickedImage2.image == UIImage(named: "アルバム") || self.userPickedImage3.image == UIImage(named: "アルバム") || self.userPickedImage4.image == UIImage(named: "アルバム") {
+            self.Alert(title: "写真が全て投稿されていません", message: "もう一度お願いします")
+            print("写真が全て投稿されていない")
+            return;
+            
+        } else if self.textView.text == "" {
+            self.Alert(title: "ゲストへのメッセージが何も入力されていません", message: "もう一度お願いします")
+            print("ゲストへのメッセージなし")
+            
+            return;
+        }
+        
+        print("確認が終わったよ")
+        // インディケータースタート
+        showLodeIndicator()
         /// 持ってきたかった情報
         // post1
         let uid = userID
@@ -296,14 +311,15 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         let yourAdress = userdefaluts.string(forKey: "yourAdress")
         let yourKeyWord = userdefaluts.string(forKey: "yourKeyWord")
         // post4
-        let count1 = userdefaluts.string(forKey: "count1")
-        let count2 = userdefaluts.string(forKey: "count2")
-        let count3 = userdefaluts.string(forKey: "count3")
-        let count4 = userdefaluts.string(forKey: "count4")
-        let count5 = userdefaluts.string(forKey: "count5")
-        let count6 = userdefaluts.string(forKey: "count6")
-        let count7 = userdefaluts.string(forKey: "count7")
-        let count8 = userdefaluts.string(forKey: "count8")
+        let necessaryCount = userdefaluts.string(forKey: "count1")
+        let wifiCount = userdefaluts.string(forKey: "count2")
+        let kitchenCount = userdefaluts.string(forKey: "count3")
+        let heaterCount = userdefaluts.string(forKey: "count4")
+        let airConCount = userdefaluts.string(forKey: "count5")
+        let tvCount = userdefaluts.string(forKey: "count6")
+        let laundryCount = userdefaluts.string(forKey: "count7")
+        let dryCount = userdefaluts.string(forKey: "count8")
+        let bathrooncount = userdefaluts.string(forKey: "count9")
         
         // textViewがnilがないか
         guard let forGuestMessage = textView.text else{
@@ -346,7 +362,7 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
             
             // randamID
             let randamID = UUID.init().uuidString
-                    
+            
             // 辞書型で入れていく
             let toDataSave = ["categoryText":categoryText,
                               "buildingText":buildingText,
@@ -356,14 +372,15 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                               "numberOfGuestBedCount":numberOfGuestBedCount,
                               "yourAdress":yourAdress,
                               "yourKeyWord":yourKeyWord,
-                              "count1":count1,
-                              "count2":count2,
-                              "count3":count3,
-                              "count4":count4,
-                              "count5":count5,
-                              "count6":count6,
-                              "count7":count7,
-                              "count8":count8,
+                              "necessaryCount":necessaryCount,
+                              "wifiCount":wifiCount,
+                              "kitchenCount":kitchenCount,
+                              "heaterCount":heaterCount,
+                              "airConCount":airConCount,
+                              "tvCount":tvCount,
+                              "laundryCount":laundryCount,
+                              "dryCount":dryCount,
+                              "bathrooncount":bathrooncount,
                               "forGuestMessage":forGuestMessage,
                               "createdAt":timestamp,
                               "uid":uid,
@@ -378,6 +395,19 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                               "ThisPostID":randamID
             ]
             
+            // -----  userのポストにはIDを入れる　------------
+            // 後で作る自分の投稿を確認できるタイムライン
+            // realtime database
+            let userPostUserID  = Database.database().reference().child("userPostID").child(uid)
+            userPostUserID.setValue(randamID) { (error, result) in
+                if error != nil {
+                    // エラー
+                    print("\(error?.localizedDescription)")
+                }else{
+                    // データが入った
+                 print("dataが入りました")
+              }
+            }
             
             // userの投稿情報の新しいPOSTSコレクションを作る
             let userData = self.db.collection("userPosts").document(randamID)
@@ -403,6 +433,7 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                     guard let imageData3 = arrayImage[2].jpegData(compressionQuality: 0.08) else {return}
                     guard let imageData4 = arrayImage[3].jpegData(compressionQuality: 0.08) else {return}
                     
+                    //　ストレージを参照
                     let uploadMetaData = StorageMetadata()
                     // imageのタイプ
                     uploadMetaData.contentType = "image/jpeg"
@@ -447,31 +478,78 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
                         }
                         print("画像をアップロードしたよ")
                         print("\(String(describing: downloadMetaData))")
+                        self.stopLoadIndicator()
                         self.backToTimeLine()
+                        self.userDefalutsDelated()
                     }
                 }
             }
         }
     }
     
-// タイムラインへの遷移
-func backToTimeLine() {
+    // タイムラインへの遷移
+    func backToTimeLine() {
     self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-}
-
-
-// back
-@IBAction func back(_ sender: Any) {
-    self.dismiss(animated: true, completion: nil)
-}
-
-// 情報を遷移するためにuserDefalutsは使っていたので
-// 投稿が終わったら消す
-func userDefalutsDelated() {
+    }
     
-}
-
-
+    
+    // インディケーター表示
+    func showLodeIndicator() {
+        indicatorBackgroundView = UIView(frame: self.view.bounds)
+        indicatorBackgroundView.backgroundColor = .green
+        indicatorBackgroundView.alpha = 0.2
+        indicatorBackgroundView.tag = 1
+        // インジケータと背景を接続
+        self.view.addSubview(indicatorBackgroundView)
+        indicatorBackgroundView?.addSubview(activityIndicatorView)
+        view.isUserInteractionEnabled = false
+        //        //起動
+        activityIndicatorView.startAnimating()
+    }
+    // インジケータを非表示にする
+    func stopLoadIndicator() {
+        // インジケータを消すか判断
+        if let viewWithTag = self.view.viewWithTag(1) {
+            viewWithTag.removeFromSuperview()
+        }
+        // 消えます
+        activityIndicatorView.stopAnimating()
+    }
+    
+    
+    // back
+    @IBAction func back(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    // 情報を遷移するためにuserDefalutsは使っていたので
+    // 投稿が終わったら消す
+    func userDefalutsDelated() {
+        
+        userdefaluts.removeObject(forKey: "categoryText")
+        userdefaluts.removeObject(forKey: "buildingText")
+        userdefaluts.removeObject(forKey: "selectedTag")
+        // post2
+        userdefaluts.removeObject(forKey: "numberOfGuestCount")
+        userdefaluts.removeObject(forKey: "numberOfGuestBedroomCount")
+        userdefaluts.removeObject(forKey: "numberOfGuestBedCount")
+        // post3
+        userdefaluts.removeObject(forKey: "yourAdress")
+        userdefaluts.removeObject(forKey: "yourKeyWord")
+        // post4
+        userdefaluts.removeObject(forKey: "count1")
+        userdefaluts.removeObject(forKey: "count2")
+        userdefaluts.removeObject(forKey: "count3")
+        userdefaluts.removeObject(forKey: "count4")
+        userdefaluts.removeObject(forKey: "count5")
+        userdefaluts.removeObject(forKey: "count6")
+        userdefaluts.removeObject(forKey: "count7")
+        userdefaluts.removeObject(forKey: "count8")
+        userdefaluts.removeObject(forKey: "count9")
+        
+    }
+    
+    
 }
 
 

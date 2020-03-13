@@ -11,8 +11,6 @@ import MapKit
 
 class Post3ViewController: UIViewController,UITextFieldDelegate{
     
-    //　スクリーンのサイズ
-    let screenSize = UIScreen.main.bounds.size
     // スクロールview
     let scrollView = UIScrollView()
     // 
@@ -126,7 +124,6 @@ class Post3ViewController: UIViewController,UITextFieldDelegate{
                         annotation.coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
                         self.mapView.addAnnotation(annotation)
                     }
-                    
                 } else {
                     // 検索できなかったら
                     self.yourStreetAddressTextFiled.text = "検索できませんでした"
@@ -138,13 +135,12 @@ class Post3ViewController: UIViewController,UITextFieldDelegate{
         yourStreetAddressTextFiled.resignFirstResponder()
         yourCityName.resignFirstResponder()
         return true
-        
+
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-        // 検索できなきなかったとする
-        self.yourStreetAddressTextFiled.text = ""
     }
     
     // next
@@ -153,10 +149,9 @@ class Post3ViewController: UIViewController,UITextFieldDelegate{
         
         guard let yourAdress = yourStreetAddressTextFiled.text, let yourKeyWord = yourCityName.text else {return}
         
-        if yourAdress == "" && yourKeyWord == "" {
+        if yourAdress == "" || yourKeyWord == "" {
             return
         } else {
-            
             // userDefaultsに保存
             UserDefaults.standard.set(yourAdress, forKey: "yourAdress")
             UserDefaults.standard.set(yourKeyWord, forKey: "yourKeyWord")

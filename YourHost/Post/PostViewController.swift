@@ -15,7 +15,7 @@ class PostViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDe
     var selectedbuilding : String?
     //　選ばれるカテゴリーとタイプ
     var priorityTypes = ["住宅","マンション","アパート"]
-    var buildingTypes = ["一軒家","ログハウス","古民家","長屋"]
+    var buildingTypes = ["一軒家","ログハウス","古民家","長屋","アパート,マンション"]
     
     // user Id
     var userID:String = ""

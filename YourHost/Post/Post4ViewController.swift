@@ -25,7 +25,7 @@ class Post4ViewController: UIViewController {
     @IBOutlet weak var tvButton: UIButton!
     @IBOutlet weak var washingMachineButton: UIButton!
     @IBOutlet weak var dryerMachineButton: UIButton!
-    
+    @IBOutlet weak var bathroomButton: UIButton!
     // カウント
     var count1 = 0
     var count2 = 0
@@ -35,10 +35,11 @@ class Post4ViewController: UIViewController {
     var count6 = 0
     var count7 = 0
     var count8 = 0
+    var count9 = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     // buttonのタグ
@@ -52,6 +53,7 @@ class Post4ViewController: UIViewController {
         case action6 = 6
         case action7 = 7
         case action8 = 8
+        case action9 = 9
     }
     
     // ボタンを押した時条件分岐４
@@ -73,26 +75,26 @@ class Post4ViewController: UIViewController {
                         count1 = 1
                         print(count1)
                     }
-                    // 以下同じ
+                // 以下同じ
                 case .action2:
                     if count2 == 1 {
-                    wifiButton.setImage(image0, for: .normal)
-                    count2 = 0
+                        wifiButton.setImage(image0, for: .normal)
+                        count2 = 0
                     } else{
                         wifiButton.setImage(image1, for: .normal)
                         count2 = 1
                     }
                 case .action3:
                     if count3 == 1{
-                    kitchenButton.setImage(image0, for: .normal)
+                        kitchenButton.setImage(image0, for: .normal)
                         count3 = 0
                     }else{
-                    kitchenButton.setImage(image1, for: .normal)
-                    count3 = 1
+                        kitchenButton.setImage(image1, for: .normal)
+                        count3 = 1
                     }
                 case .action4:
                     if count4 == 1 {
-                    heatingButton.setImage(image0, for: .normal)
+                        heatingButton.setImage(image0, for: .normal)
                         count4 = 0
                     }else {
                         heatingButton.setImage(image1, for: .normal)
@@ -100,15 +102,15 @@ class Post4ViewController: UIViewController {
                     }
                 case .action5:
                     if count5 == 1 {
-                    airconditioningButton.setImage(image0, for: .normal)
-                    count5 = 0
+                        airconditioningButton.setImage(image0, for: .normal)
+                        count5 = 0
                     }else {
                         airconditioningButton.setImage(image1, for: .normal)
                         count5 = 1
                     }
                 case .action6:
                     if count6 == 1 {
-                    tvButton.setImage(image0, for: .normal)
+                        tvButton.setImage(image0, for: .normal)
                         count6 = 0
                     } else {
                         tvButton.setImage(image1, for: .normal)
@@ -116,19 +118,27 @@ class Post4ViewController: UIViewController {
                     }
                 case .action7:
                     if  count7 == 1 {
-                    washingMachineButton.setImage(image0, for: .normal)
-                   count7 = 0
+                        washingMachineButton.setImage(image0, for: .normal)
+                        count7 = 0
                     } else {
                         washingMachineButton.setImage(image1, for: .normal)
                         count7 = 1
                     }
                 case .action8:
                     if count8 == 1 {
-                    dryerMachineButton.setImage(image0, for: .normal)
+                        dryerMachineButton.setImage(image0, for: .normal)
                         count8 = 0
                     }else{
                         dryerMachineButton.setImage(image1, for: .normal)
                         count8 = 1
+                    }
+                case .action9:
+                    if count9 == 1 {
+                        bathroomButton.setImage(image0, for: .normal)
+                        count9 = 0
+                    }else{
+                        bathroomButton.setImage(image1, for: .normal)
+                        count9 = 1
                     }
                 }
             }
@@ -151,6 +161,7 @@ class Post4ViewController: UIViewController {
         UserDefaults.standard.set(count6, forKey: "count6")
         UserDefaults.standard.set(count7, forKey: "count7")
         UserDefaults.standard.set(count8, forKey: "count8")
+        UserDefaults.standard.set(count9, forKey: "count9")
         
         // 遷移
         let nextVC = storyboard?.instantiateViewController(withIdentifier: "Post5") as! Post5ViewController
@@ -163,5 +174,5 @@ class Post4ViewController: UIViewController {
     
     
     
-
+    
 }

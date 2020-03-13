@@ -13,11 +13,9 @@ target 'YourHost' do
   pod 'FirebaseUI/Phone'
   pod 'FirebaseUI/Google'
   pod 'FirebaseStorage'
-  pod 'FacebookLogin'
-  pod 'FacebookSDK'
-  pod 'FacebookCore'
-  pod 'FacebookShare'
+  pod 'Firebase/Database'
   pod 'NVActivityIndicatorView'
   pod 'SDWebImage'
+
   
  end

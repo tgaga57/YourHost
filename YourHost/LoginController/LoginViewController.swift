@@ -117,7 +117,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
                     return
                 }
                 print("ログイン成功")
-                let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
+                let storyboard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
                 let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine") as! HomeViewController
                 toTimeLineVC.modalPresentationStyle = .fullScreen
                 // 情報を受け渡す
@@ -156,16 +156,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
         present(alertController,animated: true)
-    }
-    
-    // タイムラインへのメソッド
-    func toTimeLine(){
-        
-        let storyboard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
-        let toTimeLineVC = storyboard.instantiateViewController(withIdentifier: "TimeLine") as! HomeViewController
-        toTimeLineVC.modalPresentationStyle = .fullScreen
-        present(toTimeLineVC, animated: true, completion: nil)
-        print("タイムラインへ")
     }
     
     // 数字しか打ち込めなくする

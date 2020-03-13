@@ -4,7 +4,7 @@
 //
 //  Created by 志賀大河 on 2020/03/09.
 //  Copyright © 2020 Taiga Shiga. All rights reserved.
-//
+
 
 import UIKit
 import MapKit
@@ -61,9 +61,18 @@ class PostInformationViewController: UIViewController {
     // ホストへのメッセージ
     @IBOutlet weak var messageToHost: UIButton!
     
+    //アメニティ
+    @IBOutlet weak var necessitiesButton: UIButton!
+    @IBOutlet weak var wifiButton: UIButton!
+    @IBOutlet weak var kitchenButton: UIButton!
+    @IBOutlet weak var heatingButton: UIButton!
+    @IBOutlet weak var AirConButron: UIButton!
+    @IBOutlet weak var tvButton: UIButton!
+    @IBOutlet weak var laundryButton: UIButton!
+    @IBOutlet weak var dryButton: UIButton!
+    @IBOutlet weak var bathroomButton: UIButton!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         print("post情報をもっと詳しくお伝えします")
         print(thisPostID)
@@ -77,7 +86,6 @@ class PostInformationViewController: UIViewController {
         postUserImage.layer.cornerRadius = 15.0
         
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -126,8 +134,26 @@ class PostInformationViewController: UIViewController {
             
             self.userPostImageGetData(post1: postImage1, post2: postImage2, post3: postImage3, post4: postImage4)
             
+            self.messageToGuest.text = data["forGuestMessage"] as? String
+            let locationAdress = data["yourAdress"] as! String
+            // 住所を反映
+            self.mapkitReflection(adress: locationAdress)
+            // 必需品
+            let necceities = data["necessaryCount"] as! String
+            // wifi
+            let wifi = data["wifiCount"] as! String
+            let kitchen = data["kitchenCount"] as! String
+            let heater = data["heaterCount"] as! String
+            let aircon = data["airConCount"] as! String
+            let tv = data["tvCount"] as! String
+            let laundry = data["laundryCount"] as! String
+            let dry = data["dryCount"] as! String
+            let barhroom = data["bathrooncount"] as! String
+            
+            self.amenities(amenitie: necceities, wifi: wifi, kitchen: kitchen, heater: heater, aircon: aircon, TV: tv, washingMachine: laundry, dryMachine: dry, bath: barhroom)
         }
     }
+    
     
     
     // ゲストのベッド数とかのところ
@@ -237,9 +263,98 @@ class PostInformationViewController: UIViewController {
             self.postImage4.image = image
             self.postImage4.contentMode = .scaleAspectFill
         }
-        
     }
     
+    // mapkitに反映
+    func mapkitReflection(adress:String) {
+        // mapviewは変更予約が確定してからみれるため、ここでは使用を不可能にする!
+        location.isZoomEnabled = false
+        location.isScrollEnabled = false
+        //中心座標
+        let center = CLLocationCoordinate2DMake(35.690553, 139.699579)
+        //表示範囲
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01 )
+        //中心座標と表示範囲をマップに登録する。
+        let region = MKCoordinateRegion(center: center, span: span)
+        location.setRegion(region, animated: true)
+        
+        
+        let myGeocoder:CLGeocoder = CLGeocoder()
+        // 住所をアドレスの中に入れる
+        let searchYourAdress = adress
+        
+        UserDefaults.standard.set(searchYourAdress, forKey: "searchYourAdress")
+        
+        myGeocoder.geocodeAddressString(searchYourAdress) { (placeMarks, error) in
+            
+            if error == nil {
+                for placemark in placeMarks!{
+                    let location:CLLocation = placemark.location!
+                    
+                    //中心
+                    let center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+                    
+                    //表示範囲
+                    let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                    
+                    //中心座標と表示範囲をマップに登録する。
+                    let region = MKCoordinateRegion(center: center, span: span)
+                    self.location.setRegion(region, animated:true)
+                    
+                    //地図にピンを立てる。
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+                    self.location.addAnnotation(annotation)
+                }
+            }
+        }
+    }
+    
+    // アメニティ
+    func amenities(amenitie:String,wifi:String,kitchen:String,heater:String,aircon:String,TV:String,washingMachine:String,dryMachine:String,bath:String) {
+        //必需品
+        if amenitie == "0" {
+            necessitiesButton.isEnabled = false
+            necessitiesButton.backgroundColor = .clear
+        }
+        // wifi
+        if wifi == "0" {
+            wifiButton.isEnabled = false
+            wifiButton.backgroundColor = .clear
+        }
+        // kitchen
+        if kitchen == "0" {
+            kitchenButton.isEnabled = false
+            kitchenButton.backgroundColor = .clear
+        }
+        // 暖房
+        if heater == "0" {
+            heatingButton.isEnabled = false
+            heatingButton.backgroundColor = .clear
+
+        }
+        // aircon
+        if aircon == "0" {
+            AirConButron.isEnabled = false
+            AirConButron.backgroundColor = .clear
+        }
+        // 洗濯機
+        if washingMachine == "0" {
+            laundryButton.isEnabled = false
+            laundryButton.backgroundColor = .clear
+        }
+        // 乾燥機
+        if dryMachine == "0" {
+            dryButton.isEnabled = false
+            dryButton.backgroundColor = .clear
+        }
+        //  シャワーお風呂
+        if kitchen == "0" {
+            kitchenButton.isEnabled = false
+            kitchenButton.backgroundColor = .clear
+        }
+       
+    }
     
     // back
     @IBAction func back(_ sender: Any) {
