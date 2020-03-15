@@ -13,7 +13,9 @@
 		B140D22D2400FC8400F8B0FF /* Post2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140D22C2400FC8400F8B0FF /* Post2ViewController.swift */; };
 		B1470B3F241B44A80054E126 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1470B3E241B44A80054E126 /* MessageViewController.swift */; };
 		B1470B41241B5D900054E126 /* MessageRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1470B40241B5D900054E126 /* MessageRoomViewController.swift */; };
-		B151401624120C44002C45DA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B151401524120C43002C45DA /* UserProfile.swift */; };
+		B1470B4A241DD9590054E126 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1470B49241DD9590054E126 /* Message.swift */; };
+		B1470B4F241DF4F80054E126 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1470B4D241DF4F80054E126 /* MessageTableViewCell.swift */; };
+		B1470B50241DF4F80054E126 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1470B4E241DF4F80054E126 /* MessageTableViewCell.xib */; };
 		B151401E24162370002C45DA /* PostInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B151401D24162370002C45DA /* PostInformationViewController.swift */; };
 		B1518B4A240F8A0A0015962A /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1518B49240F8A0A0015962A /* HomeTableViewCell.swift */; };
 		B162932423E29DC800C8463A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B162932323E29DC800C8463A /* AppDelegate.swift */; };
@@ -48,7 +50,9 @@
 		B140D22C2400FC8400F8B0FF /* Post2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post2ViewController.swift; sourceTree = "<group>"; };
 		B1470B3E241B44A80054E126 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		B1470B40241B5D900054E126 /* MessageRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRoomViewController.swift; sourceTree = "<group>"; };
-		B151401524120C43002C45DA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		B1470B49241DD9590054E126 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		B1470B4D241DF4F80054E126 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		B1470B4E241DF4F80054E126 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		B151401D24162370002C45DA /* PostInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInformationViewController.swift; sourceTree = "<group>"; };
 		B1518B49240F8A0A0015962A /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		B162932023E29DC800C8463A /* YourHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				B1470B3E241B44A80054E126 /* MessageViewController.swift */,
+				B1470B4D241DF4F80054E126 /* MessageTableViewCell.swift */,
+				B1470B4E241DF4F80054E126 /* MessageTableViewCell.xib */,
 				B1470B40241B5D900054E126 /* MessageRoomViewController.swift */,
 			);
 			path = Mesage;
@@ -199,7 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				B11530B523EAB91600540788 /* SlideTransition.swift */,
-				B151401524120C43002C45DA /* UserProfile.swift */,
+				B1470B49241DD9590054E126 /* Message.swift */,
 			);
 			path = Method;
 			sourceTree = "<group>";
@@ -282,6 +288,7 @@
 				B1A9BE1523FD402A00E398F2 /* 3.json in Resources */,
 				B162932D23E29DC900C8463A /* Assets.xcassets in Resources */,
 				B10205A623ED6729003F01AC /* GoogleService-Info.plist in Resources */,
+				B1470B50241DF4F80054E126 /* MessageTableViewCell.xib in Resources */,
 				B1FE7C2923E2DCF800B1AF3C /* 2.json in Resources */,
 				B1A2129323EA98860090E467 /* Home.storyboard in Resources */,
 				B162932B23E29DC800C8463A /* Main.storyboard in Resources */,
@@ -369,12 +376,13 @@
 				B16CE0432407831400FB5BF3 /* Post5ViewController.swift in Sources */,
 				B162932423E29DC800C8463A /* AppDelegate.swift in Sources */,
 				B162932623E29DC800C8463A /* SceneDelegate.swift in Sources */,
+				B1470B4F241DF4F80054E126 /* MessageTableViewCell.swift in Sources */,
 				B1B7318923E67F950081D0A7 /* NewMemberSettingViewController.swift in Sources */,
 				B1470B3F241B44A80054E126 /* MessageViewController.swift in Sources */,
 				B1A2128B23EA86800090E467 /* HomeViewController.swift in Sources */,
+				B1470B4A241DD9590054E126 /* Message.swift in Sources */,
 				B1518B4A240F8A0A0015962A /* HomeTableViewCell.swift in Sources */,
 				B1A2129023EA8B360090E467 /* MenuViewController.swift in Sources */,
-				B151401624120C44002C45DA /* UserProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

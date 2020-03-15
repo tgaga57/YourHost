@@ -32,12 +32,17 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     var activityIndicatorView: NVActivityIndicatorView!
     // ロード時画面のview
     var indicatorBackgroundView: UIView!
-    // database用
-    var ref: DocumentReference!
     // インスタンス化
     let db = Firestore.firestore()
     // ログイン情報
     var uID = ""
+    
+    // notification
+    let nc = NotificationCenter.default
+    
+    //　編集中のてきすとフィールドを保持する変数
+    private var activeTextField: UITextField? = nil
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,40 +78,49 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         // viewにaddsubview
         self.view.addSubview(activityIndicatorView)
         
-        // キーボード閉じる処理
+        // キーボード処理
         configureNotification()
     }
     
-    
     // nortificationメソッド化
-       func configureNotification () {
+    func configureNotification () {
+        
            // キーボード出てくるときに発動
-           NotificationCenter.default.addObserver(self, selector: #selector(ProfViewController.keyboardWillShow(_ :)), name: UIResponder.keyboardWillShowNotification, object: nil)
+           nc.addObserver(self, selector: #selector(ProfViewController.keyboardWillShow(_ :)), name: UIResponder.keyboardWillShowNotification, object: nil)
            
            // キーボード閉じるときに発動
-           NotificationCenter.default.addObserver(self, selector: #selector(ProfViewController.keyboardWillHide(_ :)), name: UIResponder.keyboardWillHideNotification, object: nil)
+           nc.addObserver(self, selector: #selector(ProfViewController.keyboardWillHide(_ :)), name: UIResponder.keyboardWillHideNotification, object: nil)
        }
-       
-       // キーボードが呼び出される時
+
+       // キーボードが呼び出される　表示通知を受けてから
        @objc func keyboardWillShow(_ notification: NSNotification) {
+        // キーボードの大きさをとってくる
            guard let rect = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
                let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+         // 画面のサイズを取ってくる
+          let myBoundSize: CGSize = UIScreen.main.bounds.size
+          // viewcontrollerを基準にTextfieldの下辺までの距離を取得
+         var txtLimit = nameTextFiled.frame.origin.y + nameTextFiled.frame.height + 8.0
+          // ViewControllerの高さからキーボードの高さを引いた差分を取得
+         let kbdLimit = myBoundSize.height - rect.size.height
+        
            UIView.animate(withDuration: duration) {
                let transform = CGAffineTransform(translationX: 0, y: -(rect.size.height))
                self.view.transform = transform
            }
            print("keyboardwillshow発動")
        }
-       // キーボードを消す時
+
+       // キーボードを消す時 表示が消される通知
        @objc func keyboardWillHide(_ notification: NSNotification) {
-           
+
            guard let duration = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? TimeInterval else { return }
            UIView.animate(withDuration: duration) {
                self.view.transform = CGAffineTransform.identity
            }
            print("keyboardWillHideを実行")
        }
-
+    
     
     //userの情報を反映させる
     func getProfile(){
@@ -258,12 +272,20 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         }
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+           //編集中のtextfieldを保存
+            activeTextField = textField
+            return true
+    }
+    
     
     // リターンを押した時の処理
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nameTextFiled.resignFirstResponder()
         ageTextFiled.resignFirstResponder()
         introduceYourSelfTextView.resignFirstResponder()
+        //編集中のtextfieldを保存
+        activeTextField = textField
         return true
     }
     
@@ -276,6 +298,7 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     @IBAction func backButton(_ sender: Any) {
         presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
+    
     
     
     // Agetextのところは数字しか使えなくする
@@ -306,6 +329,5 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     
     
 }
-
 
 

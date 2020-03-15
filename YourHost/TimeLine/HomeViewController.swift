@@ -21,7 +21,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     var userID:String = ""
     // 更新のぐるぐる
     let refreshControl = UIRefreshControl()
-    var item:Int = 3
+    
     // 投稿情報
     var items = [NSDictionary]()
     // tableView

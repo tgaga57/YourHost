@@ -9,14 +9,14 @@
 import UIKit
 
 class MessageRoomViewController: UIViewController {
-    
-    
+    // メッセージから来たのかそれとも投稿情報画面から来たのかを見極めるカウント
     var whrereIsFromCount:Int = 0
+    
+    var message:Message = Message()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
         print("あなたはどこからきたの\(whrereIsFromCount)")
     }
     

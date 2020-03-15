@@ -49,7 +49,6 @@ class IntoroViewController: UIViewController,UIScrollViewDelegate{
             // addsubview
             scrollView.addSubview(animationView)
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

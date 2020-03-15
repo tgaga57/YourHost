@@ -176,7 +176,6 @@ class HomeTableViewCell: UITableViewCell{
 }
 
 
-
 extension HomeTableViewCell:UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
