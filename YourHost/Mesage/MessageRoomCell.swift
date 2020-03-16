@@ -1,22 +1,22 @@
 //
-//  MessageTableViewCell.swift
+//  MessageRoomCell.swift
 //  YourHost
 //
-//  Created by 志賀大河 on 2020/03/15.
+//  Created by 志賀大河 on 2020/03/16.
 //  Copyright © 2020 Taiga Shiga. All rights reserved.
 //
 
 import UIKit
 
-class MessageTableViewCell: UITableViewCell {
+class MessageRoomCell: UITableViewCell {
 
-    // 送信者の顔写真
-    @IBOutlet weak var senderImage: UIImageView!
-    // 送信者の名前
-    @IBOutlet weak var senderNameLabel: UILabel!
-    // メッセージの内容
-    @IBOutlet weak var messageTextView: UITextView!
-
+    // userImage
+    @IBOutlet weak var messageUserImage: UIImageView!
+    // メッセージしている人の名前
+    @IBOutlet weak var messageUserName: UILabel!
+    // meesage内容
+    @IBOutlet weak var messageLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

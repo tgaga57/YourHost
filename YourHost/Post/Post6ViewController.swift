@@ -330,6 +330,7 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
         // タイムラインで使用するため
         var uName:String = ""
         var uImage:String = ""
+        
         let currentUserProfile = db.collection("users").document(uid)
         currentUserProfile.getDocument { (snapshot, error) in
             if let error = error{
@@ -396,8 +397,8 @@ class Post6ViewController: UIViewController,UIImagePickerControllerDelegate,UINa
             ]
             
             // -----  userのポストにはIDを入れる　------------
-            // 後で作る自分の投稿を確認できるタイムライン
-            // realtime database
+            // 後で作る自分の投稿を確認できるタイムライン///////////////////////////////////////////////////////////////////////////////////////
+            // 後で確認
             let userPostUserID  = Database.database().reference().child("userPostID").child(uid)
             userPostUserID.setValue(randamID) { (error, result) in
                 if error != nil {

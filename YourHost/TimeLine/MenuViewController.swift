@@ -76,6 +76,7 @@ class MenuViewController: UITableViewController {
             let messageVC = segue.destination as! MessageRoomViewController
             // どこからきたかの情報を与える
             messageVC.whrereIsFromCount = whereIsGoingCount
+            messageVC.message.yourUID = userId
         }
     }
     

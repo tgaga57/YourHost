@@ -387,13 +387,7 @@ class PostInformationViewController: UIViewController,UIScrollViewDelegate {
             return;
         } else {
            performSegue(withIdentifier: "chat", sender: nil)
-            // ここでチャットIDを作成する///////////////////////////////
-            let chat = [postUserID,userID].sorted()
-            let chatID = chat[0] + chat[1]
-            let chatDB = Database.database().reference().child("Chats").child(chatID)
             
-            
-            chatDB.
         }
     }
     

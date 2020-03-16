@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Firebase
 
 
 class Message {
@@ -23,4 +22,6 @@ class Message {
     var yourUID:String = ""
     // 投稿者のIDでこれからチャットする人のID
     var postUserID = ""
+    // chatID
+    var chatID = ""
 }

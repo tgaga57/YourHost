@@ -149,9 +149,8 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
     // 新規登録ボタン
     @IBAction func createAccount(_ sender: Any) {
       
-            // ここは本当にできているのか確認する必要がある　//
-        
-            // emailが既に使用されていないかの確認
+            // ここは本当にできているのか確認する必要がある //
+            // emailが既に使用されていないかの確認 //
             if emailTextField.text == Auth.auth().currentUser?.email  {
                 print("このメールアドレスは既に使われています")
                 createAlert(title: "Emailが既に使用されています", message: "違うEmailを使用してください")
@@ -169,7 +168,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                 // nilないかチェック
                 if error != nil{
                     self.showErrorAlert(error: error)
-                }else{
+                   }else{
                     // uIDをオプショナルバインディング
                     guard let uID = result?.user.uid else {
                         return
@@ -196,7 +195,7 @@ class NewMemberSettingViewController: UIViewController,UITextFieldDelegate,UIIma
                             self.showErrorAlert(error: error)
                             print("ユーザー登録失敗")
                         } else {
-                            print("ユーザー登録成功")
+                           print("ユーザー登録成功")
                             // タイムラインへ遷移
                             // 遷移する先
                             let storyboard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)

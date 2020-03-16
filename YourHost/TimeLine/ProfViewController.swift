@@ -84,10 +84,8 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
     
     // nortificationメソッド化
     func configureNotification () {
-        
            // キーボード出てくるときに発動
            nc.addObserver(self, selector: #selector(ProfViewController.keyboardWillShow(_ :)), name: UIResponder.keyboardWillShowNotification, object: nil)
-           
            // キーボード閉じるときに発動
            nc.addObserver(self, selector: #selector(ProfViewController.keyboardWillHide(_ :)), name: UIResponder.keyboardWillHideNotification, object: nil)
        }
