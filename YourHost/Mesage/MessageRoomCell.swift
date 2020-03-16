@@ -14,12 +14,13 @@ class MessageRoomCell: UITableViewCell {
     @IBOutlet weak var messageUserImage: UIImageView!
     // メッセージしている人の名前
     @IBOutlet weak var messageUserName: UILabel!
+    // メッセージ
+    @IBOutlet weak var messageTextView: UITextView!
     // meesage内容
-    @IBOutlet weak var messageLabel: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

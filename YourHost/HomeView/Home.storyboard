@@ -987,19 +987,18 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Dih-Xu-vd8" id="tck-67-Rmj"/>
-                        <segue destination="YSh-ca-NGR" kind="presentation" id="qma-E8-eOx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Gm-Rn-Jxu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2668" y="131.78410794602701"/>
+            <point key="canvasLocation" x="2086" y="157"/>
         </scene>
         <!--Message View Controller-->
         <scene sceneID="DAt-fZ-fVf">
             <objects>
-                <viewController id="YSh-ca-NGR" customClass="MessageViewController" customModule="YourHost" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="message" id="YSh-ca-NGR" customClass="MessageViewController" customModule="YourHost" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bOn-F3-5e9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Tr-kP-ciS">
@@ -1032,7 +1031,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="z4n-J0-foJ">
-                                <rect key="frame" x="0.0" y="81" width="375" height="503"/>
+                                <rect key="frame" x="0.0" y="81" width="375" height="523"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="messageCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="83" id="HXb-gi-FgY" customClass="MessageTableViewCell" customModule="YourHost" customModuleProvider="target">
@@ -1046,7 +1045,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVu-Ov-A7i">
-                                <rect key="frame" x="0.0" y="584" width="375" height="63"/>
+                                <rect key="frame" x="0.0" y="604" width="375" height="63"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="こんにちは初めまして！hogeです！よろしくね！" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zZ0-v3-qGB">
                                         <rect key="frame" x="8" y="7" width="292" height="48"/>
@@ -1098,7 +1097,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yf3-VO-BYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3552.8000000000002" y="131.78410794602701"/>
+            <point key="canvasLocation" x="3423" y="197"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="wBH-H7-lfd">
@@ -2801,7 +2800,6 @@
         <image name="丸" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qma-E8-eOx"/>
-        <segue reference="R7A-oQ-caj"/>
+        <segue reference="tvq-cc-zg2"/>
     </inferredMetricsTieBreakers>
 </document>

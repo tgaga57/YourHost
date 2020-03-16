@@ -33,8 +33,8 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
         print("chat")
         print(message.thePostID)
         print(message.postUserID)
@@ -65,6 +65,7 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
         // チャットIDに格納
         message.chatID = chatID
         
+        tableView.allowsSelection = false
     }
     
     
@@ -113,7 +114,8 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
         cell.messageTextView.text = chatArray[indexPath.row].message
         // senderName
         cell.senderNameLabel.text = chatArray[indexPath.row].senderName
-        
+        // 角を丸くする
+        cell.messageTextView.layer.cornerRadius = 10.0
         
         // userImageをとってくる64String型のため変換が必要
         let uImage64String = chatArray[indexPath.row].userProfImage
@@ -149,9 +151,9 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
     }
     
     
-    //送信ボタンが押された時
+    //　送信ボタンが押された時
+    //　メッセージを作成書き込み
     @IBAction func sendAction(_ sender: Any) {
-        
         let relDB = Database.database()
         // chatIDがあるのか確認する！！！
         // もしあったら作らせない

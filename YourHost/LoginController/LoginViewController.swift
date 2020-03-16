@@ -60,7 +60,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         // テキストフィールドの角を丸く
         emailTextField.layer.cornerRadius = 10
         passWordTextField.layer.cornerRadius = 10
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,7 +100,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         activeIndicatorView.color = .green
         activeIndicatorView.startAnimating()
         
-        
+    
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passWordTextField.text!) { (usr, error) in
             if error != nil {
                 print("ログイン失敗")
