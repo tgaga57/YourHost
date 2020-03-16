@@ -66,7 +66,7 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
         message.chatID = chatID
         
     }
-
+    
     
     func configureNotification() {
         // キーボード出てくるときに発動
@@ -114,7 +114,7 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
         // senderName
         cell.senderNameLabel.text = chatArray[indexPath.row].senderName
         
-       
+        
         // userImageをとってくる64String型のため変換が必要
         let uImage64String = chatArray[indexPath.row].userProfImage
         //　NSData型に変更
@@ -129,9 +129,9 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
         
         // 自分と相手でテキストの色を変える
         if cell.senderImage.image == decodeProImage {
-           cell.messageTextView.backgroundColor = .init(red: 0, green: 55, blue: 33, alpha: 0.9)
+            cell.messageTextView.backgroundColor = .init(red: 0, green: 55, blue: 33, alpha: 0.9)
         } else {
-           cell.messageTextView.backgroundColor = .init(red: 3, green: 45, blue: 32, alpha: 0.9)
+            cell.messageTextView.backgroundColor = .init(red: 3, green: 45, blue: 32, alpha: 0.9)
         }
         
         return cell
@@ -148,47 +148,54 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
         self.view.endEditing(true)
     }
     
+    
     //送信ボタンが押された時
     @IBAction func sendAction(_ sender: Any) {
         
-        // ここでチャットIDを作成する///////////////////////////////
-        // 送信者のところにメッセージろルームを作成
-        let chat = [message.postUserID,message.yourUID].sorted()
-        let chatID = chat[0] + chat[1]
-        // チャットIDに格納
-            message.chatID = chatID
-               
-        
-        // 送信者のメッセージデータを作成
-        let senderData = ["opponentID":message.postUserID,"thisPostId":message.thePostID,"chatID":message.chatID]
-        let senderChatDB = Database.database().reference().child("yourChatDB").child(message.yourUID).childByAutoId()
-        senderChatDB.setValue(senderData) { (error, result) in
-            if error != nil {
-                print(error?.localizedDescription as Any)
-                print("エラ-")
-            } else if result == senderChatDB{
-            print("データが存在するよ")
+        let relDB = Database.database()
+        // chatIDがあるのか確認する！！！
+        // もしあったら作らせない
+        relDB.reference().child("yourChatDB").child(message.yourUID).observe(.value) { (snapshot) in
+            if snapshot.exists(){
+                print("chatIDのデータが存在するから作成致しません")
+                // データがなかったら
             }else {
-                print("作成成功")
-            }
-        }
-        
-        
-        // メッセージを受けっとった相手にもここのメッセージを送る
-        let reciverData = ["opponentID":message.yourUID,"thisPostId":message.thePostID,"chatID":message.chatID]
-        //　受け取り側にメッセージロームを作成
-        let reciceverChatDB = Database.database().reference().child("yourChatDB").child(message.postUserID).childByAutoId()
-        reciceverChatDB.setValue(reciverData) { (error, result) in
-            if error != nil {
-                print(error?.localizedDescription as Any)
-                print("error")
-            }else {
-                print("作成成功")
+                // ここでチャットIDを作成する///////////////////////////////
+                // 送信者のところにメッセージろルームを作成
+                let chat = [self.message.postUserID,self.message.yourUID].sorted()
+                let chatID = chat[0] + chat[1]
+                // チャットIDに格納
+                self.message.chatID = chatID
+                // 送信者のメッセージデータを作成
+                let senderData = ["opponentID":self.message.postUserID,"thisPostId":self.message.thePostID,"chatID":self.message.chatID]
+                let senderChatDB = relDB.reference().child("yourChatDB").child(self.message.yourUID).childByAutoId()
+                senderChatDB.setValue(senderData) { (error, result) in
+                    if error != nil {
+                        print(error?.localizedDescription as Any)
+                        print("エラ-")
+                    } else if result == senderChatDB{
+                        print("データが存在するよ")
+                    }else {
+                        print("作成成功")
+                    }
+                }
+                // メッセージを受けっとった相手にもここのメッセージを送る
+                let reciverData = ["opponentID":self.message.yourUID,"thisPostId":self.message.thePostID,"chatID":self.message.chatID]
+                //　受け取り側にメッセージロームを作成
+                let reciceverChatDB = relDB.reference().child("yourChatDB").child(self.message.postUserID).childByAutoId()
+                reciceverChatDB.setValue(reciverData) { (error, result) in
+                    if error != nil {
+                        print(error?.localizedDescription as Any)
+                        print("error")
+                    }else {
+                        print("作成成功")
+                    }
+                }
             }
         }
         
         // メッセージ
-        let chatDB = Database.database().reference().child("chats").child(message.chatID)
+        let chatDB = relDB.reference().child("chats").child(message.chatID)
         // userのプロフィールイメージをとってくる
         let currentUserProfile = db.collection("users").document(message.yourUID)
         currentUserProfile.getDocument { (snapshot, error) in
@@ -206,7 +213,7 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
             
             chatDB.childByAutoId().setValue(messageInfo) { (error, resultDB) in
                 if error != nil{
-                print("error\(error?.localizedDescription)")
+                    print("error\(error?.localizedDescription)")
                 }else {
                     print("送信完了")
                     self.messageTextView.isEditable = true
@@ -219,14 +226,13 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
     
     // データを取ってくる //更新
     func fetchData(){
-        
         // ここでチャットIDを作成する///////////////////////////////
         // 送信者のところにメッセージろルームを作成
         let chat = [message.postUserID,message.yourUID].sorted()
         let chatID = chat[0] + chat[1]
         // チャットIDに格納
         message.chatID = chatID
-                      
+        
         let fethchDataRef = Database.database().reference().child("chats").child(message.chatID)
         // データを取ってくる
         fethchDataRef.observe(.childAdded) { (snapShot) in
@@ -249,22 +255,22 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
         }
     }
     
-   // 情報を受け渡す
-      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-          
+    // 情報を受け渡す
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "messageRoom" {
-           let messageRooomVC = segue.destination as! MessageRoomViewController
+            let messageRooomVC = segue.destination as! MessageRoomViewController
             // userIDを送る
             messageRooomVC.message.yourUID = message.yourUID
         }
-      }
+    }
     
     
     //
     @IBAction func Back(_ sender: Any) {
         // 遷移
         performSegue(withIdentifier: "messageRoom", sender: nil)
-       
+        
     }
     
 }
