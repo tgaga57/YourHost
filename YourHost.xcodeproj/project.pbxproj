@@ -16,6 +16,7 @@
 		B1470B4A241DD9590054E126 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1470B49241DD9590054E126 /* Message.swift */; };
 		B1470B4F241DF4F80054E126 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1470B4D241DF4F80054E126 /* MessageTableViewCell.swift */; };
 		B1470B50241DF4F80054E126 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1470B4E241DF4F80054E126 /* MessageTableViewCell.xib */; };
+		B147E6DB2420C3FA00313C61 /* OpponentPostInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B147E6DA2420C3FA00313C61 /* OpponentPostInfoViewController.swift */; };
 		B151401E24162370002C45DA /* PostInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B151401D24162370002C45DA /* PostInformationViewController.swift */; };
 		B1518B4A240F8A0A0015962A /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1518B49240F8A0A0015962A /* HomeTableViewCell.swift */; };
 		B15259BC241F364300AF06AA /* MessageRoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15259BA241F364300AF06AA /* MessageRoomCell.swift */; };
@@ -55,6 +56,7 @@
 		B1470B49241DD9590054E126 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		B1470B4D241DF4F80054E126 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		B1470B4E241DF4F80054E126 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
+		B147E6DA2420C3FA00313C61 /* OpponentPostInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpponentPostInfoViewController.swift; sourceTree = "<group>"; };
 		B151401D24162370002C45DA /* PostInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInformationViewController.swift; sourceTree = "<group>"; };
 		B1518B49240F8A0A0015962A /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		B15259BA241F364300AF06AA /* MessageRoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRoomCell.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				B1470B40241B5D900054E126 /* MessageRoomViewController.swift */,
 				B15259BA241F364300AF06AA /* MessageRoomCell.swift */,
 				B15259BB241F364300AF06AA /* MessageRoomCell.xib */,
+				B147E6DA2420C3FA00313C61 /* OpponentPostInfoViewController.swift */,
 			);
 			path = Mesage;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				B1748C3F240139DF00FB8F40 /* Post3ViewController.swift in Sources */,
 				B102059E23EBD27D003F01AC /* ProfViewController.swift in Sources */,
 				B140D22D2400FC8400F8B0FF /* Post2ViewController.swift in Sources */,
+				B147E6DB2420C3FA00313C61 /* OpponentPostInfoViewController.swift in Sources */,
 				B16CE0432407831400FB5BF3 /* Post5ViewController.swift in Sources */,
 				B15259BC241F364300AF06AA /* MessageRoomCell.swift in Sources */,
 				B162932423E29DC800C8463A /* AppDelegate.swift in Sources */,

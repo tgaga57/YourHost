@@ -23,10 +23,11 @@ class PostInformationViewController: UIViewController,UIScrollViewDelegate {
     var ref: DocumentReference!
     // インスタンス化
     let db = Firestore.firestore()
-    
     // メッセージメソッド
     let message = Message()
-    
+     
+    // 遷移をどこからしてきたかのもの
+    var count = 1
     //投稿写真
     @IBOutlet weak var postImage1: UIImageView!
     @IBOutlet weak var postImage2: UIImageView!
@@ -166,8 +167,6 @@ class PostInformationViewController: UIViewController,UIScrollViewDelegate {
             self.amenities(amenitie: necceities, wifi: wifi, kitchen: kitchen, heater: heater, aircon: aircon, TV: tv, washingMachine: laundry, dryMachine: dry, bath: barhroom)
         }
     }
-    
-    
     
     // ゲストのベッド数とかのところ
     func prepareForGuest(guestBed:String,guestBedRoom:String,guestNumber:String){
@@ -373,11 +372,13 @@ class PostInformationViewController: UIViewController,UIScrollViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chat"{
         let chatVC = segue.destination as! MessageViewController
+            // 情報を入れてていく
             message.postUserID = postUserID
             message.thePostID = thisPostID
             message.yourUID = userID
             // 情報を受け渡す
             chatVC.message = message
+            chatVC.whrereIsfForm = count
         }
     }
     
@@ -387,7 +388,6 @@ class PostInformationViewController: UIViewController,UIScrollViewDelegate {
             return;
         } else {
            performSegue(withIdentifier: "chat", sender: nil)
-            
         }
     }
     
@@ -395,7 +395,6 @@ class PostInformationViewController: UIViewController,UIScrollViewDelegate {
     // back
     @IBAction func back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        
     }
 }
 

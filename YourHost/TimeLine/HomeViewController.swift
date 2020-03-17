@@ -47,6 +47,8 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         super.viewWillAppear(animated)
         // データの更新
         refresh()
+        // navigationbarを消す
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     // 更新

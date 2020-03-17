@@ -26,6 +26,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     let db = Firestore.firestore()
     
+    let DBref = Database.database().reference()
     // email
     @IBOutlet weak var emailTextField: UITextField!
     // pasword
@@ -60,27 +61,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         // テキストフィールドの角を丸く
         emailTextField.layer.cornerRadius = 10
         passWordTextField.layer.cornerRadius = 10
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // navigationbarを消す
         self.navigationController?.isNavigationBarHidden = true
-        
-        // Add a second document with a generated ID.
-        ref = db.collection("users").document("Post").collection("name").addDocument(data: [
-            "first": "Alan",
-            "middle": "Mathison",
-            "last": "Turing",
-            "born": 1912
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(self.ref!.documentID)")
-            }
-        }
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
