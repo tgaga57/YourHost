@@ -25,7 +25,6 @@ class PostInformationViewController: UIViewController,UIScrollViewDelegate {
     let db = Firestore.firestore()
     // メッセージメソッド
     let message = Message()
-     
     // 遷移をどこからしてきたかのもの
     var count = 1
     //投稿写真

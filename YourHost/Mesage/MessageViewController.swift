@@ -31,6 +31,8 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
     // firestore
     let db = Firestore.firestore()
     
+    @IBOutlet weak var bookButton: UIButton!
+    
     var whrereIsfForm:Int = 0
     
     override func viewDidLoad() {
@@ -40,7 +42,6 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
         print(message.thePostID)
         print(message.postUserID)
         print(message.yourUID)
-        print(message.senderName)
         print(whrereIsfForm)
         
         tableView.dataSource = self
@@ -249,8 +250,22 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
             }
         }
         
+       
+       
+    // 投稿情報を確認
+    @IBAction func toinfo(_ sender: Any) {
         
-        //
+        let opponentPostInfo = self.storyboard?.instantiateViewController(withIdentifier: "OpponentPostInfo") as! OpponentPostInfoViewController
+        opponentPostInfo.message.postUserID = message.postUserID
+        opponentPostInfo.message.thePostID = message.thePostID
+        
+        opponentPostInfo.modalPresentationStyle = .fullScreen
+        present(opponentPostInfo, animated: true, completion: nil)
+    }
+    
+    
+    
+        // 戻る
         @IBAction func Back(_ sender: Any) {
             // もしメッセージをしにきたのが投稿情報の方からだったら
             if whrereIsfForm == 1 {

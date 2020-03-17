@@ -97,10 +97,6 @@ class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableV
         nextVC.message.thePostID = messageRoomArray[indexPath.row].thePostID
         // PostuserID
         nextVC.message.postUserID = messageRoomArray[indexPath.row].postUserID
-        // メッセージしている相手の名前
-        nextVC.message.senderName = indextPathRowUserName
-        
-        print("oooooooooooooooooooooooo\(indextPathRowUserName)")
         // your userID
         nextVC.message.yourUID = message.yourUID
          // sytle
