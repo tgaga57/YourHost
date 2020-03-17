@@ -30,7 +30,7 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
     var message = Message()
     // firestore
     let db = Firestore.firestore()
-    
+    // bookButton
     @IBOutlet weak var bookButton: UIButton!
     
     var whrereIsfForm:Int = 0
@@ -63,6 +63,16 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
         fetchData()
         
         tableView.allowsSelection = false
+        
+        // bookbuttonはホストしか見れないようにする
+        if message.postUserID == message.yourUID {
+            bookButton.isHidden = false
+        }else {
+            // ボタンを消す、使用もふか
+            bookButton.isHidden = true
+            bookButton.isEnabled = false
+        }
+        
     }
     
     
