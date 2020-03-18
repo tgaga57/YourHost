@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import NVActivityIndicatorView
 import FirebaseFirestore
+import FirebaseAuth
 
 // textfieldをカスタム
 extension UITextField {
@@ -26,7 +27,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     let db = Firestore.firestore()
     
-    let DBref = Database.database().reference()
     // email
     @IBOutlet weak var emailTextField: UITextField!
     // pasword
@@ -87,7 +87,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
         activeIndicatorView.color = .green
         activeIndicatorView.startAnimating()
         
-    
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passWordTextField.text!) { (usr, error) in
             if error != nil {
                 print("ログイン失敗")

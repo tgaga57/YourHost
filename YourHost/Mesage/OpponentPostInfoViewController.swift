@@ -18,7 +18,6 @@ class OpponentPostInfoViewController: UIViewController {
     let db = Firestore.firestore()
     // メッセージメソッド
     let message = Message()
-    
     // スクロール横だけにするため
     var posY: CGFloat!
     //投稿写真
@@ -163,7 +162,6 @@ class OpponentPostInfoViewController: UIViewController {
         houseCategories.text = category
         typeOfHouse.text = type
     }
-    
     // 部屋のカテゴリー
     func availableRoomType(roomNumber:String) {
         switch roomNumber {
@@ -357,13 +355,14 @@ class OpponentPostInfoViewController: UIViewController {
 }
 
 extension OpponentPostInfoViewController:UIScrollViewDelegate{
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
-        self.pageControl.currentPage = index
-        self.postScrollview.contentOffset.y = posY
-    }
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        self.postScrollview.contentOffset.x = posY
-    }
+     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+           let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
+           self.pageControl.currentPage = index
+           self.postScrollview.contentOffset.y = posY
+       }
+       
+       func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+           posY = self.postScrollview.contentOffset.y
+       }
     
 }

@@ -372,6 +372,7 @@ class PostInformationViewController: UIViewController{
             // 情報を入れてていく postID useID 相手の名前　相手のid
             message.postUserID = postUserID
             message.thePostID = thisPostID
+            message.opppnentUserID = postUserID
             message.yourUID = userID
             message.opponentName = postUname
             // 情報を受け渡す

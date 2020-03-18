@@ -26,4 +26,6 @@ class Message {
     var chatID = ""
     // 相手の名前
     var opponentName:String = ""
+    // 相手のID
+    var opppnentUserID:String = ""
 }

@@ -17,6 +17,11 @@
 		B1470B4F241DF4F80054E126 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1470B4D241DF4F80054E126 /* MessageTableViewCell.swift */; };
 		B1470B50241DF4F80054E126 /* MessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1470B4E241DF4F80054E126 /* MessageTableViewCell.xib */; };
 		B147E6DB2420C3FA00313C61 /* OpponentPostInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B147E6DA2420C3FA00313C61 /* OpponentPostInfoViewController.swift */; };
+		B147E6E02421E58600313C61 /* YourbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B147E6DF2421E58600313C61 /* YourbookViewController.swift */; };
+		B147E6E22421E8AE00313C61 /* booker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B147E6E12421E8AE00313C61 /* booker.storyboard */; };
+		B147E6E52421E8E600313C61 /* BookerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B147E6E42421E8E600313C61 /* BookerViewController.swift */; };
+		B147E6E82421EA5C00313C61 /* yourBooking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B147E6E72421EA5C00313C61 /* yourBooking.storyboard */; };
+		B147E6EA2421EA8400313C61 /* BookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B147E6E92421EA8400313C61 /* BookingViewController.swift */; };
 		B151401E24162370002C45DA /* PostInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B151401D24162370002C45DA /* PostInformationViewController.swift */; };
 		B1518B4A240F8A0A0015962A /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1518B49240F8A0A0015962A /* HomeTableViewCell.swift */; };
 		B15259BC241F364300AF06AA /* MessageRoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15259BA241F364300AF06AA /* MessageRoomCell.swift */; };
@@ -57,6 +62,11 @@
 		B1470B4D241DF4F80054E126 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		B1470B4E241DF4F80054E126 /* MessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageTableViewCell.xib; sourceTree = "<group>"; };
 		B147E6DA2420C3FA00313C61 /* OpponentPostInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpponentPostInfoViewController.swift; sourceTree = "<group>"; };
+		B147E6DF2421E58600313C61 /* YourbookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourbookViewController.swift; sourceTree = "<group>"; };
+		B147E6E12421E8AE00313C61 /* booker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = booker.storyboard; sourceTree = "<group>"; };
+		B147E6E42421E8E600313C61 /* BookerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookerViewController.swift; sourceTree = "<group>"; };
+		B147E6E72421EA5C00313C61 /* yourBooking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = yourBooking.storyboard; sourceTree = "<group>"; };
+		B147E6E92421EA8400313C61 /* BookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewController.swift; sourceTree = "<group>"; };
 		B151401D24162370002C45DA /* PostInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInformationViewController.swift; sourceTree = "<group>"; };
 		B1518B49240F8A0A0015962A /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		B15259BA241F364300AF06AA /* MessageRoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRoomCell.swift; sourceTree = "<group>"; };
@@ -134,8 +144,29 @@
 		B147E6DC2421BD7900313C61 /* book */ = {
 			isa = PBXGroup;
 			children = (
+				B147E6DF2421E58600313C61 /* YourbookViewController.swift */,
+				B147E6E62421EA2D00313C61 /* yourbooking */,
+				B147E6E32421E8C700313C61 /* booker */,
 			);
 			path = book;
+			sourceTree = "<group>";
+		};
+		B147E6E32421E8C700313C61 /* booker */ = {
+			isa = PBXGroup;
+			children = (
+				B147E6E12421E8AE00313C61 /* booker.storyboard */,
+				B147E6E42421E8E600313C61 /* BookerViewController.swift */,
+			);
+			path = booker;
+			sourceTree = "<group>";
+		};
+		B147E6E62421EA2D00313C61 /* yourbooking */ = {
+			isa = PBXGroup;
+			children = (
+				B147E6E72421EA5C00313C61 /* yourBooking.storyboard */,
+				B147E6E92421EA8400313C61 /* BookingViewController.swift */,
+			);
+			path = yourbooking;
 			sourceTree = "<group>";
 		};
 		B162931723E29DC800C8463A = {
@@ -306,11 +337,13 @@
 				B1A9BE1523FD402A00E398F2 /* 3.json in Resources */,
 				B162932D23E29DC900C8463A /* Assets.xcassets in Resources */,
 				B10205A623ED6729003F01AC /* GoogleService-Info.plist in Resources */,
+				B147E6E82421EA5C00313C61 /* yourBooking.storyboard in Resources */,
 				B1470B50241DF4F80054E126 /* MessageTableViewCell.xib in Resources */,
 				B1FE7C2923E2DCF800B1AF3C /* 2.json in Resources */,
 				B1A2129323EA98860090E467 /* Home.storyboard in Resources */,
 				B162932B23E29DC800C8463A /* Main.storyboard in Resources */,
 				B1BECA6123E2DA3D000CE5AD /* 1.json in Resources */,
+				B147E6E22421E8AE00313C61 /* booker.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,12 +423,15 @@
 				B1470B41241B5D900054E126 /* MessageRoomViewController.swift in Sources */,
 				B1748C3F240139DF00FB8F40 /* Post3ViewController.swift in Sources */,
 				B102059E23EBD27D003F01AC /* ProfViewController.swift in Sources */,
+				B147E6EA2421EA8400313C61 /* BookingViewController.swift in Sources */,
+				B147E6E52421E8E600313C61 /* BookerViewController.swift in Sources */,
 				B140D22D2400FC8400F8B0FF /* Post2ViewController.swift in Sources */,
 				B147E6DB2420C3FA00313C61 /* OpponentPostInfoViewController.swift in Sources */,
 				B16CE0432407831400FB5BF3 /* Post5ViewController.swift in Sources */,
 				B15259BC241F364300AF06AA /* MessageRoomCell.swift in Sources */,
 				B162932423E29DC800C8463A /* AppDelegate.swift in Sources */,
 				B162932623E29DC800C8463A /* SceneDelegate.swift in Sources */,
+				B147E6E02421E58600313C61 /* YourbookViewController.swift in Sources */,
 				B1470B4F241DF4F80054E126 /* MessageTableViewCell.swift in Sources */,
 				B1B7318923E67F950081D0A7 /* NewMemberSettingViewController.swift in Sources */,
 				B1470B3F241B44A80054E126 /* MessageViewController.swift in Sources */,

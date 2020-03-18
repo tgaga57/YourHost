@@ -40,9 +40,10 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
         super.viewDidLoad()
         print("chat")
         print("ポストiDですよ\(message.thePostID)")
-        print("相手のユーザーIDですよ\(message.postUserID)")
+        print("このメッセージしているルームの投句ID\(message.postUserID)")
         print("あなたのIDですよ\(message.yourUID)")
         print("相手の名前\(message.opponentName)")
+        print("相手のuserID\(message.opppnentUserID)")
         print(whrereIsfForm)
         
         tableView.dataSource = self
@@ -147,7 +148,7 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
         return 120
     }
     
-    // 他のびviewを触ったら閉じる
+    // 他のviewを触ったら閉じる
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -176,16 +177,15 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
             let senderName = data["userName"] as! String
             // 送信者の写真
             let uImage = data["userImage"] as! String
-            // メッセージ内容など送信者の情報を入れていく
             
+            // メッセージ内容など送信者の情報を入れていく
             let messageInfo = ["message":self.messageTextView.text!,"senderName":senderName,"userImage":uImage,"senderID":self.message.yourUID]
             chatDB.childByAutoId().setValue(messageInfo) { (error, resultDB) in
                 if error != nil{
                     print("error\(error?.localizedDescription)")
                 }else {
-                    
                     // 送信者のメッセージデータを作成
-                    let senderData = ["opponentID":self.message.postUserID,"thisPostId":self.message.thePostID,"chatID":chatID,"opponentName":self.message.opponentName]
+                    let senderData = ["opponentID":self.message.opppnentUserID,"thisPostId":self.message.thePostID,"chatID":chatID,"opponentName":self.message.opponentName,"postUserID":self.message.postUserID]
                     let senderChatDB = relDB.reference().child("yourChatDB").child(self.message.yourUID).child(chatID)
                     senderChatDB.setValue(senderData) { (error, result) in
                         if error != nil {
@@ -199,7 +199,7 @@ class MessageViewController: UIViewController,UITextFieldDelegate,UITableViewDat
                     }
 
                     // メッセージを受けっとった相手にもメッセージルームを作成
-                    let reciverData = ["opponentID":self.message.yourUID,"thisPostId":self.message.thePostID,"chatID":chatID,"opponentName":senderName]
+                    let reciverData = ["opponentID":self.message.yourUID,"thisPostId":self.message.thePostID,"chatID":chatID,"opponentName":senderName,"postUserID":self.message.postUserID]
                     //　受け取り側にメッセージロームを作成
                     let reciceverChatDB = relDB.reference().child("yourChatDB").child(self.message.postUserID).child(chatID)
                     reciceverChatDB.setValue(reciverData) { (error, result) in

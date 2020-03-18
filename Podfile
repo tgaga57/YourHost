@@ -16,6 +16,6 @@ target 'YourHost' do
   pod 'Firebase/Database'
   pod 'NVActivityIndicatorView'
   pod 'SDWebImage'
-
+  pod 'XLPagerTabStrip'
   
  end

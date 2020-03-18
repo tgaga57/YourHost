@@ -35,6 +35,7 @@ class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableV
         fetchMessageOponentData()
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // メッセージしている人の数を返してあげる
         return messageRoomArray.count
@@ -48,7 +49,7 @@ class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableV
         cell.messageUserImage.layer.cornerRadius = 25
         cell.messageUserImage.contentMode = .scaleAspectFill
         
-        let messageRef  = db.collection("users").document(messageRoomArray[indexPath.row].postUserID)
+        let messageRef  = db.collection("users").document(messageRoomArray[indexPath.row].opppnentUserID)
         messageRef.getDocument { (Snapshot, error) in
             if let error = error {
                 print("\(error.localizedDescription)")
@@ -86,16 +87,17 @@ class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         print("\(indexPath.row)番目が選択されました")
         let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "message") as! MessageViewController
         // セルのrow番目をとってくる   /////
         // postID
         nextVC.message.thePostID = messageRoomArray[indexPath.row].thePostID
         // PostuserID
-        nextVC.message.postUserID = messageRoomArray[indexPath.row].postUserID
+        nextVC.message.opppnentUserID = messageRoomArray[indexPath.row].opppnentUserID
         // opponentName
         nextVC.message.opponentName = messageRoomArray[indexPath.row].opponentName
+        // postUserID
+        nextVC.message.postUserID = messageRoomArray[indexPath.row].postUserID
         // your userID
         nextVC.message.yourUID = message.yourUID
          // sytle
@@ -125,14 +127,18 @@ class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableV
             let thisPostID = snapData.value(forKey: "thisPostId") as! String
             let chatID = snapData.value(forKey: "chatID") as! String
             let opponentUesrName = snapData.value(forKey: "opponentName") as! String
+            let postUserID = snapData.value(forKey: "postUserID") as! String
             // messgeメソッドを呼び出す
             let message = Message()
-            // userID
-            message.postUserID = opponentUserID
+            // 相手のuserID
+            message.opppnentUserID = opponentUserID
             // chatID
             message.chatID =  chatID
             // postID
             message.thePostID = thisPostID
+            // postUID
+            message.postUserID = postUserID
+            // messa
             // opponetUserName
             message.opponentName = opponentUesrName
             self.messageRoomArray.append(message)
