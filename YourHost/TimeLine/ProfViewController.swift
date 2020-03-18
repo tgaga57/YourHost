@@ -297,8 +297,6 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
         presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
-    
-    
     // Agetextのところは数字しか使えなくする
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
                // 年齢のところのkeybordは数字しか打てないようにする
@@ -323,9 +321,5 @@ class ProfViewController: UIViewController,UITextFieldDelegate,UIImagePickerCont
                }
                return true
            }
-    
-    
-    
 }
-
 

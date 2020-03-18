@@ -11,63 +11,64 @@ import Firebase
 import MapKit
 
 class OpponentPostInfoViewController: UIViewController {
-
-       // storage用
-       var ref: DocumentReference!
-       // インスタンス化
-       let db = Firestore.firestore()
-       // メッセージメソッド
-       let message = Message()
-       
     
+    // storage用
+    var ref: DocumentReference!
+    // インスタンス化
+    let db = Firestore.firestore()
+    // メッセージメソッド
+    let message = Message()
+    
+    // スクロール横だけにするため
+    var posY: CGFloat!
     //投稿写真
-       @IBOutlet weak var postImage1: UIImageView!
-       @IBOutlet weak var postImage2: UIImageView!
-       @IBOutlet weak var postImage3: UIImageView!
-       @IBOutlet weak var postImage4: UIImageView!
-       
-       // 投稿者のprofile Image
-       @IBOutlet weak var postUserImage: UIImageView!
-       // pagecontrol
-       @IBOutlet weak var pageControl: UIPageControl!
-       // 投稿者の名前
-       @IBOutlet weak var postUserName: UILabel!
-       // 場所
-       @IBOutlet weak var locationName: UILabel!
-       // 地図
-       @IBOutlet weak var location: MKMapView!
-       // 受け入れ開始日
-       @IBOutlet weak var startDay: UILabel!
-       // 受け入れ終了日
-       @IBOutlet weak var lasdDay: UILabel!
-       // カテゴリー
-       @IBOutlet weak var houseCategories: UILabel!
-       // 住宅タイプ
-       @IBOutlet weak var typeOfHouse: UILabel!
-       // ゲストが使える部屋
-       @IBOutlet weak var guestCanUseRoom: UILabel!
-       // ゲストの定員数
-       @IBOutlet weak var numberOfGuest: UILabel!
-       // ゲストの寝室数
-       @IBOutlet weak var forGuestBedRoom: UILabel!
-       // ゲスト用のベッド数
-       @IBOutlet weak var forGuestBed: UILabel!
-       // ゲストへのメッセージ
-       @IBOutlet weak var messageToGuest: UITextView!
-       
-       // scrollview
-       @IBOutlet weak var postScrollview: UIScrollView!
-       
-       //アメニティ
-       @IBOutlet weak var necessitiesButton: UIButton!
-       @IBOutlet weak var wifiButton: UIButton!
-       @IBOutlet weak var kitchenButton: UIButton!
-       @IBOutlet weak var heatingButton: UIButton!
-       @IBOutlet weak var AirConButron: UIButton!
-       @IBOutlet weak var tvButton: UIButton!
-       @IBOutlet weak var laundryButton: UIButton!
-       @IBOutlet weak var dryButton: UIButton!
-       @IBOutlet weak var bathroomButton: UIButton!
+    @IBOutlet weak var postImage1: UIImageView!
+    @IBOutlet weak var postImage2: UIImageView!
+    @IBOutlet weak var postImage3: UIImageView!
+    @IBOutlet weak var postImage4: UIImageView!
+    
+    // 投稿者のprofile Image
+    @IBOutlet weak var postUserImage: UIImageView!
+    // pagecontrol
+    @IBOutlet weak var pageControl: UIPageControl!
+    // 投稿者の名前
+    @IBOutlet weak var postUserName: UILabel!
+    // 場所
+    @IBOutlet weak var locationName: UILabel!
+    // 地図
+    @IBOutlet weak var location: MKMapView!
+    // 受け入れ開始日
+    @IBOutlet weak var startDay: UILabel!
+    // 受け入れ終了日
+    @IBOutlet weak var lasdDay: UILabel!
+    // カテゴリー
+    @IBOutlet weak var houseCategories: UILabel!
+    // 住宅タイプ
+    @IBOutlet weak var typeOfHouse: UILabel!
+    // ゲストが使える部屋
+    @IBOutlet weak var guestCanUseRoom: UILabel!
+    // ゲストの定員数
+    @IBOutlet weak var numberOfGuest: UILabel!
+    // ゲストの寝室数
+    @IBOutlet weak var forGuestBedRoom: UILabel!
+    // ゲスト用のベッド数
+    @IBOutlet weak var forGuestBed: UILabel!
+    // ゲストへのメッセージ
+    @IBOutlet weak var messageToGuest: UITextView!
+    
+    // scrollview
+    @IBOutlet weak var postScrollview: UIScrollView!
+    
+    //アメニティ
+    @IBOutlet weak var necessitiesButton: UIButton!
+    @IBOutlet weak var wifiButton: UIButton!
+    @IBOutlet weak var kitchenButton: UIButton!
+    @IBOutlet weak var heatingButton: UIButton!
+    @IBOutlet weak var AirConButron: UIButton!
+    @IBOutlet weak var tvButton: UIButton!
+    @IBOutlet weak var laundryButton: UIButton!
+    @IBOutlet weak var dryButton: UIButton!
+    @IBOutlet weak var bathroomButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,16 +81,12 @@ class OpponentPostInfoViewController: UIViewController {
         getPostData(PostID: message.thePostID, postUserID: message.postUserID)
         // image写真を丸くする
         postUserImage.layer.cornerRadius = 15.0
-               
-       
+        
+        self.postScrollview.delegate = self
+        // 縦の動き禁止
+        postScrollview.showsVerticalScrollIndicator = false
+        
     }
-    
-    // スクロールページの
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-           let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
-          pageControl.currentPage = index
-    }
-    
     
     func getPostData(PostID:String,postUserID:String){
         db.collection("userPosts").document(PostID).getDocument { (snap, error) in
@@ -328,7 +325,7 @@ class OpponentPostInfoViewController: UIViewController {
         if heater == "0" {
             heatingButton.isEnabled = false
             heatingButton.backgroundColor = .clear
-
+            
         }
         // aircon
         if aircon == "0" {
@@ -350,12 +347,23 @@ class OpponentPostInfoViewController: UIViewController {
             kitchenButton.isEnabled = false
             kitchenButton.backgroundColor = .clear
         }
-       
+        
     }
-
+    
     //back
     @IBAction func back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension OpponentPostInfoViewController:UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
+        self.pageControl.currentPage = index
+        self.postScrollview.contentOffset.y = posY
+    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        self.postScrollview.contentOffset.x = posY
     }
     
 }

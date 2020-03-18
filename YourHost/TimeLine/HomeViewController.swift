@@ -21,7 +21,6 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     var userID:String = ""
     // 更新のぐるぐる
     let refreshControl = UIRefreshControl()
-    
     // 投稿情報
     var items = [NSDictionary]()
     // tableView
@@ -123,16 +122,16 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         nextVC.transitioningDelegate = self
         
         present(nextVC, animated: true)
-        
     }
      
     // 遷移処理
     // goPostInfo
-    func goPostInfomation(userPostID:String,postUserID:String) {
+    func goPostInfomation(userPostID:String,postUserID:String,postUserName:String) {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let toPostInfoVC = storyboard.instantiateViewController(withIdentifier: "toPostInfo") as! PostInformationViewController
         toPostInfoVC.thisPostID = userPostID
         toPostInfoVC.postUserID = postUserID
+        toPostInfoVC.postUname = postUserName
         toPostInfoVC.userID = userID
         toPostInfoVC.modalPresentationStyle = .fullScreen
         self.present(toPostInfoVC, animated: true, completion: nil)

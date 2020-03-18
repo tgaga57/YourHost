@@ -12,15 +12,10 @@ import Firebase
 class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableViewDelegate{
     // メッセージから来たのかそれとも投稿情報画面から来たのかを見極めるカウント
     var whrereIsFromCount:Int = 0
-    
     var messageRoomArray = [Message]()
-    
     let message = Message()
-    
     let db = Firestore.firestore()
-    
     let reldb = Database.database()
-    
     var indextPathRowUserName = ""
     
     @IBOutlet weak var tableView: UITableView!
@@ -71,6 +66,8 @@ class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableV
             // 名前
             cell.messageUserName.text = opponentUserName
             
+            self.indextPathRowUserName = opponentUserName
+            
             self.indextPathRowUserName = cell.messageUserName.text!
             
             // 写真イメージ
@@ -89,14 +86,16 @@ class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row)番目が選択されました")
         
+        print("\(indexPath.row)番目が選択されました")
         let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "message") as! MessageViewController
-        // セルのrow番目をとってくる/////
+        // セルのrow番目をとってくる   /////
         // postID
         nextVC.message.thePostID = messageRoomArray[indexPath.row].thePostID
         // PostuserID
         nextVC.message.postUserID = messageRoomArray[indexPath.row].postUserID
+        // opponentName
+        nextVC.message.opponentName = messageRoomArray[indexPath.row].opponentName
         // your userID
         nextVC.message.yourUID = message.yourUID
          // sytle
@@ -105,8 +104,7 @@ class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableV
         self.present(nextVC, animated: true, completion: nil)
         
     }
-  
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -116,7 +114,7 @@ class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableV
         return 100
     }
     
-    // messageしているデータのところにいく
+    // messageしている相手とのchatRoomIDをとってくる
     func fetchMessageOponentData() {
         print("データを持ってくるよ")
         // yourchatDBを入れていく
@@ -126,7 +124,7 @@ class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableV
             let opponentUserID = snapData.value(forKey: "opponentID") as! String
             let thisPostID = snapData.value(forKey: "thisPostId") as! String
             let chatID = snapData.value(forKey: "chatID") as! String
-            
+            let opponentUesrName = snapData.value(forKey: "opponentName") as! String
             // messgeメソッドを呼び出す
             let message = Message()
             // userID
@@ -135,6 +133,8 @@ class MessageRoomViewController: UIViewController,UITableViewDataSource,UITableV
             message.chatID =  chatID
             // postID
             message.thePostID = thisPostID
+            // opponetUserName
+            message.opponentName = opponentUesrName
             self.messageRoomArray.append(message)
             self.tableView.reloadData()
         }

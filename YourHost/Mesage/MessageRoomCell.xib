@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="ヤッホーー" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="grh-wF-pKs">
-                        <rect key="frame" x="79" y="26" width="267" height="59"/>
+                        <rect key="frame" x="79" y="30" width="267" height="55"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.8093273879762477" green="1" blue="0.81754248379236538" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -29,7 +29,7 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="名前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2JI-Po-rCo">
-                        <rect key="frame" x="79" y="1" width="262" height="17"/>
+                        <rect key="frame" x="79" y="10" width="262" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
@@ -43,7 +43,7 @@
                 <outlet property="messageUserImage" destination="ldo-eY-nvG" id="THH-13-PXu"/>
                 <outlet property="messageUserName" destination="2JI-Po-rCo" id="47K-As-Gfm"/>
             </connections>
-            <point key="canvasLocation" x="169.56521739130437" y="143.63839285714286"/>
+            <point key="canvasLocation" x="7" y="56"/>
         </tableViewCell>
     </objects>
     <resources>

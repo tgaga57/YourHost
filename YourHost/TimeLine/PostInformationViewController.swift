@@ -12,13 +12,15 @@ import FirebaseStorage
 import FirebaseFirestore
 import Firebase
 
-class PostInformationViewController: UIViewController,UIScrollViewDelegate {
+class PostInformationViewController: UIViewController{
     // postID
     var thisPostID = ""
     // 投稿者ID
     var postUserID = ""
     // 自分自身のID
     var userID = ""
+    // 投稿者の名前
+    var postUname = ""
     // storage用
     var ref: DocumentReference!
     // インスタンス化
@@ -27,6 +29,8 @@ class PostInformationViewController: UIViewController,UIScrollViewDelegate {
     let message = Message()
     // 遷移をどこからしてきたかのもの
     var count = 1
+    // scrollview用
+    var posY: CGFloat!
     //投稿写真
     @IBOutlet weak var postImage1: UIImageView!
     @IBOutlet weak var postImage2: UIImageView!
@@ -91,19 +95,13 @@ class PostInformationViewController: UIViewController,UIScrollViewDelegate {
         // image写真を丸くする
         postUserImage.layer.cornerRadius = 15.0
         
-        scrollViewDidScroll(postScrollview)
+        self.postScrollview.delegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
-    // スクロールページの
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-           let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
-          pageControl.currentPage = index
-    }
-    
     
     func getPostData(PostID:String,postUserID:String){
         db.collection("userPosts").document(PostID).getDocument { (snap, error) in
@@ -371,10 +369,11 @@ class PostInformationViewController: UIViewController,UIScrollViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chat"{
         let chatVC = segue.destination as! MessageViewController
-            // 情報を入れてていく
+            // 情報を入れてていく postID useID 相手の名前　相手のid
             message.postUserID = postUserID
             message.thePostID = thisPostID
             message.yourUID = userID
+            message.opponentName = postUname
             // 情報を受け渡す
             chatVC.message = message
             chatVC.whrereIsfForm = count
@@ -394,6 +393,19 @@ class PostInformationViewController: UIViewController,UIScrollViewDelegate {
     // back
     @IBAction func back(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+
+extension PostInformationViewController:UIScrollViewDelegate{
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let index = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
+        self.pageControl.currentPage = index
+        self.postScrollview.contentOffset.y = posY
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        posY = self.postScrollview.contentOffset.y
     }
 }
 

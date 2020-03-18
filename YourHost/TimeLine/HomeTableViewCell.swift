@@ -35,6 +35,8 @@ class HomeTableViewCell: UITableViewCell{
     var postImages:[UIImage] = []
     // PostUserID
     var postUserID:String = ""
+    // PosetuserName
+    var postUName:String = ""
     // uiimageview
     @IBOutlet weak var postImageView1: UIImageView!
     @IBOutlet weak var postImageView2: UIImageView!
@@ -51,8 +53,6 @@ class HomeTableViewCell: UITableViewCell{
         postUserImage.layer.cornerRadius = 15.0
         // デリゲート
         self.scrollView.delegate = self
-        // スクロールバーを消した
-        scrollView.showsVerticalScrollIndicator = false
         
     }
     
@@ -65,6 +65,8 @@ class HomeTableViewCell: UITableViewCell{
     func set(dict:NSDictionary) {
         // row番目のデータ
         postUserName.text = dict["userName"] as? String
+        // 名前を入れる
+        postUName = postUserName.text!
         startDay.text = dict["startDay"] as? String
         lastDay.text = dict["lastDay"] as? String
         postUserLocation.text = dict["yourKeyWord"] as? String
@@ -166,12 +168,12 @@ class HomeTableViewCell: UITableViewCell{
                 self.postImageView4.contentMode = .scaleAspectFill
               }
          }
-    
+      
      // 投稿情報をもっと詳しく
     @IBAction func moreInfo(_ sender: Any) {
         print("遷移しますよおおおん")
         // 引数の中に現在ユーザーが見ているpostIDを入れる
-        homeViewController?.goPostInfomation(userPostID: postID, postUserID: postUserID)
+        homeViewController?.goPostInfomation(userPostID: postID, postUserID: postUserID, postUserName: postUserName.text!)
     }
 }
 
